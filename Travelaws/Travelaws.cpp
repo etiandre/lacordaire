@@ -11,49 +11,17 @@
 #include "SplashState.h"
 #pragma endregion includes
 
-
+/*
 Game::Game(int width, int height, std::string title)
 {
-	_data->window.create(sf::VideoMode(width, height), title, sf::Style::Close | sf::Style::Titlebar);
-	_data->machine.AddState(StateRef(new SplashState(_data)));
+	//INIT
 
 	run();
 }
 
 void Game::run()
 {
-	float newTime, frameTime, interpolation;
-
-	float currentTime = _clock.getElapsedTime().asSeconds();
-	float accumulator = 0.0f;
-
-	while (_data->window.isOpen())
-	{
-		_data->machine.ProcessStateChanges();
-
-		newTime = _clock.getElapsedTime().asSeconds();
-		frameTime = newTime - currentTime;
-
-		//"limite basse" de 4fps
-		if (frameTime > 0.25f)
-		{
-			frameTime = 0.25f;
-		}
-
-		currentTime = newTime;
-		accumulator += frameTime;
-
-		// On update que tous les 1/60e de s
-		while (accumulator >= updt)
-		{
-			_data->machine.GetActiveState()->handleInput();
-			_data->machine.GetActiveState()->update(updt);
-
-			accumulator -= updt;
-		}
-
-		interpolation = accumulator / updt; //ratio temps écoulé sur temps mini update
-		_data->machine.GetActiveState()->draw(interpolation);
+	
 	}
 
 }
@@ -63,7 +31,7 @@ int main(int argc, char ** argv) {
 	return EXIT_SUCCESS;
 }
 
-/*
+*/
 #pragma region variables
 sf::RenderWindow window;
 int windowHeight = 1080;
@@ -190,5 +158,5 @@ int main(int argc, char ** argv) {
 
 }
 
-*/
+
 

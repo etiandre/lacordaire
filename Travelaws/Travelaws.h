@@ -9,10 +9,7 @@
 
 struct GameData
 {
-	StateMachine machine;
-	sf::RenderWindow window;
-	AssetManager assets;
-	InputsManager inputs;
+	
 };
 
 typedef std::shared_ptr<GameData> GameDataRef;

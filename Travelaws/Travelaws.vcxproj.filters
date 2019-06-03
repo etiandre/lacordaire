@@ -22,6 +22,9 @@
     <Filter Include="Fichiers d%27en-tête\GameEntities">
       <UniqueIdentifier>{7cef37cb-1653-4a22-9b7c-a7632947fdf2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\GameEngine">
+      <UniqueIdentifier>{6fab5e7f-01d4-4106-a707-62d713ac7d97}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Travelaws.h">
@@ -39,18 +42,30 @@
     <ClInclude Include="InputsManager.h">
       <Filter>Fichiers d%27en-tête\GameEngine</Filter>
     </ClInclude>
+    <ClInclude Include="AssetManager.h">
+      <Filter>Fichiers d%27en-tête\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="DEFINITIONS.h">
+      <Filter>Fichiers d%27en-tête\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Fichiers d%27en-tête\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="SplashState.h">
+      <Filter>Fichiers d%27en-tête\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverState.h">
+      <Filter>Fichiers d%27en-tête\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuState.h">
+      <Filter>Fichiers d%27en-tête\GameEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Travelaws.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="StateMachine.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="InputsManager.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

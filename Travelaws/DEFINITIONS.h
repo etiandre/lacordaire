@@ -5,9 +5,10 @@
 
 #define SPLASH_STATE_SHOW_TIME 3.0
 
-/* Example:
 
-#define SPLASH_SCENE_BACKGROUND_FILEPATH "Resources/res/Splash Background.png"
+
+#define SPLASH_SCENE_BACKGROUND_FILEPATH "assets/textures/Splashscreen.jpg"
+/* Example:
 #define MAIN_MENU_BACKGROUND_FILEPATH "Resources/res/sky.png"
 #define GAME_BACKGROUND_FILEPATH "Resources/res/sky.png"
 #define GAME_OVER_BACKGROUND_FILEPATH "Resources/res/sky.png"
