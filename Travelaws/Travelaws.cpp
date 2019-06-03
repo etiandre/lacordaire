@@ -12,6 +12,7 @@
 #include "SFMLOrthogonalLayer.hpp"
 #include "Travelaws.h"
 #include "GravityRule.hpp"
+#include "InputManager.hpp"
 #pragma endregion includes
 
 Game::Game(int width, int height, std::string title) {
@@ -54,20 +55,12 @@ void Game::mainLoop() {
 		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::EventType::Closed) window.close();
 		}
-		// CLAVIER
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-			gameData.player.move(-1, 0);
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-			gameData.player.move(1, 0);
-		}
+		
+		InputManager inputManager;
+		inputManager.manageInputs(gameData.player);
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-			gameData.player.move(0, -1);
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-			gameData.player.move(0, 1);
-		}
+
+		
 
 		GravityRule gravity;
 		gravity.update(gameData);
@@ -94,6 +87,6 @@ void Game::mainLoop() {
 }
 
 int main(int argc, char** argv) {
-	Game(SCREEN_WIDTH, SCREEN_HEIGHT, "Travelaws alpha");
+	Game(SCREEN_WIDTH, SCREEN_HEIGHT, "Game alpha");
 	return EXIT_SUCCESS;
 }

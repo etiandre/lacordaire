@@ -161,7 +161,7 @@
   <ItemGroup>
     <ClInclude Include="DEFINITIONS.h" />
     <ClInclude Include="GravityRule.hpp" />
-    <ClInclude Include="InputsManager.h" />
+    <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rule.hpp" />
@@ -172,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GravityRule.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
