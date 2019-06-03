@@ -10,7 +10,6 @@
 #include <iostream>
 #include "Travelaws.h"
 #include "DEFINITIONS.h"
-#include "SplashState.h"
 #pragma endregion includes
 
 /*
