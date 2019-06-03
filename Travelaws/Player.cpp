@@ -1,32 +1,38 @@
 #include "pch.h"
-#include "SFML/Graphics.hpp"
+//
 #include <iostream>
 #include "Player.h"
+#include "SFML/Graphics.hpp"
 
-Player::Player()
-{
-	sf::Texture playerTexture;
-	sf::Sprite playerSprite;
-	_location.x = 0 , _location.y = 0;
-	_health = 100, _speed = 5, _size = 1;
-	if (!playerTexture.loadFromFile("textures/slime.png")) {
-		std::cout << "erreur chargement slime.png" << std::endl;
-	}
-	playerTexture.setSmooth(true);  // lisse la texture
-	playerSprite.setTexture(playerTexture);
+Player::Player() {
+  _health = 100, _moveSpeed = 5, _inertia = 0.8;
+  _velocity = sf::Vector2f(0, 0);
+  if (!playerTexture.loadFromFile("assets/textures/slime.png")) {
+    std::cout << "erreur chargement slime.png" << std::endl;
+    exit(1);
+  }
+  playerSprite.setTexture(playerTexture);
+  playerSprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
 }
 
-Player::~Player()
-{
+void Player::setPosition(int x, int y) {
+  _velocity.x = 0;
+  _velocity.y = 0;
+  playerSprite.setPosition(x, y);
 }
 
-void Player::setPosition(int x, int y)
-{
-	_location.x = x;
-	_location.y = y;
+void Player::move(int x, int y) {
+  _velocity.x = x*_moveSpeed;
+  _velocity.y = y*_moveSpeed;
 }
 
-Position& Player::getPosition()
-{
-	return _location;
+void Player::updatePosition() {
+  int x = playerSprite.getPosition().x + _velocity.x;
+  int y = playerSprite.getPosition().y + _velocity.y;
+  _velocity *= _inertia;
+	playerSprite.setPosition(x, y);
+}
+
+sf::Vector2i Player::getPosition() {
+  return (sf::Vector2i)playerSprite.getPosition();
 }

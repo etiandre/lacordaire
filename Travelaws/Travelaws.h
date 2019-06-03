@@ -3,10 +3,13 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <string>
+#include "Player.h"
 
-struct GameData {};
+struct GameData {
+  Player player;
+};
 
-typedef std::shared_ptr<GameData> GameDataRef;
+//typedef std::shared_ptr<GameData> GameDataRef;
 
 class Game {
  public:
@@ -15,11 +18,9 @@ class Game {
  private:
   sf::RenderWindow window;
   sf::View view;
-
+  GameData gameData;
   tmx::Map map;
 
-  GameDataRef _data = std::make_shared<GameData>();
   void loadLevel(int levelID);
-
   void mainLoop();
 };
