@@ -1,7 +1,12 @@
 #pragma once
 
+
 struct Position {
 	int x; int y;
+};
+
+struct Size {
+	int width; int height;
 };
 
 class Player
@@ -11,11 +16,14 @@ public:
 	~Player();
 	void setPosition(int x, int y);
 	Position& getPosition();
+	Size& getSize();
+	sf::Sprite playerSprite;
 
 private:
 	int _health;
 	int _speed;
-	float _size;
+	Size _size;
 	Position _location;
-	
+
+	sf::Texture playerTexture;
 };
