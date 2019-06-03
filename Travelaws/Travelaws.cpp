@@ -89,9 +89,13 @@ int main(int argc, char** argv) {
 
 	// chargement du niveau
   sf::Event event;
-  tmx::Map level;
-  level.load("assets/levels/level1.tmx");
-  MapLayer layerZero(level, 0);
+  tmx::Map map;
+  if (!map.load("assets/levels/level1.tmx")) {
+    std::cout << "cannot load level !" << std::endl;
+    exit(1);
+	}
+  MapLayer backgroundLayer(map, 0);
+  MapLayer platformsLayer(map, 2);
 
   if (!slimeTexture.loadFromFile("textures/slime.png")) {
     std::cout << "erreur chargement slime.png" << std::endl;
@@ -141,7 +145,8 @@ int main(int argc, char** argv) {
     window.setView(view);
 
     window.clear();
-    window.draw(layerZero);
+    window.draw(backgroundLayer);
+    window.draw(platformsLayer);
     window.draw(slimeSprite);
     window.draw(circle);
     window.draw(convex);
