@@ -4,95 +4,43 @@
 
 #pragma region includes
 #include <SFML/Graphics.hpp>
-#include <tmxlite/Map.hpp>
-#include "SFMLOrthogonalLayer.hpp"
 #include <cmath>
 #include <iostream>
-#include "Travelaws.h"
+#include <tmxlite/Map.hpp>
 #include "DEFINITIONS.h"
+#include "SFMLOrthogonalLayer.hpp"
+#include "Travelaws.h"
 #pragma endregion includes
 
-/*
-Game::Game(int width, int height, std::string title)
-{
-        //INIT
-
-        run();
-}
-
-void Game::run()
-{
-        
-
-        }
-
-}
-int main(int argc, char ** argv) {
-        Game(SCREEN_WIDTH, SCREEN_HEIGHT, "Travelaws alpha");
-
-        return EXIT_SUCCESS;
-}
-
-*/
-#pragma region variables
-sf::RenderWindow window;
-int windowHeight = 1080;
-int windowWidth = 1920;
-
-sf::CircleShape circle;
-sf::ConvexShape convex;
-int speed = 5;
-sf::Vector2i positionSouris;
-sf::Texture slimeTexture;
-sf::Sprite slimeSprite;
-enum Directions { Left, Right };
-sf::Vector2i anim(1, Right);
-bool updateFPS = true;
-int blockSize = 64;
-sf::View view;
-#pragma endregion variables
-
-void gestion_clavier() {
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-    anim.y = Left;
-    slimeSprite.move(-speed, 0);
-  } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-    anim.y = Right;
-    slimeSprite.move(speed, 0);
-  }
-
-  if (slimeSprite.getPosition().x <= 0)
-    slimeSprite.setPosition(sf::Vector2f(0, slimeSprite.getPosition().y));
-  if (slimeSprite.getPosition().x >= windowWidth)
-    slimeSprite.setPosition(
-        sf::Vector2f(windowWidth, slimeSprite.getPosition().y));
-  if (slimeSprite.getPosition().y <= 0)
-    slimeSprite.setPosition(sf::Vector2f(slimeSprite.getPosition().x, 0));
-  if (slimeSprite.getPosition().y >= windowHeight)
-    slimeSprite.setPosition(
-        sf::Vector2f(slimeSprite.getPosition().x, windowHeight));
-}
-
-void gestion_souris() {
-  if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-    positionSouris = sf::Mouse::getPosition(window);
-    std::cout << "Mouse.x = " << sf::Mouse::getPosition().x
-              << "Mouse.y = " << sf::Mouse::getPosition().y << std::endl;
-  }
-}
-
-int main(int argc, char** argv) {
-  window.create(sf::VideoMode(windowWidth, windowHeight), "DemGame");
+Game::Game(int width, int height, std::string title) {
+  window.create(sf::VideoMode(width, height),
+                "Travelaws 0.0.0.0.1 alpha dx+ TEST RELEASE");
   window.setFramerateLimit(60);
-  std::cout << "Lancement du jeu" << std::endl;
+  loadLevel(1);
+  mainLoop();
+}
 
-	// chargement du niveau
-  sf::Event event;
-  tmx::Map map;
-  if (!map.load("assets/levels/level1.tmx")) {
+void Game::loadLevel(int levelID) {
+  if (!map.load("assets/levels/level" + std::to_string(levelID) + ".tmx")) {
     std::cout << "cannot load level !" << std::endl;
     exit(1);
-	}
+  }
+}
+
+void Game::mainLoop() {
+  int windowHeight = 1080;
+  int windowWidth = 1920;
+
+  int speed = 5;
+  sf::Texture slimeTexture;
+  sf::Sprite slimeSprite;
+  enum Directions { Left, Right };
+  sf::Vector2i anim(1, Right);
+  bool updateFPS = true;
+  int blockSize = 64;
+
+  sf::Event event;
+
   MapLayer backgroundLayer(map, 0);
   MapLayer platformsLayer(map, 2);
 
@@ -114,9 +62,25 @@ int main(int argc, char** argv) {
       else
         updateFPS = false;
     }
+    // CLAVIER
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+      anim.y = Left;
+      slimeSprite.move(-speed, 0);
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+      anim.y = Right;
+      slimeSprite.move(speed, 0);
+    }
 
-    gestion_clavier();
-    gestion_souris();
+    if (slimeSprite.getPosition().x <= 0)
+      slimeSprite.setPosition(sf::Vector2f(0, slimeSprite.getPosition().y));
+    if (slimeSprite.getPosition().x >= windowWidth)
+      slimeSprite.setPosition(
+          sf::Vector2f(windowWidth, slimeSprite.getPosition().y));
+    if (slimeSprite.getPosition().y <= 0)
+      slimeSprite.setPosition(sf::Vector2f(slimeSprite.getPosition().x, 0));
+    if (slimeSprite.getPosition().y >= windowHeight)
+      slimeSprite.setPosition(
+          sf::Vector2f(slimeSprite.getPosition().x, windowHeight));
 
     if (updateFPS) {
       if (time.getElapsedTime().asMilliseconds() >= 50) {
@@ -147,8 +111,11 @@ int main(int argc, char** argv) {
     window.draw(backgroundLayer);
     window.draw(platformsLayer);
     window.draw(slimeSprite);
-    window.draw(circle);
-    window.draw(convex);
     window.display();
   }
+}
+
+int main(int argc, char** argv) {
+  Game(SCREEN_WIDTH, SCREEN_HEIGHT, "Travelaws alpha");
+  return EXIT_SUCCESS;
 }

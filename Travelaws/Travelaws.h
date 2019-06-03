@@ -1,27 +1,25 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
 #include <memory>
 #include <string>
-#include <SFML/Graphics.hpp>
 
-struct GameData
-{
-	
-};
+struct GameData {};
 
 typedef std::shared_ptr<GameData> GameDataRef;
 
-class Game
-{
-public:
-	Game(int width, int height, std::string title);
+class Game {
+ public:
+  Game(int width, int height, std::string title);
 
-private:
-	// Updates run at 60 per second.
-	const float updt = 1.0f / 60.0f;
-	sf::Clock _clock;
+ private:
+  sf::RenderWindow window;
+  sf::View view;
 
-	GameDataRef _data = std::make_shared<GameData>();
+  tmx::Map map;
 
-	void run();
+  GameDataRef _data = std::make_shared<GameData>();
+  void loadLevel(int levelID);
+
+  void mainLoop();
 };
