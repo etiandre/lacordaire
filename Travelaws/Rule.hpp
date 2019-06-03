@@ -3,5 +3,6 @@
 
 class Rule {
  public:
-  virtual void update(GameData gameData&) = 0;
+  virtual void update(GameData &gameData) = 0;
+  double scoreMultiplicator;
 };

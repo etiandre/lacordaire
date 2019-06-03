@@ -16,12 +16,13 @@ class Player {
   void setPosition(int x, int y);
   void move(int x, int y);
   sf::Vector2i getPosition();
+  void accelerate(int x, int y);
   sf::Sprite playerSprite;
   void updatePosition();
 
  private:
   int _health;
-  int _moveSpeed;
+  sf::Vector2i _moveSpeed;
   float _inertia;
   sf::Vector2f _velocity;
 

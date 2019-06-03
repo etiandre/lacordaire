@@ -1,5 +1,6 @@
 #pragma once
 
+#include <tmxlite/Map.hpp>
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <string>

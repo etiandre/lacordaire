@@ -5,7 +5,7 @@
 #include "SFML/Graphics.hpp"
 
 Player::Player() {
-  _health = 100, _moveSpeed = 5, _inertia = 0.8;
+  _health = 100, _moveSpeed.x = 5, _moveSpeed.y = 5, _inertia = 0.8;
   _velocity = sf::Vector2f(0, 0);
   if (!playerTexture.loadFromFile("assets/textures/slime.png")) {
     std::cout << "erreur chargement slime.png" << std::endl;
@@ -22,11 +22,12 @@ void Player::setPosition(int x, int y) {
 }
 
 void Player::move(int x, int y) {
-  _velocity.x = x*_moveSpeed;
-  _velocity.y = y*_moveSpeed;
+  _velocity.x = x*_moveSpeed.x;
+  _velocity.y = y*_moveSpeed.y;
 }
 
 void Player::updatePosition() {
+
   int x = playerSprite.getPosition().x + _velocity.x;
   int y = playerSprite.getPosition().y + _velocity.y;
   _velocity *= _inertia;
@@ -35,4 +36,9 @@ void Player::updatePosition() {
 
 sf::Vector2i Player::getPosition() {
   return (sf::Vector2i)playerSprite.getPosition();
+}
+
+void Player::accelerate(int x, int y) {
+	_velocity.x += x;
+	_velocity.y += y;
 }
