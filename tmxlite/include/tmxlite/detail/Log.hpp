@@ -128,7 +128,7 @@ namespace tmx
 
 #ifdef _MSC_VER
                 outstring += "\n";
-                OutputDebugString(outstring.c_str());
+                OutputDebugStringA(outstring.c_str());
 #endif //_MSC_VER
             }
             if (output == Output::File || output == Output::All)
@@ -139,10 +139,10 @@ namespace tmx
                 {
 #ifndef __ANDROID__
                     std::time_t time = std::time(nullptr);
-                    auto tm = *std::localtime(&time);
+                    //auto tm = *std::localtime(&time);
 					//put_time isn't implemented by the ndk versions of the stl
                     file.imbue(std::locale());
-                    file << std::put_time(&tm, "%d/%m/%y-%H:%M:%S: ");
+                    //file << std::put_time(&tm, "%d/%m/%y-%H:%M:%S: ");
 #endif //__ANDROID__
                     file << outstring << std::endl;
                     file.close();

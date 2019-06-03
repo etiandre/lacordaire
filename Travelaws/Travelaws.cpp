@@ -4,6 +4,8 @@
 
 #pragma region includes
 #include <SFML/Graphics.hpp>
+#include <tmxlite/Map.hpp>
+#include "SFMLOrthogonalLayer.hpp"
 #include <cmath>
 #include <iostream>
 #include "Travelaws.h"
@@ -85,10 +87,11 @@ int main(int argc, char** argv) {
   window.setFramerateLimit(60);
   std::cout << "Lancement du jeu" << std::endl;
 
+	// chargement du niveau
   sf::Event event;
-  //tmx::Map map;
-  //map.load("assets/levels/level1.tmx");
-  //MapLayer layerZero(map, 0);
+  tmx::Map level;
+  level.load("assets/levels/level1.tmx");
+  MapLayer layerZero(level, 0);
 
   if (!slimeTexture.loadFromFile("textures/slime.png")) {
     std::cout << "erreur chargement slime.png" << std::endl;
@@ -138,6 +141,7 @@ int main(int argc, char** argv) {
     window.setView(view);
 
     window.clear();
+    window.draw(layerZero);
     window.draw(slimeSprite);
     window.draw(circle);
     window.draw(convex);
