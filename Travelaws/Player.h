@@ -18,7 +18,7 @@ class Player {
   void setPosition(int x, int y);
   void move(int x, int y);
   sf::Vector2i getPosition();
-  void accelerate(int x, int y);
+
   sf::Sprite playerSprite;
   void updatePosition();
   enum Direction{Left,Right};

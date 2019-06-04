@@ -40,10 +40,6 @@ sf::Vector2i Player::getPosition() {
   return (sf::Vector2i)playerSprite.getPosition();
 }
 
-void Player::accelerate(int x, int y) {
-	velocity.x += x;
-	velocity.y += y;
-}
 
 
 sf::Vector2i Player::animatorState() {
