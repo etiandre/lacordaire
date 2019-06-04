@@ -15,6 +15,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Travelaws.cpp" />
     <ClCompile Include="WindRule.cpp" />
+    <ClCompile Include="VisionRule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CollisionRule.h" />
@@ -37,5 +38,6 @@
     <ClInclude Include="SFMLOrthogonalLayer.hpp" />
     <ClInclude Include="Travelaws.h" />
     <ClInclude Include="WindRule.hpp" />
+    <ClInclude Include="VisionRule.hpp" />
   </ItemGroup>
 </Project>

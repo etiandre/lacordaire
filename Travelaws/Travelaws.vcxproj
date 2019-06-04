@@ -169,6 +169,7 @@
     <ClInclude Include="SFMLOrthogonalLayer.hpp" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Travelaws.h" />
+    <ClInclude Include="VisionRule.hpp" />
     <ClInclude Include="WindRule.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +185,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Travelaws.cpp" />
+    <ClCompile Include="VisionRule.cpp" />
     <ClCompile Include="WindRule.cpp" />
   </ItemGroup>
   <ItemGroup>

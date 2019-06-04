@@ -18,6 +18,7 @@
 #include "InputManager.hpp"
 #include "CollisionRule.h"
 #include "WindRule.hpp"
+#include "VisionRule.hpp"
 #pragma endregion includes
 
 Game::Game(int width, int height, std::string title) {
@@ -48,6 +49,7 @@ void Game::mainLoop() {
 	rules.push_back(std::make_unique<CollisionRule>(platformsLayer));
 	rules.push_back(std::make_unique<GravityRule>());
 	rules.push_back(std::make_unique<WindRule>());
+	rules.push_back(std::make_unique<VisionRule>());
 
   float fpsCount = 0, switchFPS = 100, fpsSpeed = 500;
 
@@ -103,12 +105,19 @@ void Game::mainLoop() {
       view.reset(sf::FloatRect(position.x, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
       window.setView(view);
 			
-			// DRAW
+
+		// DRAW
       gameData.player.updateAnimation();
       window.clear();
       window.draw(backgroundLayer);
       window.draw(platformsLayer);
       window.draw(gameData.player.playerSprite);
+
+	  // RULES DRAW
+	  for (auto& rule : rules) {
+		  if (rule.get()->active)
+			  rule.get()->draw(window);
+	  }
       window.display();
     }
     accumulator -= 1 / 60;
