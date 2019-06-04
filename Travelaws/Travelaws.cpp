@@ -19,7 +19,7 @@
 #include "imgui.h"
 #pragma endregion includes
 
-Game::Game(int width, int height, std::string title) {
+Game::Game(int width, int height) {
   gameData.player = Player();
   gameData.map = tmx::Map();
   view = sf::View(sf::FloatRect(0, 0, width/4, height/4));
@@ -115,6 +115,6 @@ void Game::mainLoop() {
 }
 
 int main(int argc, char** argv) {
-  Game(SCREEN_WIDTH, SCREEN_HEIGHT, "Game alpha");
+  Game(SCREEN_WIDTH, SCREEN_HEIGHT);
   return EXIT_SUCCESS;
 }

@@ -11,7 +11,7 @@
 
 class Game {
  public:
-  Game(int width, int height, std::string title);
+  Game(int width, int height);
 
  private:
   sf::RenderWindow window;
