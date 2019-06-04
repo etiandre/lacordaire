@@ -4,3 +4,7 @@
 void GravityRule::update(GameData& gameData) {
 	gameData.player.velocity.y += gravity;
 }
+
+GravityRule::GravityRule()
+{
+}

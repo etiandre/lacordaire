@@ -7,4 +7,5 @@ class GravityRule : public Rule {
 
  public:
   void update(GameData &gameData);
+  GravityRule();
 };

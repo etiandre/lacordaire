@@ -5,39 +5,44 @@
 #include "SFML/Graphics.hpp"
 
 Player::Player() {
-  _health = 100, _moveSpeed.x = 5, _moveSpeed.y = 5, _inertia = 0.8;
-  velocity = sf::Vector2f(0, 0);
-  if (!playerTexture.loadFromFile("assets/textures/slime.png")) {
-    std::cout << "erreur chargement slime.png" << std::endl;
-    exit(1);
-  }
-  playerSprite.setTexture(playerTexture);
-  playerSprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
-  _animation.x = 0, _animation.y = 0;
+	_health = 100, _moveSpeed.x = 5, _moveSpeed.y = 5, _inertia = 0.8;
+	velocity = sf::Vector2f(0, 0);
+	if (!playerTexture.loadFromFile("assets/textures/slime.png")) {
+		std::cout << "erreur chargement slime.png" << std::endl;
+		exit(1);
+	}
+	playerSprite.setTexture(playerTexture);
+	playerSprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
+	_animation.x = 0, _animation.y = 0;
 
 }
 
 void Player::setPosition(int x, int y) {
-  velocity.x = 0;
-  velocity.y = 0;
-  playerSprite.setPosition(x, y);
+	velocity.x = 0;
+	velocity.y = 0;
+	playerSprite.setPosition(x, y);
 }
 
 void Player::move(int x, int y) {
-  velocity.x = x*_moveSpeed.x;
-  velocity.y = y*_moveSpeed.y;
+	velocity.x = x * _moveSpeed.x;
+	velocity.y = y * _moveSpeed.y;
 }
 
 void Player::updatePosition() {
 
-  int x = playerSprite.getPosition().x + velocity.x;
-  int y = playerSprite.getPosition().y + velocity.y;
-  velocity *= _inertia;
+	int x = playerSprite.getPosition().x + velocity.x;
+	int y = playerSprite.getPosition().y + velocity.y;
+	velocity *= _inertia;
+	
+	if (x <= 0) { x = 0; }
+	if (y <= 0) { y = 0; }
+	if (y >= SCREEN_HEIGHT - 5 ) { y = SCREEN_HEIGHT- 5; }
+
 	playerSprite.setPosition(x, y);
 }
 
 sf::Vector2i Player::getPosition() {
-  return (sf::Vector2i)playerSprite.getPosition();
+	return (sf::Vector2i)playerSprite.getPosition();
 }
 
 
