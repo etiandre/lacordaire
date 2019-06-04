@@ -7,22 +7,20 @@ CollisionRule::CollisionRule(MapLayer& layer) : collisionLayer(layer){};
 
 void CollisionRule::update(GameData& gameData) {
   sf::FloatRect box;
-  // axe x
+  // axe x (horizontal)
 	
-  box = sf::FloatRect(
-      gameData.player.getPosition().x + gameData.player.velocity.x,
-      gameData.player.getPosition().y, 64, 64);
+  box = gameData.player.box;
+  box.top += gameData.player.getPosition().y;
+  box.left += gameData.player.getPosition().x + gameData.player.velocity.x;
   if (collides(box, gameData.map.getTileSize(), gameData.map.getTileCount())) {
-    std::cout << "collision en x" << std::endl;
     gameData.player.velocity.x = 0;
   }
 
-  // axe y
-  box = sf::FloatRect(
-      gameData.player.getPosition().x,
-      gameData.player.getPosition().y + gameData.player.velocity.y, 64, 64);
+  // axe y (vertical)
+  box = gameData.player.box;
+  box.top += gameData.player.getPosition().y + gameData.player.velocity.y;
+  box.left += gameData.player.getPosition().x;
   if (collides(box, gameData.map.getTileSize(), gameData.map.getTileCount())) {
-    std::cout << "collision en y" << std::endl;
     gameData.player.velocity.y = 0;
   }
 }

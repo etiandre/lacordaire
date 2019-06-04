@@ -8,7 +8,7 @@ class Player : public Actor {
   void updateAnimation();
   void animator(int x, int y);
   sf::Vector2i animatorState();
+  double moveSpeed;
  private:
-  sf::Vector2i _moveSpeed;
   sf::Vector2i _animation;
 };

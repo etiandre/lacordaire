@@ -11,6 +11,7 @@ class Actor {
   sf::Vector2f velocity;
 
   sf::Sprite sprite;
+  sf::FloatRect box;
   void draw(sf::RenderWindow& window);
 
  protected:

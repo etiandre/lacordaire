@@ -13,18 +13,20 @@
 #include "InputManager.hpp"
 #include "Player.h"
 #include "SFMLOrthogonalLayer.hpp"
+#include "VisionRule.hpp"
 #include "WindRule.hpp"
 #include "imgui-SFML.h"
 #include "imgui.h"
-#include "VisionRule.hpp"
 #pragma endregion includes
 
 Game::Game(int width, int height, std::string title) {
   gameData.player = Player();
   gameData.map = tmx::Map();
+  view = sf::View(sf::FloatRect(0, 0, width/4, height/4));
   window.create(sf::VideoMode(width, height),
                 "Travelaws 0.0.0.0.1 alpha dx+ TEST RELEASE");
   window.setFramerateLimit(60);
+  window.setView(view);
   ImGui::SFML::Init(window);
   loadLevel(1);
   mainLoop();
@@ -44,11 +46,11 @@ void Game::mainLoop() {
   InputManager inputManager;
 
   MapLayer backgroundLayer(gameData.map, 0);
-  MapLayer platformsLayer(gameData.map, 2);
+  MapLayer platformsLayer(gameData.map, 1);
 
   rules.push_back(std::make_unique<GravityRule>());
-  rules.push_back(std::make_unique<WindRule>());
-  rules.push_back(std::make_unique<VisionRule>());
+  //rules.push_back(std::make_unique<WindRule>());
+  //rules.push_back(std::make_unique<VisionRule>());
   rules.push_back(std::make_unique<CollisionRule>(
       platformsLayer));  //!\\ Collision has to be last !
 
@@ -80,15 +82,8 @@ void Game::mainLoop() {
     }
 
     // VIEW
-    view.reset(sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
-    sf::Vector2f position(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-    position.x =
-        gameData.player.getPosition().x + BLOCK_SIZE / 2 - SCREEN_WIDTH / 2;
-    if (position.x < 0) position.x = 0;
-    if (position.y < 0) position.y = 0;
-
-    view.reset(sf::FloatRect(position.x, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
-    window.setView(view);
+    // view.setCenter(sf::Vector2f(gameData.player.getPosition().x + 16,
+    // gameData.player.getPosition().y + 16)); window.setView(view);
 
     // GUI
     ImGui::Begin("Rules");
@@ -98,8 +93,10 @@ void Game::mainLoop() {
     ImGui::End();  // Rules
 
     ImGui::Begin("Debug");
-    ImGui::Text("position : x=%d y=%d", gameData.player.getPosition().x, gameData.player.getPosition().y);
-    ImGui::Text("vitesse : x=%0.3f y=%0.3f", gameData.player.velocity.x, gameData.player.velocity.y);
+    ImGui::Text("position : x=%d y=%d", gameData.player.getPosition().x,
+                gameData.player.getPosition().y);
+    ImGui::Text("vitesse : x=%0.3f y=%0.3f", gameData.player.velocity.x,
+                gameData.player.velocity.y);
     ImGui::End();  // Debug
 
     // DRAW
@@ -108,11 +105,10 @@ void Game::mainLoop() {
     window.draw(backgroundLayer);
     window.draw(platformsLayer);
     gameData.player.draw(window);
-	// RULES DRAW
-	for (auto& rule : rules) {
-		if (rule.get()->active)
-			rule.get()->draw(window);
-	}
+    // RULES DRAW
+    for (auto& rule : rules) {
+      if (rule.get()->active) rule.get()->draw(window);
+    }
     ImGui::SFML::Render(window);
     window.display();
   }

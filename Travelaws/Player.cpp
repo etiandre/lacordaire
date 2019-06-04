@@ -4,8 +4,8 @@
 #include "TextureManager.h"
 
 Player::Player() : Actor("Player") {
-  _moveSpeed.x = 5, _moveSpeed.y = 5;
-  velocity = sf::Vector2f(0, 0);
+  moveSpeed = 5;
+  box = sf::FloatRect(10, 22, 12, 10);
   sf::Texture* texturePointer =
       TextureManager::loadTexture("player", "assets/textures/slime.png");
   if (texturePointer == NULL) {
@@ -13,7 +13,7 @@ Player::Player() : Actor("Player") {
     exit(1);
   }
   sprite.setTexture(*texturePointer);
-  sprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
+  sprite.setTextureRect(sf::IntRect(0, 0, 32, 32));
   _animation.x = 0, _animation.y = 0;
 }
 
@@ -29,5 +29,5 @@ void Player::updateAnimation() {
     _animation.x -= 5;
   }
   sprite.setTextureRect(
-      sf::IntRect(_animation.x * 64, _animation.y * 64, 64, 64));
+      sf::IntRect(_animation.x * 32, _animation.y * 32, 32, 32));
 }
