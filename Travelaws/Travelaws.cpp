@@ -16,6 +16,7 @@
 #include "WindRule.hpp"
 #include "imgui-SFML.h"
 #include "imgui.h"
+#include "VisionRule.hpp"
 #pragma endregion includes
 
 Game::Game(int width, int height, std::string title) {
@@ -47,6 +48,7 @@ void Game::mainLoop() {
 
   rules.push_back(std::make_unique<GravityRule>());
   rules.push_back(std::make_unique<WindRule>());
+  rules.push_back(std::make_unique<VisionRule>());
   rules.push_back(std::make_unique<CollisionRule>(
       platformsLayer));  //!\\ Collision has to be last !
 
@@ -106,6 +108,11 @@ void Game::mainLoop() {
     window.draw(backgroundLayer);
     window.draw(platformsLayer);
     window.draw(gameData.player.playerSprite);
+	// RULES DRAW
+	for (auto& rule : rules) {
+		if (rule.get()->active)
+			rule.get()->draw(window);
+	}
     ImGui::SFML::Render(window);
     window.display();
   }

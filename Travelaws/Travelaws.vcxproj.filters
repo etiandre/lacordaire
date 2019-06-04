@@ -29,6 +29,8 @@
     <ClCompile Include="imgui\imgui_widgets.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
+    <ClCompile Include="WindRule.cpp" />
+    <ClCompile Include="VisionRule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEFINITIONS.h" />
@@ -49,6 +51,9 @@
     <ClInclude Include="WindRule.hpp">
       <Filter>rules</Filter>
     </ClInclude>
+	<ClInclude Include="VisionRule.hpp">
+		<Filter>rules</Filter>
+	</ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="rules">
