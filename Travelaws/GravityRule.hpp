@@ -1,5 +1,5 @@
 #pragma once
-#include "Rule.hpp"
+#include "Rule.h"
 
 class GravityRule : public Rule {
  private:

@@ -27,7 +27,7 @@ Game::Game(int width, int height, std::string title) {
 }
 
 void Game::loadLevel(int levelID) {
-	if (!map.load("assets/levels/level" + std::to_string(levelID) + ".tmx")) {
+	if (!gameData.map.load("assets/levels/level" + std::to_string(levelID) + ".tmx")) {
 		std::cout << "cannot load level !" << std::endl;
 		exit(1);
 	}
@@ -36,11 +36,6 @@ void Game::loadLevel(int levelID) {
 void Game::mainLoop() {
 	int windowHeight = 1080;
 	int windowWidth = 1920;
-
-	int speed = 0.1;
-	sf::Texture slimeTexture;
-	sf::Sprite slimeSprite;
-	int blockSize = 64;
 
 	sf::Event event;
 
@@ -58,7 +53,7 @@ void Game::mainLoop() {
 	InputManager inputManager;
 	GravityRule gravity;
 
-	gameData.player.playerSprite.setTexture(gameData.player.playerTexture);
+	//gameData.player.playerSprite.setTexture(gameData.player.playerTexture);
 
 	while (window.isOpen()) {
 
@@ -101,7 +96,7 @@ void Game::mainLoop() {
     view.reset(sf::FloatRect(0, 0, windowWidth, windowHeight));
     sf::Vector2f position(windowWidth / 2, windowHeight / 2);
     position.x =
-        gameData.player.getPosition().x + blockSize / 2 - windowWidth / 2;
+        gameData.player.getPosition().x + BLOCK_SIZE / 2 - windowWidth / 2;
     if (position.x < 0) position.x = 0;
     if (position.y < 0) position.y = 0;
 
