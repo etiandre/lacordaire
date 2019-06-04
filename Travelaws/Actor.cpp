@@ -24,10 +24,12 @@ void Actor::update() {
   }
   if (y <= 0) {
     y = 0;
+	//destroy
   }
-  if (y >= SCREEN_HEIGHT - 5) {
-    y = SCREEN_HEIGHT - 5;
+  if (y >= SCREEN_HEIGHT - 35) {
+    y = SCREEN_HEIGHT - 35;
   }
+  
 
   sprite.setPosition(x, y);
 }

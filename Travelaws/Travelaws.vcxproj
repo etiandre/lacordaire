@@ -169,6 +169,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rule.h" />
     <ClInclude Include="SFMLOrthogonalLayer.hpp" />
+    <ClInclude Include="StateMachine.hpp" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Travelaws.h" />
     <ClInclude Include="VisionRule.hpp" />

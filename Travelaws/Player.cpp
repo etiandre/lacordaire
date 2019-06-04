@@ -3,7 +3,9 @@
 #include "SFML/Graphics.hpp"
 #include "TextureManager.h"
 
+
 Player::Player() : Actor("Player") {
+	//_move dead ?
   _moveSpeed.x = 5, _moveSpeed.y = 5;
   velocity = sf::Vector2f(0, 0);
   sf::Texture* texturePointer =
@@ -18,6 +20,7 @@ Player::Player() : Actor("Player") {
 }
 
 sf::Vector2i Player::animatorState() { return _animation; }
+
 
 void Player::animator(int x, int y) {
   _animation.x = x;

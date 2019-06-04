@@ -11,7 +11,7 @@ void InputManager::manageInputs(Player &player) {
     player.animator(player.animatorState().x, 0);
     player.animator(player.animatorState().x + 1, player.animatorState().y);
   } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-    X = 3;
+    X = 30;
     player.animator(player.animatorState().x, 1);
     player.animator(player.animatorState().x + 1, player.animatorState().y);
   }
