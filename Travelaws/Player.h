@@ -1,18 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "DEFINITIONS.h"
+#include "Actors.hpp"
 
-struct Position {
-  int x;
-  int y;
-};
-
-struct Size {
-  int width;
-  int height;
-};
-
-class Player {
+class Player : public Actors {
  public:
   Player();
   void setPosition(int x, int y);
@@ -26,10 +17,10 @@ class Player {
   void animator(int x, int y);
   sf::Vector2i animatorState();
   sf::Vector2f velocity;
+
  private:
   int _health;
-  sf::Vector2i _moveSpeed;
+  sf::Vector2i _moveSpeed;//à terme à bouger dans InputManager
   float _inertia;
   sf::Vector2i _animation;
-  sf::Texture playerTexture;
 };
