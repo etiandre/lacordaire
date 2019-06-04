@@ -37,4 +37,5 @@ class Player {
 
 
 
+  sf::Texture playerTexture;
 };

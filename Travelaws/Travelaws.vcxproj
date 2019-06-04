@@ -159,20 +159,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CollisionRule.h" />
     <ClInclude Include="DEFINITIONS.h" />
     <ClInclude Include="GravityRule.hpp" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Rule.hpp" />
+    <ClInclude Include="Rule.h" />
     <ClInclude Include="SFMLOrthogonalLayer.hpp" />
-    <ClInclude Include="State.h" />
-    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="Travelaws.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GravityRule.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="CollisionRule.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

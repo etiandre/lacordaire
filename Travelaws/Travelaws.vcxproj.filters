@@ -13,15 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête\GameEngine">
-      <UniqueIdentifier>{4b86b451-2765-423c-a531-30c0656d6e51}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\GameLaws">
-      <UniqueIdentifier>{cbc77dcd-c5ef-4f49-9886-6f763c42fce1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\GameEntities">
-      <UniqueIdentifier>{7cef37cb-1653-4a22-9b7c-a7632947fdf2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers sources\GameEngine">
       <UniqueIdentifier>{6fab5e7f-01d4-4106-a707-62d713ac7d97}</UniqueIdentifier>
     </Filter>
@@ -33,12 +24,6 @@
     <ClInclude Include="pch.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Fichiers d%27en-tête\GameEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="StateMachine.h">
-      <Filter>Fichiers d%27en-tête\GameEngine</Filter>
-    </ClInclude>
     <ClInclude Include="DEFINITIONS.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -46,6 +31,16 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionRule.h">
+    <ClInclude Include="DEFINITIONS.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Rule.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="GameData.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="GravityRule.hpp">
@@ -72,6 +67,9 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionRule.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

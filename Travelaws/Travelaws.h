@@ -2,15 +2,11 @@
 
 #include <tmxlite/Map.hpp>
 #include <SFML/Graphics.hpp>
-#include <memory>
+#include <tmxlite/Map.hpp>
 #include <string>
 #include "Player.h"
-
-struct GameData {
-  Player player;
-};
-
-//typedef std::shared_ptr<GameData> GameDataRef;
+#include "GameData.h"
+#include "Rule.h"
 
 class Game {
  public:
@@ -20,7 +16,7 @@ class Game {
   sf::RenderWindow window;
   sf::View view;
   GameData gameData;
-  tmx::Map map;
+  std::vector<std::unique_ptr<Rule>> rules;
 
   void loadLevel(int levelID);
   void mainLoop();
