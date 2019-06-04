@@ -16,7 +16,6 @@
 #include "SFMLOrthogonalLayer.hpp"
 #include "Travelaws.h"
 #include "WindRule.hpp"
-
 #pragma endregion includes
 
 Game::Game(int width, int height, std::string title) {
@@ -88,6 +87,13 @@ void Game::mainLoop() {
 
       view.reset(sf::FloatRect(position.x, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
       window.setView(view);
+
+			// GUI
+      ImGui::Begin("Rules");
+      for (auto& rule : rules) {
+        ImGui::Checkbox(rule.get()->getName(), &rule.get()->active);
+			}
+			ImGui::End(); // Rules
 
       // DRAW
       gameData.player.updateAnimation();

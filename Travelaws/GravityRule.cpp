@@ -3,3 +3,5 @@
 void GravityRule::physicsUpdate(GameData& gameData) {
   gameData.player.velocity.y += gravity;
 }
+
+const char* GravityRule::getName() { return "Gravite"; }

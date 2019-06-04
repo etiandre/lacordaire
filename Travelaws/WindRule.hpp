@@ -3,7 +3,8 @@
 
 class WindRule : public Rule {
  public:
-  void physicsUpdate(GameData &gameData);
+  void physicsUpdate(GameData& gameData);
+  const char* getName();
 
  private:
   int _windForce = 0;
