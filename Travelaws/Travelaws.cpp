@@ -53,27 +53,14 @@ void Game::mainLoop() {
 
   float fpsCount = 0, switchFPS = 100, fpsSpeed = 500;
 
-  sf::Clock time;
-  float newTime, frameTime;
-  float currentTime = time.getElapsedTime().asSeconds();
-  float accumulator = 0.0f;
+  sf::Clock clock;
 
   while (window.isOpen()) {
-    float currentTime = time.getElapsedTime().asSeconds();
-    float accumulator = 0.0f;
-
-    while (accumulator >= 1 / 60)  // 60 fps
-    {
       while (window.pollEvent(event)) {
+        ImGui::SFML::ProcessEvent(event);
         if (event.type == sf::Event::EventType::Closed) window.close();
       }
-
-      newTime = time.getElapsedTime().asSeconds();
-      frameTime = newTime - currentTime;
-
-      // Envisager cas limite des frames trop longues ?
-      currentTime = newTime;
-      accumulator += frameTime;
+      ImGui::SFML::Update(window, clock.restart());
 
       // GAME LOOP
       // INPUTS
@@ -109,10 +96,9 @@ void Game::mainLoop() {
       window.draw(backgroundLayer);
       window.draw(platformsLayer);
       window.draw(gameData.player.playerSprite);
+      ImGui::SFML::Render(window);
       window.display();
     }
-    accumulator -= 1 / 60;
-  }
 }
 
 int main(int argc, char** argv) {
