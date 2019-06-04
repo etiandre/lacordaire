@@ -9,4 +9,8 @@ class CollisionRule : public Rule {
 
  private:
   MapLayer& collisionLayer;
+  bool collides(const sf::FloatRect& box, const tmx::Vector2u& tileSize,
+                const tmx::Vector2u& tileCount);
+  const tmx::Vector2u tileSize;
+  const tmx::Vector2u tileCount;
 };

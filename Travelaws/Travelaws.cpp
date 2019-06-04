@@ -45,9 +45,9 @@ void Game::mainLoop() {
 	MapLayer backgroundLayer(gameData.map, 0);
 	MapLayer platformsLayer(gameData.map, 2);
 
-	rules.push_back(std::make_unique<CollisionRule>(platformsLayer));
 	rules.push_back(std::make_unique<GravityRule>());
 	rules.push_back(std::make_unique<WindRule>());
+  rules.push_back(std::make_unique<CollisionRule>(platformsLayer)); //!\\ Collision has to be last !
 
   float fpsCount = 0, switchFPS = 100, fpsSpeed = 500;
 
