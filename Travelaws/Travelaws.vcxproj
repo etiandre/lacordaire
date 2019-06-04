@@ -167,6 +167,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rule.h" />
     <ClInclude Include="SFMLOrthogonalLayer.hpp" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Travelaws.h" />
     <ClInclude Include="WindRule.hpp" />
   </ItemGroup>
@@ -181,6 +182,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Travelaws.cpp" />
     <ClCompile Include="WindRule.cpp" />
   </ItemGroup>

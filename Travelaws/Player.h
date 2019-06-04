@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "DEFINITIONS.h"
+#include "TextureManager.h"
 
 struct Position {
   int x;
@@ -31,5 +32,4 @@ class Player {
   sf::Vector2i _moveSpeed;
   float _inertia;
   sf::Vector2i _animation;
-  sf::Texture playerTexture;
 };

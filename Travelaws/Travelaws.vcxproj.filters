@@ -7,9 +7,26 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Travelaws.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="GravityRule.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="CollisionRule.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Travelaws.cpp" />
     <ClCompile Include="WindRule.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CollisionRule.h" />
+    <ClInclude Include="DEFINITIONS.h" />
+    <ClInclude Include="GravityRule.hpp" />
+    <ClInclude Include="InputManager.hpp" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Rule.h" />
+    <ClInclude Include="SFMLOrthogonalLayer.hpp" />
+    <ClInclude Include="Travelaws.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="CollisionRule.h" />
     <ClInclude Include="DEFINITIONS.h" />
     <ClInclude Include="GravityRule.hpp" />
