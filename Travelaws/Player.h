@@ -31,5 +31,4 @@ class Player {
   sf::Vector2i _moveSpeed;
   float _inertia;
   sf::Vector2i _animation;
-  sf::Texture playerTexture;
 };
