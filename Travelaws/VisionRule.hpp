@@ -8,7 +8,8 @@ public:
 	void update(GameData& gameData);
 	VisionRule();
 	sf::Sprite filter;
-	bool filterIsActive=true;
+	const char* getName();
+
 private:
 	sf::RectangleShape _rect1;
 	sf::RectangleShape _rect2;

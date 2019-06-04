@@ -160,6 +160,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Actors.hpp" />
     <ClInclude Include="CollisionRule.h" />
     <ClInclude Include="DEFINITIONS.h" />
     <ClInclude Include="GravityRule.hpp" />

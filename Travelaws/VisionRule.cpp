@@ -1,7 +1,7 @@
-#include "pch.h"
 #include "VisionRule.hpp"
 #include "TextureManager.h"
 
+const char* VisionRule::getName() { return "Vision"; }
 
 void VisionRule::draw(sf::RenderWindow& window)
 {		
