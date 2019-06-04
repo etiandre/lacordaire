@@ -56,38 +56,44 @@ void Game::mainLoop() {
 	InputManager inputManager;
 	GravityRule gravity;
 
+	gameData.player.playerSprite.setTexture(gameData.player.playerTexture);
+
 	while (window.isOpen()) {
 
 		float newTime, frameTime;
 		float currentTime = time.getElapsedTime().asSeconds();
 		float accumulator = 0.0f;
 
-		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::EventType::Closed) window.close();
-		}
-		
-		
-		newTime = time.getElapsedTime().asSeconds();
-		frameTime = newTime - currentTime;
-
-		//Envisager cas limite des frames trop longues ?
-		currentTime = newTime;
-		accumulator += frameTime;
-		while (accumulator >= 1/60) // 60 fps
+		while (accumulator >= 1 / 60) // 60 fps
 		{
+			while (window.pollEvent(event)) {
+				if (event.type == sf::Event::EventType::Closed) window.close();
+			}
+
+			newTime = time.getElapsedTime().asSeconds();
+			frameTime = newTime - currentTime;
+
+			//Envisager cas limite des frames trop longues ?
+			currentTime = newTime;
+			accumulator += frameTime;
+
+
+
+
+
 			inputManager.manageInputs(gameData.player);
 			gravity.update(gameData);
 			gameData.player.updatePosition();
-
+			gameData.player.updateAnimation();
 
 
 
 
 			// Partie graph
+
 			view.reset(sf::FloatRect(0, 0, windowWidth, windowHeight));
 			sf::Vector2f position(windowWidth / 2, windowHeight / 2);
-			position.x =
-				gameData.player.getPosition().x + blockSize / 2 - windowWidth / 2;
+			position.x = gameData.player.getPosition().x + blockSize / 2 - windowWidth / 2;
 			if (position.x < 0) position.x = 0;
 			if (position.y < 0) position.y = 0;
 
@@ -103,8 +109,9 @@ void Game::mainLoop() {
 
 
 
-			accumulator -= 1/60;
+
 		}
+		accumulator -= 1 / 60;
 	}
 }
 

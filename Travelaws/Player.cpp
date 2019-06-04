@@ -13,6 +13,8 @@ Player::Player() {
   }
   playerSprite.setTexture(playerTexture);
   playerSprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
+  _animation.x = 0, _animation.y = 0;
+
 }
 
 void Player::setPosition(int x, int y) {
@@ -41,4 +43,22 @@ sf::Vector2i Player::getPosition() {
 void Player::accelerate(int x, int y) {
 	_velocity.x += x;
 	_velocity.y += y;
+}
+
+
+sf::Vector2i Player::animatorState() {
+	return _animation;
+}
+
+void Player::animator(int x, int y) {
+	_animation.x = x;
+	_animation.y = y;
+}
+
+void Player::updateAnimation() {
+	if (_animation.x >= 5) {
+		_animation.x -= 5;
+	}
+
+	playerSprite.setTextureRect(sf::IntRect(_animation.x * BLOCK_SIZE, _animation.y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE));
 }

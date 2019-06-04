@@ -4,25 +4,31 @@
 #include <iostream>
 
 void InputManager::manageInputs(Player &player) {
-	int x = 0;
-	int y = 0;
+	int X = 0;
+	int Y = 0;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-		x = -3;
+		X = -3;
+		player.animator(player.animatorState().x, 0);
+		player.animator(player.animatorState().x + 1 , player.animatorState().y);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-		x = 3;
+		X = 3;
+		player.animator(player.animatorState().x, 1);
+		player.animator(player.animatorState().x + 1 , player.animatorState().y);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-		y = -5;
+		Y = -5;
+		//specific anim ?
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-		y = 3;
+		Y = 3;
+
 	}
 
-	player.move(x, y);
+	player.move(X, Y);
 
-	std::cout << "coords (" << player.getPosition().x << "," << player.getPosition().y << ")" << std::endl;
+	//std::cout << "coords (" << player.getPosition().x << "," << player.getPosition().y << ")" << std::endl;
 }
 

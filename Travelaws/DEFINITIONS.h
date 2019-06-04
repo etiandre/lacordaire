@@ -4,7 +4,7 @@
 #define SCREEN_HEIGHT 1080
 
 #define SPLASH_STATE_SHOW_TIME 3.0
-
+constexpr auto BLOCK_SIZE = 64;;
 
 
 #define SPLASH_SCENE_BACKGROUND_FILEPATH "assets/textures/Splashscreen.jpg"
