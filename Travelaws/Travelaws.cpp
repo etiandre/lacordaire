@@ -13,10 +13,10 @@
 #include "InputManager.hpp"
 #include "Player.h"
 #include "SFMLOrthogonalLayer.hpp"
+#include "VisionRule.hpp"
 #include "WindRule.hpp"
 #include "imgui-SFML.h"
 #include "imgui.h"
-#include "VisionRule.hpp"
 #pragma endregion includes
 
 Game::Game(int width, int height, std::string title) {
@@ -48,11 +48,11 @@ void Game::mainLoop() {
 	MapLayer backgroundLayer(gameData.map, 0);
 	MapLayer platformsLayer(gameData.map, 2);
 
-	rules.push_back(std::make_unique<GravityRule>());
-	rules.push_back(std::make_unique<WindRule>());
-	rules.push_back(std::make_unique<VisionRule>());
-	rules.push_back(std::make_unique<CollisionRule>(
-		platformsLayer));  //!\\ Collision has to be last !
+  rules.push_back(std::make_unique<GravityRule>());
+  //rules.push_back(std::make_unique<WindRule>());
+  //rules.push_back(std::make_unique<VisionRule>());
+  rules.push_back(std::make_unique<CollisionRule>(
+      platformsLayer));  //!\\ Collision has to be last !
 
 	sf::Clock clock;
 
