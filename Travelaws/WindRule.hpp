@@ -3,7 +3,7 @@
 
 class WindRule : public Rule {
  public:
-  void physicsUpdate(GameData& gameData);
+  void update(GameData& gameData);
   const char* getName();
 
  private:

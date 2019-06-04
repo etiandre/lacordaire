@@ -68,11 +68,11 @@ void Game::mainLoop() {
 
     // PHYSICS UPDATE
     for (auto& rule : rules) {
-      if (rule.get()->active) rule.get()->physicsUpdate(gameData);
+      if (rule.get()->active) rule.get()->update(gameData);
     }
 
     // POSITION UPDATE
-    gameData.player.updatePosition();
+    gameData.player.update();
 
     // RULES UPDATE
     for (auto& rule : rules) {
@@ -107,7 +107,7 @@ void Game::mainLoop() {
     window.clear();
     window.draw(backgroundLayer);
     window.draw(platformsLayer);
-    window.draw(gameData.player.playerSprite);
+    gameData.player.draw(window);
 	// RULES DRAW
 	for (auto& rule : rules) {
 		if (rule.get()->active)

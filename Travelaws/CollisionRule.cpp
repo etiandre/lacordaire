@@ -5,7 +5,7 @@
 
 CollisionRule::CollisionRule(MapLayer& layer) : collisionLayer(layer){};
 
-void CollisionRule::physicsUpdate(GameData& gameData) {
+void CollisionRule::update(GameData& gameData) {
   sf::FloatRect box;
   // axe x
 	

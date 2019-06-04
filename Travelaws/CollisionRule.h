@@ -5,7 +5,7 @@
 class CollisionRule : public Rule {
  public:
   CollisionRule(MapLayer& layer);
-  void physicsUpdate(GameData& gameData) override;
+  void update(GameData& gameData) override;
   const char* getName();
 
  private:

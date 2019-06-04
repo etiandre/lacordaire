@@ -6,6 +6,6 @@ class GravityRule : public Rule {
   float gravity = 3;
 
  public:
-  void physicsUpdate(GameData& gameData);
+  void update(GameData& gameData);
   const char* getName();
 };

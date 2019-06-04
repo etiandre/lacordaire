@@ -1,6 +1,6 @@
 #include "VisionRule.hpp"
 #include "TextureManager.h"
-
+#include "DEFINITIONS.h"
 const char* VisionRule::getName() { return "Vision"; }
 
 void VisionRule::draw(sf::RenderWindow& window)
