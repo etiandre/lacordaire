@@ -6,9 +6,25 @@
 CollisionRule::CollisionRule(MapLayer& layer) : collisionLayer(layer){};
 
 void CollisionRule::physicsUpdate(GameData& gameData) {
-  sf::FloatRect box = sf::FloatRect(gameData.player.getPosition().x,
-                                    gameData.player.getPosition().y, 64, 64);
-  collides(box, gameData.map.getTileSize(), gameData.map.getTileCount());
+  sf::FloatRect box;
+  // axe x
+	
+  box = sf::FloatRect(
+      gameData.player.getPosition().x + gameData.player.velocity.x,
+      gameData.player.getPosition().y, 64, 64);
+  if (collides(box, gameData.map.getTileSize(), gameData.map.getTileCount())) {
+    std::cout << "collision en x" << std::endl;
+    gameData.player.velocity.x = 0;
+  }
+
+  // axe y
+  box = sf::FloatRect(
+      gameData.player.getPosition().x,
+      gameData.player.getPosition().y + gameData.player.velocity.y, 64, 64);
+  if (collides(box, gameData.map.getTileSize(), gameData.map.getTileCount())) {
+    std::cout << "collision en y" << std::endl;
+    gameData.player.velocity.y = 0;
+  }
 }
 
 bool CollisionRule::collides(const sf::FloatRect& box,
@@ -27,11 +43,11 @@ bool CollisionRule::collides(const sf::FloatRect& box,
   for (int i = leftTile; i <= rightTile; i++) {
     for (int j = topTile; j <= bottomTile; j++) {
       if (collisionLayer.getTile(i, j).ID != 0) {
-        std::cout << "collision !" << std::endl;
         return true;
       }
     }
   }
+  return false;
 }
 
 const char* CollisionRule::getName() { return "Collisions"; }
