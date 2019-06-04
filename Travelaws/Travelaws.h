@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "GameData.h"
 #include "Rule.h"
+#include "TextureManager.h"
 
 class Game {
  public:
@@ -17,7 +18,6 @@ class Game {
   sf::View view;
   GameData gameData;
   std::vector<std::unique_ptr<Rule>> rules;
-
   void loadLevel(int levelID);
   void mainLoop();
 };
