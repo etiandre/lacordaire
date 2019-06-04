@@ -175,6 +175,7 @@
     <ClInclude Include="WindRule.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="GravityRule.cpp" />
     <ClCompile Include="imgui-sfml\imgui-SFML.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />

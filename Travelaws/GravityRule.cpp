@@ -1,6 +1,6 @@
 #include "GravityRule.hpp"
 
-void GravityRule::physicsUpdate(GameData& gameData) {
+void GravityRule::update(GameData& gameData) {
   gameData.player.velocity.y += gravity;
 }
 

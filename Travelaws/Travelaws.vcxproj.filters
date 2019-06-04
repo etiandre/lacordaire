@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="GravityRule.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Travelaws.cpp" />
@@ -32,10 +31,13 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>lib</Filter>
     </ClCompile>
+    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="GravityRule.cpp">
+      <Filter>rules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEFINITIONS.h" />
-    <ClInclude Include="GravityRule.hpp" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Travelaws.h" />
@@ -59,6 +61,9 @@
     </ClInclude>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="GameData.h" />
+    <ClInclude Include="GravityRule.hpp">
+      <Filter>rules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="rules">
