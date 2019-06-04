@@ -1,41 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="GravityRule.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="CollisionRule.cpp" />
-    <ClCompile Include="pch.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Travelaws.cpp" />
     <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="GravityRule.cpp" />
-    <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="CollisionRule.cpp" />
-    <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Travelaws.cpp" />
-    <ClCompile Include="WindRule.cpp" />
+    <ClCompile Include="CollisionRule.cpp">
+      <Filter>rules</Filter>
+    </ClCompile>
+    <ClCompile Include="GravityRule.cpp">
+      <Filter>rules</Filter>
+    </ClCompile>
+    <ClCompile Include="WindRule.cpp">
+      <Filter>rules</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_demo.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui-sfml\imgui-SFML.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_widgets.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CollisionRule.h" />
     <ClInclude Include="DEFINITIONS.h" />
-    <ClInclude Include="GravityRule.hpp" />
     <ClInclude Include="InputManager.hpp" />
-    <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Rule.h" />
     <ClInclude Include="SFMLOrthogonalLayer.hpp" />
-    <ClInclude Include="Travelaws.h" />
     <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="CollisionRule.h" />
-    <ClInclude Include="DEFINITIONS.h" />
-    <ClInclude Include="GravityRule.hpp" />
-    <ClInclude Include="InputManager.hpp" />
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Rule.h" />
-    <ClInclude Include="SFMLOrthogonalLayer.hpp" />
     <ClInclude Include="Travelaws.h" />
-    <ClInclude Include="WindRule.hpp" />
+    <ClInclude Include="CollisionRule.h">
+      <Filter>rules</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityRule.hpp">
+      <Filter>rules</Filter>
+    </ClInclude>
+    <ClInclude Include="Rule.h">
+      <Filter>rules</Filter>
+    </ClInclude>
+    <ClInclude Include="WindRule.hpp">
+      <Filter>rules</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="rules">
+      <UniqueIdentifier>{898a7438-3a46-4032-904d-99669aae1c16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{b1b1640e-c727-4ffc-b0af-26b30a3d8e97}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

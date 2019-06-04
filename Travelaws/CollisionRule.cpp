@@ -1,5 +1,3 @@
-#include "pch.h"
-//
 #include <cmath>
 #include "CollisionRule.h"
 

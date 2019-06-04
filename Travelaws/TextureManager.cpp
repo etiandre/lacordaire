@@ -1,4 +1,3 @@
-#include "pch.h"
 //from https://github.com/netpoetica/sfml-texture-manager
 //The MIT License(MIT) Copyright(c) 2013 Dylan Jones
 //

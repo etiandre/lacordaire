@@ -1,8 +1,9 @@
-#include "pch.h"
 // Travelaws.cpp : Ce fichier contient la fonction 'main'
 //
 
 #pragma region includes
+#include "imgui-SFML.h"
+#include "imgui.h"
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <iostream>
@@ -14,10 +15,8 @@
 #include "Player.h"
 #include "SFMLOrthogonalLayer.hpp"
 #include "Travelaws.h"
-#include "GravityRule.hpp"
-#include "InputManager.hpp"
-#include "CollisionRule.h"
 #include "WindRule.hpp"
+
 #pragma endregion includes
 
 Game::Game(int width, int height, std::string title) {
@@ -26,8 +25,10 @@ Game::Game(int width, int height, std::string title) {
   window.create(sf::VideoMode(width, height),
                 "Travelaws 0.0.0.0.1 alpha dx+ TEST RELEASE");
   window.setFramerateLimit(60);
+  ImGui::SFML::Init(window);
   loadLevel(1);
   mainLoop();
+  ImGui::SFML::Shutdown();
 }
 
 void Game::loadLevel(int levelID) {
@@ -39,22 +40,23 @@ void Game::loadLevel(int levelID) {
 }
 
 void Game::mainLoop() {
-	sf::Event event;
-	InputManager inputManager;
+  sf::Event event;
+  InputManager inputManager;
 
-	MapLayer backgroundLayer(gameData.map, 0);
-	MapLayer platformsLayer(gameData.map, 2);
+  MapLayer backgroundLayer(gameData.map, 0);
+  MapLayer platformsLayer(gameData.map, 2);
 
-	rules.push_back(std::make_unique<GravityRule>());
-	rules.push_back(std::make_unique<WindRule>());
-  rules.push_back(std::make_unique<CollisionRule>(platformsLayer)); //!\\ Collision has to be last !
+  rules.push_back(std::make_unique<GravityRule>());
+  rules.push_back(std::make_unique<WindRule>());
+  rules.push_back(std::make_unique<CollisionRule>(
+      platformsLayer));  //!\\ Collision has to be last !
 
   float fpsCount = 0, switchFPS = 100, fpsSpeed = 500;
 
-	sf::Clock time;
-	float newTime, frameTime;
-	float currentTime = time.getElapsedTime().asSeconds();
-	float accumulator = 0.0f;
+  sf::Clock time;
+  float newTime, frameTime;
+  float currentTime = time.getElapsedTime().asSeconds();
+  float accumulator = 0.0f;
 
   while (window.isOpen()) {
     float currentTime = time.getElapsedTime().asSeconds();
@@ -73,23 +75,21 @@ void Game::mainLoop() {
       currentTime = newTime;
       accumulator += frameTime;
 
-			// GAME LOOP
-			// INPUTS
+      // GAME LOOP
+      // INPUTS
       inputManager.manageInputs(gameData.player);
 
-			// PHYSICS UPDATE
+      // PHYSICS UPDATE
       for (auto& rule : rules) {
-        if (rule.get()->active)
-					rule.get()->physicsUpdate(gameData);
-			}
+        if (rule.get()->active) rule.get()->physicsUpdate(gameData);
+      }
 
-			// POSITION UPDATE
+      // POSITION UPDATE
       gameData.player.updatePosition();
 
       // RULES UPDATE
       for (auto& rule : rules) {
-        if (rule.get()->active)
-					rule.get()->update(gameData);
+        if (rule.get()->active) rule.get()->update(gameData);
       }
 
       // VIEW
@@ -102,8 +102,8 @@ void Game::mainLoop() {
 
       view.reset(sf::FloatRect(position.x, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
       window.setView(view);
-			
-			// DRAW
+
+      // DRAW
       gameData.player.updateAnimation();
       window.clear();
       window.draw(backgroundLayer);

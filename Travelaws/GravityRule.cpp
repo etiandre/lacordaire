@@ -1,5 +1,3 @@
-#include "pch.h"
-//
 #include "GravityRule.hpp"
 
 void GravityRule::physicsUpdate(GameData& gameData) {
