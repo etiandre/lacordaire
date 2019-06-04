@@ -51,11 +51,10 @@ void Game::mainLoop() {
   rules.push_back(std::make_unique<CollisionRule>(
       platformsLayer));  //!\\ Collision has to be last !
 
-  float fpsCount = 0, switchFPS = 100, fpsSpeed = 500;
-
-  sf::Clock clock;
+	sf::Clock clock;
 
   while (window.isOpen()) {
+			// EVENTS
       while (window.pollEvent(event)) {
         ImGui::SFML::ProcessEvent(event);
         if (event.type == sf::Event::EventType::Closed) window.close();
