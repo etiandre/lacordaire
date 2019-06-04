@@ -15,6 +15,7 @@ class Player {
   Player();
   void setPosition(int x, int y);
   void move(int x, int y);
+  sf::Vector2f velocity;
   sf::Vector2i getPosition();
   sf::Sprite playerSprite;
   void updatePosition();
@@ -23,7 +24,5 @@ class Player {
   int _health;
   int _moveSpeed;
   float _inertia;
-  sf::Vector2f _velocity;
-
   sf::Texture playerTexture;
 };

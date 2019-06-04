@@ -11,9 +11,12 @@
 #include "Player.h"
 #include "SFMLOrthogonalLayer.hpp"
 #include "Travelaws.h"
+#include "CollisionRule.h"
 #pragma endregion includes
 
 Game::Game(int width, int height, std::string title) {
+  gameData.player = Player();
+  gameData.map = tmx::Map();
   window.create(sf::VideoMode(width, height),
                 "Travelaws 0.0.0.0.1 alpha dx+ TEST RELEASE");
   window.setFramerateLimit(60);
@@ -22,7 +25,7 @@ Game::Game(int width, int height, std::string title) {
 }
 
 void Game::loadLevel(int levelID) {
-  if (!map.load("assets/levels/level" + std::to_string(levelID) + ".tmx")) {
+  if (!gameData.map.load("assets/levels/level" + std::to_string(levelID) + ".tmx")) {
     std::cout << "cannot load level !" << std::endl;
     exit(1);
   }
@@ -39,11 +42,10 @@ void Game::mainLoop() {
 
   sf::Event event;
 
-  MapLayer backgroundLayer(map, 0);
-  MapLayer platformsLayer(map, 2);
+  MapLayer backgroundLayer(gameData.map, 0);
+  MapLayer platformsLayer(gameData.map, 2);
   
-	gameData = {};
-  gameData.player = Player();
+	rules.push_back(std::make_unique<CollisionRule>(platformsLayer));
 
   float fpsCount = 0, switchFPS = 100, fpsSpeed = 500;
 
@@ -66,7 +68,11 @@ void Game::mainLoop() {
       gameData.player.move(0, 1);
     }
 
-		gameData.player.updatePosition();
+    gameData.player.updatePosition();
+
+		for (auto& rule : rules) {
+      rule.get()->update(gameData);
+		}
 
     // Création et gestion de la vue:
     view.reset(sf::FloatRect(0, 0, windowWidth, windowHeight));
