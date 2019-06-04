@@ -39,20 +39,15 @@ void Game::loadLevel(int levelID) {
 }
 
 void Game::mainLoop() {
-  int windowHeight = 1080;
-  int windowWidth = 1920;
-
 	sf::Event event;
 	InputManager inputManager;
-	GravityRule gravity;
-	WindRule wind;
 
 	MapLayer backgroundLayer(gameData.map, 0);
 	MapLayer platformsLayer(gameData.map, 2);
 
 	rules.push_back(std::make_unique<CollisionRule>(platformsLayer));
-	rules.push_back(std::make_unique <GravityRule>(gravity));
-	rules.push_back(std::make_unique<WindRule>(wind));
+	rules.push_back(std::make_unique<GravityRule>());
+	rules.push_back(std::make_unique<WindRule>());
 
   float fpsCount = 0, switchFPS = 100, fpsSpeed = 500;
 
@@ -62,7 +57,6 @@ void Game::mainLoop() {
 	float accumulator = 0.0f;
 
   while (window.isOpen()) {
-    float newTime, frameTime;
     float currentTime = time.getElapsedTime().asSeconds();
     float accumulator = 0.0f;
 
@@ -79,28 +73,38 @@ void Game::mainLoop() {
       currentTime = newTime;
       accumulator += frameTime;
 
+			// GAME LOOP
+			// INPUTS
       inputManager.manageInputs(gameData.player);
-      gravity.update(gameData);
-      gameData.player.updatePosition();
-      gameData.player.updateAnimation();
 
-      // Partie graph
-
+			// PHYSICS UPDATE
       for (auto& rule : rules) {
-        rule.get()->update(gameData);
+        if (rule.get()->active)
+					rule.get()->physicsUpdate(gameData);
+			}
+
+			// POSITION UPDATE
+      gameData.player.updatePosition();
+
+      // RULES UPDATE
+      for (auto& rule : rules) {
+        if (rule.get()->active)
+					rule.get()->update(gameData);
       }
 
-      // Création et gestion de la vue:
-      view.reset(sf::FloatRect(0, 0, windowWidth, windowHeight));
-      sf::Vector2f position(windowWidth / 2, windowHeight / 2);
+      // VIEW
+      view.reset(sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
+      sf::Vector2f position(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
       position.x =
-          gameData.player.getPosition().x + BLOCK_SIZE / 2 - windowWidth / 2;
+          gameData.player.getPosition().x + BLOCK_SIZE / 2 - SCREEN_WIDTH / 2;
       if (position.x < 0) position.x = 0;
       if (position.y < 0) position.y = 0;
 
-      view.reset(sf::FloatRect(position.x, 0, windowWidth, windowHeight));
+      view.reset(sf::FloatRect(position.x, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
       window.setView(view);
-
+			
+			// DRAW
+      gameData.player.updateAnimation();
       window.clear();
       window.draw(backgroundLayer);
       window.draw(platformsLayer);

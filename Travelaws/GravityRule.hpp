@@ -6,6 +6,5 @@ class GravityRule : public Rule {
   float gravity = 3;
 
  public:
-  void update(GameData &gameData);
-  GravityRule();
+  void physicsUpdate(GameData &gameData);
 };

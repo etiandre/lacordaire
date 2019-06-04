@@ -2,10 +2,9 @@
 #include "Rule.h"
 
 class WindRule : public Rule {
+ public:
+  void physicsUpdate(GameData &gameData);
 
-public:
-	void update(GameData &gameData);
-	WindRule();
-private:
-	int _windForce = 0;
+ private:
+  int _windForce = 0;
 };

@@ -3,5 +3,7 @@
 
 class Rule {
  public:
-  virtual void update(GameData& gameData) = 0;
+  virtual void update(GameData& gameData){};
+  virtual void physicsUpdate(GameData& gameData){};
+  bool active = true;
 };
