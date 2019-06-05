@@ -22,6 +22,7 @@
 Game::Game(int width, int height) {
   gameData.player = Player();
   gameData.map = tmx::Map();
+  gameData.gameState = InGame;
   view = sf::View(sf::FloatRect(0, 0, width/4, height/4));
   window.create(sf::VideoMode(width, height),
                 "Travelaws 0.0.0.0.1 alpha dx+ TEST RELEASE");
@@ -47,7 +48,7 @@ void Game::mainLoop() {
 	InputManager inputManager;
 
 	MapLayer backgroundLayer(gameData.map, 0);
-	MapLayer platformsLayer(gameData.map, 2);
+	MapLayer platformsLayer(gameData.map, 1);
 
   rules.push_back(std::make_unique<GravityRule>());
   //rules.push_back(std::make_unique<WindRule>());
