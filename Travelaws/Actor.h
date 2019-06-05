@@ -6,7 +6,7 @@ class Actor {
   Actor(const char* name);
   void setPosition(int x, int y);
   sf::Vector2i getPosition();
-  void update();
+  virtual void update();
 
   sf::Vector2f velocity;
 

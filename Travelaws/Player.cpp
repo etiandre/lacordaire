@@ -3,6 +3,7 @@
 #include "SFML/Graphics.hpp"
 #include "TextureManager.h"
 
+
 Player::Player() : Actor("Player") {
   moveSpeed = 5;
   box = sf::FloatRect(10, 22, 12, 10);

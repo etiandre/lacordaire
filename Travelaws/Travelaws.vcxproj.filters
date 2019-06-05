@@ -64,6 +64,7 @@
     <ClInclude Include="GravityRule.hpp">
       <Filter>rules</Filter>
     </ClInclude>
+    <ClInclude Include="StateMachine.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="rules">

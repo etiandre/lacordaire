@@ -20,4 +20,7 @@ class Game {
   std::vector<std::unique_ptr<Rule>> rules;
   void loadLevel(int levelID);
   void mainLoop();
+  void victory();
+  void gameOver();
+  void check_state();
 };

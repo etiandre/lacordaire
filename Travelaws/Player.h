@@ -11,4 +11,5 @@ class Player : public Actor {
   double moveSpeed;
  private:
   sf::Vector2i _animation;
+
 };
