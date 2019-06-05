@@ -18,19 +18,6 @@ void Actor::update() {
   int x = sprite.getPosition().x + velocity.x;
   int y = sprite.getPosition().y + velocity.y;
   velocity.x *= _inertia;
-
-  if (x <= 0) {
-    x = 0;
-  }
-  if (y <= 0) {
-    y = 0;
-	//destroy
-  }
-  if (y >= SCREEN_HEIGHT - 35) {
-    y = SCREEN_HEIGHT - 35;
-  }
-  
-
   sprite.setPosition(x, y);
 }
 
