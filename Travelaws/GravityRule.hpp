@@ -3,7 +3,7 @@
 
 class GravityRule : public Rule {
  private:
-  float gravity = 1;
+  const float gravity = 0.2;
 
  public:
   void update(GameData& gameData);
