@@ -23,7 +23,8 @@ void CollisionRule::update(GameData& gameData) {
       gameData.player.velocity.x -=
           fmod(box.left + box.width, map.getTileSize().x) + _epsilon;
     } else if (gameData.player.velocity.x < 0) {  // on va vers la gauche
-      gameData.player.velocity.x += map.getTileSize().x-fmod(box.left, map.getTileSize().x) + _epsilon;
+      gameData.player.velocity.x +=
+          map.getTileSize().x - fmod(box.left, map.getTileSize().x) + _epsilon;
     }
   }
 
@@ -36,9 +37,10 @@ void CollisionRule::update(GameData& gameData) {
       gameData.player.onGround = true;
       gameData.player.velocity.y -=
           fmod(box.top + box.height, map.getTileSize().y) + _epsilon;
-    } else if (gameData.player.velocity.y < 0) { // on va vers le haut
-      gameData.player.velocity.y +=map.getTileSize().y - fmod(box.top, map.getTileSize().y) - _epsilon;
-		}
+    } else if (gameData.player.velocity.y < 0) {  // on va vers le haut
+      gameData.player.velocity.y +=
+          map.getTileSize().y - fmod(box.top, map.getTileSize().y) + _epsilon;
+    }
   }
 }
 
