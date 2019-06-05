@@ -1,22 +1,20 @@
 #include "Actor.h"
-#include "TextureManager.h"
 #include "DEFINITIONS.h"
-Actor::Actor(const char* name) : _name(name) {
-  _inertia = 0.8;
-  velocity = sf::Vector2f(0, 0);
-}
+#include "TextureManager.h"
 
-void Actor::setPosition(int x, int y) {
+Actor::Actor(const char* name) : _name(name), _inertia(0.9f), velocity() {}
+
+void Actor::teleportTo(float x, float y) {
   velocity.x = 0;
   velocity.y = 0;
   sprite.setPosition(x, y);
 }
 
-sf::Vector2i Actor::getPosition() { return (sf::Vector2i)sprite.getPosition(); }
+sf::Vector2f Actor::getPosition() { return sprite.getPosition(); }
 
 void Actor::update() {
-  int x = sprite.getPosition().x + velocity.x;
-  int y = sprite.getPosition().y + velocity.y;
+  float x = sprite.getPosition().x + velocity.x;
+  float y = sprite.getPosition().y + velocity.y;
   velocity.x *= _inertia;
   sprite.setPosition(x, y);
 }

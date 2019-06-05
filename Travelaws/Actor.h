@@ -4,8 +4,8 @@
 class Actor {
  public:
   Actor(const char* name);
-  void setPosition(int x, int y);
-  sf::Vector2i getPosition();
+  void teleportTo(float x, float y);
+  sf::Vector2f getPosition();
   virtual void update();
 
   sf::Vector2f velocity;

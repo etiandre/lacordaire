@@ -69,7 +69,7 @@ void GameState::update() {
   ImGui::End();  // Rules
 
   ImGui::Begin("Player Debug");
-  ImGui::Text("position : x=%d y=%d", _gameData.player.getPosition().x,
+  ImGui::Text("position : x=%f y=%f", _gameData.player.getPosition().x,
               _gameData.player.getPosition().y);
   ImGui::Text("vitesse : x=%0.3f y=%0.3f", _gameData.player.velocity.x,
               _gameData.player.velocity.y);
