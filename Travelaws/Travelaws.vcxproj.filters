@@ -35,8 +35,9 @@
       <Filter>rules</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="World.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Game.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEFINITIONS.h" />
@@ -66,8 +67,9 @@
       <Filter>rules</Filter>
     </ClInclude>
     <ClInclude Include="StateMachine.hpp" />
-    <ClInclude Include="Game.h" />
     <ClInclude Include="World.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="Game.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="rules">

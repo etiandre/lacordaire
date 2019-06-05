@@ -1,22 +1,12 @@
 #pragma once
-
-#include <tmxlite/Map.hpp>
 #include <SFML/Graphics.hpp>
-#include <tmxlite/Map.hpp>
-#include <string>
-#include "Player.h"
 #include "GameData.h"
-#include "Rule.h"
-#include "TextureManager.h"
-
 class Game {
  public:
   Game(int width, int height);
+  void run();
 
  private:
-  sf::View view;
-  GameData gameData;
-  std::vector<std::unique_ptr<Rule>> rules;
-  void loadLevel(int levelID);
-  void mainLoop();
+  sf::View _view;
+  GameData _gameData;
 };
