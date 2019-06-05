@@ -15,4 +15,7 @@ void InputManager::manageInputs(Player &player) {
     player.animator(player.animatorState().x, 1);
     player.animator(player.animatorState().x + 1, player.animatorState().y);
   }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && player.onGround) {
+    player.velocity.y = -20;
+  }
 }

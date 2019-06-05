@@ -8,7 +8,7 @@ CollisionRule::CollisionRule(MapLayer& layer) : collisionLayer(layer){};
 void CollisionRule::update(GameData& gameData) {
   sf::FloatRect box;
   // axe x (horizontal)
-	
+  gameData.player.onGround = false;
   box = gameData.player.box;
   box.top += gameData.player.getPosition().y;
   box.left += gameData.player.getPosition().x + gameData.player.velocity.x;
@@ -21,6 +21,9 @@ void CollisionRule::update(GameData& gameData) {
   box.top += gameData.player.getPosition().y + gameData.player.velocity.y;
   box.left += gameData.player.getPosition().x;
   if (collides(box, gameData.map.getTileSize(), gameData.map.getTileCount())) {
+    if (gameData.player.velocity.y > 0) {
+      gameData.player.onGround = true;
+		}
     gameData.player.velocity.y = 0;
   }
 }

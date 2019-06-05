@@ -2,6 +2,7 @@
 
 #define SCREEN_WIDTH 1920
 #define SCREEN_HEIGHT 1080
+#define SCALE_FACTOR 4
 
 #define SPLASH_STATE_SHOW_TIME 3.0
 constexpr auto BLOCK_SIZE = 32;

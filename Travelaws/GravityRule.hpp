@@ -3,7 +3,7 @@
 
 class GravityRule : public Rule {
  private:
-  float gravity = 3;
+  float gravity = 1;
 
  public:
   void update(GameData& gameData);

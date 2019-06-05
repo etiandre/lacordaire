@@ -17,7 +17,7 @@ sf::Vector2i Actor::getPosition() { return (sf::Vector2i)sprite.getPosition(); }
 void Actor::update() {
   int x = sprite.getPosition().x + velocity.x;
   int y = sprite.getPosition().y + velocity.y;
-  velocity *= _inertia;
+  velocity.x *= _inertia;
 
   if (x <= 0) {
     x = 0;
