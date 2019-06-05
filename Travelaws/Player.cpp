@@ -3,10 +3,8 @@
 #include "SFML/Graphics.hpp"
 #include "TextureManager.h"
 
-
-Player::Player() : Actor("Player") {
-  moveSpeed = 5;
-  box = sf::FloatRect(10, 22, 12, 10);
+Player::Player() : Actor("Player"), moveSpeed(2) {
+  hitbox = sf::FloatRect(10, 22, 12, 10);
   sf::Texture* texturePointer =
       TextureManager::loadTexture("player", "assets/textures/slime.png");
   if (texturePointer == NULL) {

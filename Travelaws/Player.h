@@ -8,9 +8,9 @@ class Player : public Actor {
   void updateAnimation();
   void animator(int x, int y);
   sf::Vector2i animatorState();
-  double moveSpeed;
+  float moveSpeed;
   bool onGround = false;
+
  private:
   sf::Vector2i _animation;
-
 };

@@ -13,7 +13,7 @@ void CollisionRule::update(GameData& gameData) {
   auto& collisionLayer = gameData.world.getCollisionLayer();
   // axe x (horizontal)
   gameData.player.onGround = false;
-  box = gameData.player.box;
+  box = gameData.player.hitbox;
   box.top += gameData.player.getPosition().y;
   box.left += gameData.player.getPosition().x + gameData.player.velocity.x;
   if (collides(box, map.getTileSize(), map.getTileCount(), collisionLayer)) {
@@ -21,7 +21,7 @@ void CollisionRule::update(GameData& gameData) {
   }
 
   // axe y (vertical)
-  box = gameData.player.box;
+  box = gameData.player.hitbox;
   box.top += gameData.player.getPosition().y + gameData.player.velocity.y;
   box.left += gameData.player.getPosition().x;
   if (collides(box, map.getTileSize(), map.getTileCount(), collisionLayer)) {
