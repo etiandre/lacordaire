@@ -14,13 +14,9 @@ class Game {
   Game(int width, int height);
 
  private:
-  sf::RenderWindow window;
   sf::View view;
   GameData gameData;
   std::vector<std::unique_ptr<Rule>> rules;
   void loadLevel(int levelID);
   void mainLoop();
-  void victory();
-  void gameOver();
-  void check_state();
 };

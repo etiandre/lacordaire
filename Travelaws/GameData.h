@@ -1,11 +1,10 @@
 #pragma once
-#include <tmxlite/Map.hpp>
+#include <SFML/Graphics.hpp>
 #include "Player.h"
-#include "StateMachine.hpp"
-#include "SFMLOrthogonalLayer.hpp"
+#include "World.h"
 
 struct GameData {
   Player player;
-  tmx::Map map;
-  State gameState;
+  World world;
+  sf::RenderWindow window;
 };

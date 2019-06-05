@@ -17,58 +17,44 @@
 #include "WindRule.hpp"
 #include "imgui-SFML.h"
 #include "imgui.h"
+#include "World.h"
 #pragma endregion includes
 
 Game::Game(int width, int height) {
   gameData.player = Player();
-  gameData.map = tmx::Map();
-  gameData.gameState = InGame;
+  gameData.world = World(1);
   view = sf::View(
       sf::FloatRect(0, 0, width / SCALE_FACTOR, height / SCALE_FACTOR));
-  window.create(sf::VideoMode(width, height),
+  gameData.window.create(sf::VideoMode(width, height),
                 "Travelaws 0.0.0.0.1 alpha dx+ TEST RELEASE");
-  window.setFramerateLimit(60);
-  window.setView(view);
-  ImGui::SFML::Init(window);
-  loadLevel(1);
+  gameData.window.setFramerateLimit(60);
+  gameData.window.setView(view);
+  ImGui::SFML::Init(gameData.window);
+
   mainLoop();
   ImGui::SFML::Shutdown();
-}
-
-void Game::loadLevel(int levelID) {
-  if (!gameData.map.load("assets/levels/level" + std::to_string(levelID) +
-                         ".tmx")) {
-    std::cout << "cannot load level !" << std::endl;
-    exit(1);
-  }
 }
 
 void Game::mainLoop() {
   sf::Event event;
   InputManager inputManager;
 
-  MapLayer backgroundLayer(gameData.map, 0);
-  MapLayer platformsLayer(gameData.map, 1);
-
   rules.push_back(std::make_unique<GravityRule>());
   // rules.push_back(std::make_unique<WindRule>());
   // rules.push_back(std::make_unique<VisionRule>());
-  rules.push_back(std::make_unique<CollisionRule>(
-      platformsLayer));  //!\\ Collision has to be last !
+  rules.push_back(std::make_unique<CollisionRule>());  //!\\ Collision has to be last !
 
   sf::Clock clock;
 
-  while (window.isOpen()) {
+  while (gameData.window.isOpen()) {
     // EVENTS
-    while (window.pollEvent(event)) {
+    while (gameData.window.pollEvent(event)) {
       ImGui::SFML::ProcessEvent(event);
-      if (event.type == sf::Event::EventType::Closed) window.close();
+      if (event.type == sf::Event::EventType::Closed) gameData.window.close();
     }
 
-    ImGui::SFML::Update(window, clock.restart());
+    ImGui::SFML::Update(gameData.window, clock.restart());
 
-    switch (gameData.gameState) {
-      case InGame: {
         // INPUTS
         inputManager.manageInputs(gameData.player);
 
@@ -79,9 +65,6 @@ void Game::mainLoop() {
 
         // POSITION UPDATE
         gameData.player.update();
-
-				// CHECK STATE
-        check_state();
 
         // RULES UPDATE
         for (auto& rule : rules) {
@@ -95,7 +78,7 @@ void Game::mainLoop() {
         if (cameraPos.y < 0) cameraPos.y = 0;
 
         view.setCenter(cameraPos);
-        window.setView(view);
+        gameData.window.setView(view);
 
         // GUI
         ImGui::Begin("Rules");
@@ -114,68 +97,15 @@ void Game::mainLoop() {
 
         // DRAW
         gameData.player.updateAnimation();
-        window.clear();
-        window.draw(backgroundLayer);
-        window.draw(platformsLayer);
-        gameData.player.draw(window);
+        gameData.window.clear();
+        gameData.world.draw(gameData.window);
+        gameData.player.draw(gameData.window);
         // RULES DRAW
         for (auto& rule : rules) {
-          if (rule.get()->active) rule.get()->draw(window);
+          if (rule.get()->active) rule.get()->draw(gameData.window);
         }
-      } break;
-      case Victory:
-        victory();
-        break;
-      case GameOver:
-        gameOver();
-        break;
-    }
 
-    ImGui::SFML::Render(window);
-    window.display();
+    ImGui::SFML::Render(gameData.window);
+    gameData.window.display();
   }
-}
-
-void Game::check_state() {
-  // Condition sur x seulement pour le moment, à voir si on change
-  if (gameData.player.sprite.getPosition().x >= 6400) {
-    gameData.player.sprite.setPosition(6432,
-                                       gameData.player.sprite.getPosition().y);
-    gameData.gameState = Victory;
-  } else if (gameData.player.sprite.getPosition().y >= 1016) {
-    // Kill player
-    gameData.gameState = GameOver;
-  }
-}
-
-void Game::victory() {
-  sf::Sprite victorySprite;
-  sf::Texture victoryTexture;
-  if (!victoryTexture.loadFromFile("assets/textures/victory.png")) {
-    std::cout << "erreur chargement texture victory !" << std::endl;
-    exit(1);
-  }
-  std::cout << "GG, Score = " << std::endl;
-  victorySprite.setTexture(victoryTexture);
-
-  view.reset(sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
-  window.setView(view);
-  window.clear();
-  window.draw(victorySprite);
-}
-
-void Game::gameOver() {
-  sf::Sprite gameOverSprite;
-  sf::Texture gameOverTexture;
-  if (!gameOverTexture.loadFromFile("assets/textures/gameover.jpg")) {
-    std::cout << "erreur chargement texture gameover !" << std::endl;
-    exit(1);
-  }
-  std::cout << "You lose, score = -42 " << std::endl;
-  gameOverSprite.setTexture(gameOverTexture);
-
-  view.reset(sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
-  window.setView(view);
-  window.clear();
-  window.draw(gameOverSprite);
 }

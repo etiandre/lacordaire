@@ -1,18 +1,22 @@
 #include "CollisionRule.h"
+#include "SFMLOrthogonalLayer.hpp"
+#include "tmxlite/Map.hpp"
 #include <cmath>
 
 // merci https://jonathanwhiting.com/tutorial/collision/
 
-CollisionRule::CollisionRule(MapLayer& layer) : collisionLayer(layer){};
+CollisionRule::CollisionRule() {};
 
 void CollisionRule::update(GameData& gameData) {
   sf::FloatRect box;
+  auto& map = gameData.world.getMap();
+  auto& collisionLayer = gameData.world.getCollisionLayer();
   // axe x (horizontal)
   gameData.player.onGround = false;
   box = gameData.player.box;
   box.top += gameData.player.getPosition().y;
   box.left += gameData.player.getPosition().x + gameData.player.velocity.x;
-  if (collides(box, gameData.map.getTileSize(), gameData.map.getTileCount())) {
+  if (collides(box, map.getTileSize(), map.getTileCount(), collisionLayer)) {
     gameData.player.velocity.x = 0;
   }
 
@@ -20,7 +24,7 @@ void CollisionRule::update(GameData& gameData) {
   box = gameData.player.box;
   box.top += gameData.player.getPosition().y + gameData.player.velocity.y;
   box.left += gameData.player.getPosition().x;
-  if (collides(box, gameData.map.getTileSize(), gameData.map.getTileCount())) {
+  if (collides(box, map.getTileSize(), map.getTileCount(), collisionLayer)) {
     if (gameData.player.velocity.y > 0) {
       gameData.player.onGround = true;
 		}
@@ -30,7 +34,7 @@ void CollisionRule::update(GameData& gameData) {
 
 bool CollisionRule::collides(const sf::FloatRect& box,
                              const tmx::Vector2u& tileSize,
-                             const tmx::Vector2u& tileCount) {
+                             const tmx::Vector2u& tileCount, std::unique_ptr<MapLayer>& collisionLayer) {
   int topTile = box.top / tileSize.y;
   int leftTile = box.left / tileSize.x;
   int bottomTile = (box.top + box.height) / tileSize.y;
@@ -43,7 +47,7 @@ bool CollisionRule::collides(const sf::FloatRect& box,
 
   for (int i = leftTile; i <= rightTile; i++) {
     for (int j = topTile; j <= bottomTile; j++) {
-      if (collisionLayer.getTile(i, j).ID != 0) {
+      if (collisionLayer->getTile(i, j).ID != 0) {
         return true;
       }
     }

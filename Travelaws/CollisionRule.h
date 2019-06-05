@@ -4,14 +4,13 @@
 
 class CollisionRule : public Rule {
  public:
-  CollisionRule(MapLayer& layer);
+  CollisionRule();
   void update(GameData& gameData) override;
   const char* getName();
 
  private:
-  MapLayer& collisionLayer;
   bool collides(const sf::FloatRect& box, const tmx::Vector2u& tileSize,
-                const tmx::Vector2u& tileCount);
+                const tmx::Vector2u& tileCount, std::unique_ptr<MapLayer>& collisionLayer);
   const tmx::Vector2u tileSize;
   const tmx::Vector2u tileCount;
 };
