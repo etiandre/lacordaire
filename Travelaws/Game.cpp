@@ -2,7 +2,7 @@
 //
 
 #pragma region includes
-#include "Travelaws.h"
+#include "Game.h"
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <iostream>
@@ -178,9 +178,4 @@ void Game::gameOver() {
   window.setView(view);
   window.clear();
   window.draw(gameOverSprite);
-}
-
-int main(int argc, char** argv) {
-  Game(SCREEN_WIDTH, SCREEN_HEIGHT);
-  return EXIT_SUCCESS;
 }

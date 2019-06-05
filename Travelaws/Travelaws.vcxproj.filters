@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Travelaws.cpp" />
     <ClCompile Include="VisionRule.cpp">
       <Filter>rules</Filter>
     </ClCompile>
@@ -35,12 +34,13 @@
     <ClCompile Include="GravityRule.cpp">
       <Filter>rules</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Game.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEFINITIONS.h" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Travelaws.h" />
     <ClInclude Include="VisionRule.hpp">
       <Filter>rules</Filter>
     </ClInclude>
@@ -65,6 +65,7 @@
       <Filter>rules</Filter>
     </ClInclude>
     <ClInclude Include="StateMachine.hpp" />
+    <ClInclude Include="Game.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="rules">
@@ -72,6 +73,9 @@
     </Filter>
     <Filter Include="lib">
       <UniqueIdentifier>{40c2e76f-0164-472f-93cf-24cac8f082cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="statemachine">
+      <UniqueIdentifier>{f36dad91-994f-424a-9247-845e3248fd77}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
