@@ -48,7 +48,7 @@ bool CollisionRule::collides(const sf::FloatRect& box,
                              const tmx::Vector2u& tileSize,
                              const tmx::Vector2u& tileCount,
                              std::unique_ptr<MapLayer>& collisionLayer) {
-  if (box.left <= 0) return true;
+  //if (box.left <= 0) return true;
   int topTile = box.top / tileSize.y;
   int leftTile = box.left / tileSize.x;
   int bottomTile = (box.top + box.height) / tileSize.y;
