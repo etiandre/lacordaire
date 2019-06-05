@@ -13,4 +13,5 @@ class CollisionRule : public Rule {
                 const tmx::Vector2u& tileCount, std::unique_ptr<MapLayer>& collisionLayer);
   const tmx::Vector2u tileSize;
   const tmx::Vector2u tileCount;
+  const float _epsilon = 0.001;
 };
