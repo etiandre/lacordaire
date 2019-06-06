@@ -1,19 +1,21 @@
 #include "StateMachine.hpp"
 
+StateMachine::StateMachine(GameData& gameData)
+    : _gameData(gameData), _states(), _currentState(None) {}
 
-StateMachine::StateMachine(GameData& gameData) : _gameData(gameData), _states(), _currentState(None) {
-}
-
-void StateMachine::addState(std::unique_ptr<State> state, StateName stateName) {
-	_states.insert(std::pair<StateName, std::unique_ptr<State> >(stateName, state));
+void StateMachine::addState(StateName stateName, std::unique_ptr<State> state) {
+  _states[stateName] = std::move(state);
 }
 
 void StateMachine::switchState(StateName stateName) {
-	_states[_currentState]->onExit();
-	_currentState = stateName;
-	_states[_currentState]->onEnter();
+  if (_currentState != None) {
+    _states[_currentState].get()->onEnter();
+    _currentState = stateName;
+    _states[_currentState].get()->onEnter();
+	}
+	else {
+    _currentState = stateName;
+	}
 }
 
-void StateMachine::update() {
-	_states[_currentState]->update();
-}
+void StateMachine::update() { _states[_currentState].get()->update(); }

@@ -10,6 +10,7 @@ class World {
   void draw(sf::RenderWindow &window);
 
 	tmx::Map& getMap();
+  sf::Vector2i getSize();
   std::unique_ptr<MapLayer>& getCollisionLayer();
 
  private:
