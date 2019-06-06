@@ -11,7 +11,6 @@ enum StateName {
 
 class StateMachine {
  public:
-  StateMachine();
   StateMachine(GameData& gameData);
   void addState(StateName stateName, std::unique_ptr<State> state);
   void switchState(StateName stateName);

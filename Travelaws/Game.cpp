@@ -10,7 +10,7 @@ Game::Game(int width, int height) : _stateMachine(_gameData) {
   _gameData.window.setFramerateLimit(60);
   _gameData.window.setView(_view);
   ImGui::SFML::Init(_gameData.window);
-  _stateMachine.addState(InGame, make_unique<GameState>(_gameData));
+  _stateMachine.addState(InGame, make_unique<GameState>(_gameData, _stateMachine));
 }
 
 void Game::run() {

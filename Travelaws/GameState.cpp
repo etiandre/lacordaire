@@ -18,13 +18,16 @@
 #include "World.h"
 #include "imgui-SFML.h"
 #include "imgui.h"
+#include "GameOverState.hpp"
+#include "StateMachine.hpp"
 #pragma endregion includes
 
-GameState::GameState(GameData& gameData)
-    : State(gameData),
+GameState::GameState(GameData& gameData, StateMachine& stateMachine)
+    : State(gameData, stateMachine),
       _inputManager(),
       _view(sf::View(sf::FloatRect(0, 0, SCREEN_WIDTH / SCALE_FACTOR,
                                    SCREEN_HEIGHT / SCALE_FACTOR))) {
+
   _gameData.player = Player();
   _gameData.world = World(1);
 
@@ -46,6 +49,12 @@ void GameState::update() {
 
   // POSITION UPDATE
   _gameData.player.update();
+
+  // CHECK STATE
+  if (_gameData.player.getPosition().y >= SCREEN_HEIGHT / SCALE_FACTOR ) {
+	 // _stateMachine.addState(GameOver, make_unique<GameOverState>(_gameData, _stateMachine));
+	 // _stateMachine.switchState(GameOver);
+  }
 
   // RULES UPDATE
   for (auto& rule : rules) {
