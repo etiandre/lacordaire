@@ -21,10 +21,13 @@ VictoryState::VictoryState(GameData& gameData, StateMachine& stateMachine) :
 
 }
 
+void VictoryState::processEvent(sf::Event& event) {
+  if (event.type == sf::Event::KeyPressed) _stateMachine.requestState(InGame);
+}
+
 void VictoryState::update() {
 	_gameData.window.clear();
 	_gameData.window.draw(_victorySprite);
-	//getInputs, manage buttons (+ animate Victory screen maybe)
 }
 
 void VictoryState::onEnter() {
@@ -38,5 +41,4 @@ void VictoryState::onEnter() {
 }
 
 void VictoryState::onExit() {
-	//Reset score, load level according to player's choice
 }

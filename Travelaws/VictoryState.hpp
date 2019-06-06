@@ -6,7 +6,8 @@
 
 class VictoryState : public State {
 public:
-	VictoryState(GameData& gameData,StateMachine& stateMachine);
+  VictoryState(GameData& gameData, StateMachine& stateMachine);
+  void processEvent(sf::Event& event) override;
 	void update() override;
 	void onEnter() override;
 	void onExit() override;
