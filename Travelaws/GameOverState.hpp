@@ -12,6 +12,5 @@ public:
 	void onExit() override;
 private:
 	sf::Sprite _gameOverSprite;
-	sf::View _view;
 	InputManager _inputManager;
 };
