@@ -1,5 +1,5 @@
 #include "VictoryState.hpp"
-
+#include "TextureManager.h"
 
 VictoryState::VictoryState(GameData& gameData, StateMachine& stateMachine) :
 	State(gameData, stateMachine),
@@ -7,14 +7,13 @@ VictoryState::VictoryState(GameData& gameData, StateMachine& stateMachine) :
 	_view(sf::View(sf::FloatRect(0, 0, SCREEN_WIDTH,
 		SCREEN_HEIGHT))) {
 
-
-	sf::Texture VictoryTexture;
-	if (!VictoryTexture.loadFromFile("assets/textures/victory.png")) {
+	sf::Texture* texturePtr = TextureManager::loadTexture("Victory", "assets/textures/victory.png");
+	if (!texturePtr) {
 		std::cout << "erreur chargement texture Victory !" << std::endl;
 		exit(1);
 	}
 	std::cout << "GG, Score = " << std::endl;
-	_victorySprite.setTexture(VictoryTexture);
+	_victorySprite.setTexture(*texturePtr);
 
 	_view.reset(sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
 	_gameData.window.setView(_view);
