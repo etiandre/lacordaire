@@ -9,7 +9,6 @@ public:
 	GameOverState(GameData& gameData,StateMachine& stateMachine);
 	void update() override;
 	void onEnter() override;
-	void onExit() override;
 private:
 	sf::Sprite _gameOverSprite;
 	sf::View _view;

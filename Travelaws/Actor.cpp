@@ -27,7 +27,7 @@ void Actor::draw(sf::RenderWindow& window) { window.draw(sprite); }
 
 bool Actor::collidesWith(sf::FloatRect rect) {
   auto box = hitbox;
-  box.top += sprite.getPosition().x;
-  box.left += sprite.getPosition().y;
+  box.left += sprite.getPosition().x;
+  box.top += sprite.getPosition().y;
   return box.intersects(rect);
 }
