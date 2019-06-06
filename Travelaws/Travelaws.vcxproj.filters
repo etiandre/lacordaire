@@ -49,6 +49,9 @@
     <ClCompile Include="GameOverState.cpp">
       <Filter>statemachine</Filter>
     </ClCompile>
+    <ClCompile Include="VictoryState.cpp">
+      <Filter>statemachine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEFINITIONS.h" />
@@ -89,6 +92,9 @@
       <Filter>statemachine</Filter>
     </ClInclude>
     <ClInclude Include="GameOverState.hpp">
+      <Filter>statemachine</Filter>
+    </ClInclude>
+    <ClInclude Include="VictoryState.hpp">
       <Filter>statemachine</Filter>
     </ClInclude>
   </ItemGroup>

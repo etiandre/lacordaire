@@ -56,8 +56,8 @@ void GameState::update() {
 
   // CHECK STATE
   if (_gameData.player.getPosition().y >= SCREEN_HEIGHT / SCALE_FACTOR ) {
-	 // _stateMachine.addState(GameOver, make_unique<GameOverState>(_gameData, _stateMachine));
-	 // _stateMachine.switchState(GameOver);
+	  _stateMachine.addState(GameOver, make_unique<GameOverState>(_gameData, _stateMachine));
+	  _stateMachine.switchState(GameOver);
   }
 
   // RULES UPDATE
