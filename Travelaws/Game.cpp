@@ -17,7 +17,8 @@ void Game::run() {
   sf::Event event;
   sf::Clock clock;
 
-  _stateMachine.switchState(InGame);
+  _stateMachine.requestState(InGame);
+  _stateMachine.processStateSwitch();
 
   while (_gameData.window.isOpen()) {
     // EVENTS
@@ -38,6 +39,7 @@ void Game::run() {
 #endif
 
     _gameData.window.display();
+    _stateMachine.processStateSwitch();
   }
 
 #ifdef DEBUG

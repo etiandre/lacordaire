@@ -15,11 +15,14 @@ class StateMachine {
  public:
   StateMachine(GameData& gameData);
   void addState(StateName stateName, std::unique_ptr<State> state);
-  void switchState(StateName stateName);
+  void requestState(StateName stateName);
   void update();
+  void processStateSwitch();
 
  private:
   GameData& _gameData;
   std::map<StateName, std::unique_ptr<State>> _states;
+  void _switchState(StateName stateName);
   StateName _currentState;
+  StateName _nextState;
 };
