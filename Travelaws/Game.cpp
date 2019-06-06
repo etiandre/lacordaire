@@ -9,6 +9,7 @@ Game::Game(int width, int height) : _stateMachine(_gameData) {
                           "Travelaws 0.0.0.0.1 alpha dx+ TEST RELEASE");
   _gameData.window.setFramerateLimit(60);
   _gameData.window.setView(_view);
+  _gameData.window.setKeyRepeatEnabled(false);
 #ifdef DEBUG
   ImGui::SFML::Init(_gameData.window);
 #endif
