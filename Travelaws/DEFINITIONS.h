@@ -6,7 +6,7 @@
 #define BLOCK_SIZE 32
 #define SPLASH_STATE_SHOW_TIME 3.0
 
-#undef DEBUG
+#define DEBUG
 
 #define SPLASH_SCENE_BACKGROUND_FILEPATH "assets/textures/Splashscreen.jpg"
 /* Example:
@@ -17,7 +17,6 @@
 #define GAME_TITLE_FILEPATH "Resources/res/title.png"
 #define PLAY_BUTTON_FILEPATH "Resources/res/PlayButton.png"
 */
-
 
 #ifdef DEBUG
 #include "imgui-SFML.h"

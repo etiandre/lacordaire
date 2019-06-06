@@ -36,7 +36,7 @@ GameState::GameState(GameData& gameData)
 }
 
 void GameState::onEnter() {
-  _gameData.player.teleportTo(_gameData.world.playerSpawn);
+  _gameData.player.teleportTo(_gameData.world.playerSpawn.left, _gameData.world.playerSpawn.top);
 }
 
 void GameState::update() {

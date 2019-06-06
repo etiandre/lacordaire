@@ -15,7 +15,7 @@ class Actor {
   sf::FloatRect hitbox;
   void draw(sf::RenderWindow& window);
 
-  bool collidesWith(sf::Vector2f position);
+  bool collidesWith(sf::FloatRect rect);
 
  protected:
   float _inertia;

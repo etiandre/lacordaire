@@ -14,8 +14,8 @@ class World {
 
   std::unique_ptr<MapLayer>& getCollisionLayer();
 
-  sf::Vector2f playerSpawn;
-  sf::Vector2f goal;
+  sf::FloatRect playerSpawn;
+  sf::FloatRect goal;
 
   
 
@@ -23,5 +23,5 @@ class World {
   tmx::Map _map;
   std::vector<std::unique_ptr<MapLayer>> _layers;
   std::vector<tmx::Object> _objects;
-  sf::Vector2f _getObject(const char* name);
+  sf::FloatRect _getObjectRect(const char* name);
 };

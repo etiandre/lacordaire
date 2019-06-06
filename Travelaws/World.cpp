@@ -22,19 +22,15 @@ World::World(int levelID) : _map(), _layers(), _objects() {
     }
     i++;
   }
-
-  playerSpawn = _getObject("playerSpawn");
-  goal = _getObject("goal");
+  
+  playerSpawn = _getObjectRect("playerSpawn");
+  goal = _getObjectRect("goal");
 }
 
 void World::draw(sf::RenderWindow& window) {
   for (auto& layer : _layers) {
     window.draw(*layer.get());
   }
-
-#ifdef DEBUG
-	
-#endif  // DEBUG
 }
 
 tmx::Map& World::getMap() { return _map; }
@@ -49,12 +45,13 @@ std::unique_ptr<MapLayer>& World::getCollisionLayer() {
                           // des plateformes
 }
 
-sf::Vector2f World::_getObject(const char* name) {
+sf::FloatRect World::_getObjectRect(const char* name) {
   for (const auto& object : _objects) {
     if (object.getName() == name) {
-      return sf::Vector2f(object.getPosition().x, object.getPosition().y);
+      auto& rect = object.getAABB();
+      return sf::FloatRect(rect.left, rect.top, rect.width, rect.height);
     }
   }
   std::cout << "WARNING : did not find " << name << std::endl;
-  return sf::Vector2f(0, 0);
+  return sf::FloatRect();
 }
