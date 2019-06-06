@@ -36,8 +36,16 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="World.cpp" />
-    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="State.cpp">
+      <Filter>statemachine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>statemachine</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>statemachine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEFINITIONS.h" />
@@ -66,10 +74,17 @@
     <ClInclude Include="GravityRule.hpp">
       <Filter>rules</Filter>
     </ClInclude>
-    <ClInclude Include="StateMachine.hpp" />
     <ClInclude Include="World.h" />
-    <ClInclude Include="GameState.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="State.hpp">
+      <Filter>statemachine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>statemachine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.hpp">
+      <Filter>statemachine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="rules">
