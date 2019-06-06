@@ -13,7 +13,7 @@
 
 class GameState : public State {
  public:
-  GameState(GameData& gameData);
+  GameState(GameData& gameData, StateMachine& stateMachine);
   void onEnter() override;
   void update() override;
 

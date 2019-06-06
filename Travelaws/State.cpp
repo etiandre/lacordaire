@@ -1,6 +1,8 @@
 #include "State.hpp"
 
-State::State(GameData& gameData) : _gameData(gameData) {}
+State::State(GameData& gameData, StateMachine& stateMachine) :
+	_gameData(gameData),
+	_stateMachine(stateMachine) {}
 
 void State::onEnter() {}
 

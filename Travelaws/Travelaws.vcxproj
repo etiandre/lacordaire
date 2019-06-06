@@ -165,6 +165,7 @@
     <ClInclude Include="DEFINITIONS.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameData.h" />
+    <ClInclude Include="GameOverState.hpp" />
     <ClInclude Include="GravityRule.hpp" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="Player.h" />
@@ -181,6 +182,7 @@
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="GravityRule.cpp" />
     <ClCompile Include="imgui-sfml\imgui-SFML.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />

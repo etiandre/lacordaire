@@ -10,7 +10,7 @@ Game::Game(int width, int height) : _stateMachine(_gameData) {
 #ifdef DEBUG
   ImGui::SFML::Init(_gameData.window);
 #endif
-  _stateMachine.addState(InGame, make_unique<GameState>(_gameData));
+  _stateMachine.addState(InGame, make_unique<GameState>(_gameData, _stateMachine));
 }
 
 void Game::run() {
