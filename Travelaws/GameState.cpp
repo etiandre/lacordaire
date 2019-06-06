@@ -20,6 +20,7 @@
 #include "imgui.h"
 #include "GameOverState.hpp"
 #include "StateMachine.hpp"
+#include "DEBUG.h"
 #pragma endregion includes
 
 GameState::GameState(GameData& gameData, StateMachine& stateMachine)

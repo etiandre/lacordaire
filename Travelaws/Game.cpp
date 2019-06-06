@@ -1,6 +1,6 @@
 #include "Game.h"
-#include "DEFINITIONS.h"
 #include "GameState.h"
+#include "DEBUG.h"
 
 Game::Game(int width, int height) : _stateMachine(_gameData) {
   _gameData.window.create(sf::VideoMode(width, height),

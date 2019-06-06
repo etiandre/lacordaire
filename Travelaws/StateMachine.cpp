@@ -1,4 +1,5 @@
 #include "StateMachine.hpp"
+#include "DEBUG.h"
 
 StateMachine::StateMachine(GameData& gameData)
     : _gameData(gameData), _states(), _currentState(None), _nextState(None) {}
@@ -17,7 +18,14 @@ void StateMachine::_switchState(StateName stateName) {
   _states[_currentState].get()->onEnter();
 }
 
-void StateMachine::update() { _states[_currentState].get()->update(); }
+void StateMachine::update() {
+  _states[_currentState].get()->update();
+#ifdef DEBUG
+  ImGui::Begin("State");
+  ImGui::Text("Current State : %d", _currentState);
+  ImGui::End(); // State
+#endif  // DEBUG
+}
 
 void StateMachine::processStateSwitch() {
   if (_nextState != _currentState) _switchState(_nextState);
