@@ -33,7 +33,3 @@ void GameOverState::onEnter() {
 	_gameData.window.setView(view);
 
 }
-
-void GameOverState::onExit() {
-	//Reset score, reload level
-}

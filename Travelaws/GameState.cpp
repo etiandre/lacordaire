@@ -20,6 +20,7 @@
 #include "imgui.h"
 #include "GameOverState.hpp"
 #include "StateMachine.hpp"
+#include "VictoryState.hpp"
 #pragma endregion includes
 
 GameState::GameState(GameData& gameData, StateMachine& stateMachine)
@@ -54,20 +55,25 @@ void GameState::update() {
   // POSITION UPDATE
   _gameData.player.update();
 
-  // CHECK STATE
-  if (_gameData.player.getPosition().y >= SCREEN_HEIGHT / SCALE_FACTOR ) {
-	  _stateMachine.addState(GameOver, make_unique<GameOverState>(_gameData, _stateMachine));
-	  _stateMachine.requestState(GameOver);
-  }
+
 
   // RULES UPDATE
   for (auto& rule : rules) {
     if (rule.get()->active) rule.get()->update(_gameData);
   }
 
-  // WIN / LOSE
-  if (_gameData.player.collidesWith(_gameData.world.goal))
-    std::cout << "you win" << std::endl;
+ // CHECK STATE
+  if (_gameData.player.getPosition().y >= SCREEN_HEIGHT / SCALE_FACTOR) {
+	  _stateMachine.addState(GameOver, make_unique<GameOverState>(_gameData, _stateMachine));
+	  _stateMachine.requestState(GameOver);
+  }
+  else if (_gameData.player.collidesWith(_gameData.world.goal)) {
+	  std::cout << "you win" << std::endl;
+	  _stateMachine.addState(Victory, make_unique<VictoryState>(_gameData, _stateMachine));
+	  _stateMachine.requestState(Victory);
+  }
+
+    
 
   // VIEW
   auto cameraPos = sf::Vector2f(_gameData.player.getPosition().x + 16,
