@@ -9,6 +9,8 @@ enum StateName {
   Victory
 };  // add Splashscreen and MainMenu later on
 
+class State;
+
 class StateMachine {
  public:
   StateMachine(GameData& gameData);
