@@ -5,6 +5,7 @@ class Actor {
  public:
   Actor(const char* name);
   void teleportTo(float x, float y);
+  void teleportTo(sf::Vector2f position);
   sf::Vector2f getPosition();
   virtual void update();
 

@@ -14,6 +14,7 @@
 class GameState : public State {
  public:
   GameState(GameData& gameData);
+  void onEnter() override;
   void update() override;
 
  private:

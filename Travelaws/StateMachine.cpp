@@ -9,13 +9,10 @@ void StateMachine::addState(StateName stateName, std::unique_ptr<State> state) {
 
 void StateMachine::switchState(StateName stateName) {
   if (_currentState != None) {
-    _states[_currentState].get()->onEnter();
+    _states[_currentState].get()->onExit();
+  }
     _currentState = stateName;
     _states[_currentState].get()->onEnter();
-	}
-	else {
-    _currentState = stateName;
-	}
 }
 
 void StateMachine::update() { _states[_currentState].get()->update(); }

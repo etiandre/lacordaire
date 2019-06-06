@@ -11,9 +11,17 @@ class World {
 
 	tmx::Map& getMap();
   sf::Vector2i getSize();
+
   std::unique_ptr<MapLayer>& getCollisionLayer();
+
+  sf::Vector2f getPlayerSpawn();
+  sf::Vector2f getGoal();
+
+  
 
  private:
   tmx::Map _map;
   std::vector<std::unique_ptr<MapLayer>> _layers;
+  std::vector<tmx::Object> _objects;
+  sf::Vector2f _getObject(const char* name);
 };

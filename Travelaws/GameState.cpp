@@ -35,6 +35,10 @@ GameState::GameState(GameData& gameData)
       std::make_unique<CollisionRule>());  //!\\ Collision has to be last !
 }
 
+void GameState::onEnter() {
+  _gameData.player.teleportTo(_gameData.world.getPlayerSpawn());
+}
+
 void GameState::update() {
   // INPUTS
   _inputManager.manageInputs(_gameData.player);

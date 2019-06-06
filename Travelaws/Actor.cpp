@@ -10,6 +10,10 @@ void Actor::teleportTo(float x, float y) {
   sprite.setPosition(x, y);
 }
 
+void Actor::teleportTo(sf::Vector2f position) {
+  teleportTo(position.x, position.y);
+}
+
 sf::Vector2f Actor::getPosition() { return sprite.getPosition(); }
 
 void Actor::update() {
