@@ -3,6 +3,8 @@
 #include "DEBUG.h"
 #include "VictoryState.hpp"
 #include "GameOverState.hpp"
+#include "SplashscreenState.hpp"
+#include "SFML/Audio.hpp"
 
 Game::Game(int width, int height) : _stateMachine(_gameData) {
   _gameData.window.create(sf::VideoMode(width, height),
@@ -13,22 +15,27 @@ Game::Game(int width, int height) : _stateMachine(_gameData) {
 #ifdef DEBUG
   ImGui::SFML::Init(_gameData.window);
 #endif
+  _stateMachine.addState(Splash, make_unique<SplashscreenState>(_gameData, _stateMachine));
   _stateMachine.addState(InGame, make_unique<GameState>(_gameData, _stateMachine));
-  _stateMachine.addState(Victory,
-                         make_unique<VictoryState>(_gameData, _stateMachine));
-  _stateMachine.addState(GameOver,
-                         make_unique<GameOverState>(_gameData, _stateMachine));
+  _stateMachine.addState(Victory, make_unique<VictoryState>(_gameData, _stateMachine));
+  _stateMachine.addState(GameOver, make_unique<GameOverState>(_gameData, _stateMachine));
 }
 
 void Game::run() {
   sf::Event event;
   sf::Clock clock;
 
-  _stateMachine.requestState(InGame);
+  _stateMachine.requestState(Splash);
   _stateMachine.processStateSwitch();
 
+  ////////////////////// AUDIO ///////////////////
+  sf::Music music;
+  if (!music.openFromFile("assets/music.ogg"))
+	  exit(-1); 
+  music.play();
+
   while (_gameData.window.isOpen()) {
-    // EVENTS
+    ////////////////////   EVENTS  ////////////////////////////
     while (_gameData.window.pollEvent(event)) {
 #ifdef DEBUG
       ImGui::SFML::ProcessEvent(event);

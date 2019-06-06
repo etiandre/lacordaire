@@ -10,9 +10,7 @@ public:
   void processEvent(sf::Event& event) override;
 	void update() override;
 	void onEnter() override;
-	void onExit() override;
 private:
 	sf::Sprite _victorySprite;
-	sf::View _view;
 	InputManager _inputManager;
 };

@@ -2,7 +2,7 @@
 #include "GameData.h"
 #include "State.hpp"
 
-enum StateName { None, InGame, GameOver, Victory };  // add Splashscreen
+enum StateName { None, Splash, InGame, GameOver, Victory };
 
 class State;
 

@@ -3,9 +3,8 @@
 #define SCREEN_WIDTH 1920
 #define SCREEN_HEIGHT 1080
 #define SCALE_FACTOR 4
-#define BLOCK_SIZE 32
-#define SPLASH_STATE_SHOW_TIME 3.0
-#define NUM_LEVELS 1
+#define BLOCK_SIZE 16
+#define NUM_LEVELS 2
 
 
 #define SPLASH_SCENE_BACKGROUND_FILEPATH "assets/textures/Splashscreen.jpg"

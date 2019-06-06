@@ -75,8 +75,8 @@ void GameState::update() {
   }
 
   // VIEW
-  auto cameraPos = sf::Vector2f(_gameData.player.getPosition().x + 16,
-                                SCREEN_HEIGHT / SCALE_FACTOR / 2);
+  auto cameraPos = sf::Vector2f(_gameData.player.getPosition().x + 16, _gameData.player.getPosition().y);
+                           //     SCREEN_HEIGHT / SCALE_FACTOR / 2);
   if (cameraPos.x < SCREEN_WIDTH / SCALE_FACTOR / 2)
     cameraPos.x = SCREEN_WIDTH / SCALE_FACTOR / 2;
   else if (cameraPos.x >

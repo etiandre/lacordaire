@@ -52,6 +52,7 @@
     <ClCompile Include="VictoryState.cpp">
       <Filter>statemachine</Filter>
     </ClCompile>
+    <ClCompile Include="SplashscreenState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEFINITIONS.h" />
@@ -95,6 +96,9 @@
       <Filter>statemachine</Filter>
     </ClInclude>
     <ClInclude Include="VictoryState.hpp">
+      <Filter>statemachine</Filter>
+    </ClInclude>
+    <ClInclude Include="SplashscreenState.hpp">
       <Filter>statemachine</Filter>
     </ClInclude>
   </ItemGroup>

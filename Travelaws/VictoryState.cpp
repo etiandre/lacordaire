@@ -3,9 +3,7 @@
 
 VictoryState::VictoryState(GameData& gameData, StateMachine& stateMachine) :
 	State(gameData, stateMachine),
-	_inputManager(),
-	_view(sf::View(sf::FloatRect(0, 0, SCREEN_WIDTH,
-		SCREEN_HEIGHT))) {
+	_inputManager() {
 
 	sf::Texture* texturePtr = TextureManager::loadTexture("Victory", "assets/textures/victory.png");
 	if (!texturePtr) {
@@ -15,23 +13,19 @@ VictoryState::VictoryState(GameData& gameData, StateMachine& stateMachine) :
 	std::cout << "GG, Score = " << std::endl;
 	_victorySprite.setTexture(*texturePtr);
 
-	_view.reset(sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
-	_gameData.window.setView(_view);
-
-
 }
 
 void VictoryState::processEvent(sf::Event& event) {
-  if (event.type == sf::Event::KeyPressed) _stateMachine.requestState(InGame);
+	if (event.type == sf::Event::KeyPressed) _stateMachine.requestState(InGame);
 }
 
 void VictoryState::update() {
 	_gameData.window.clear();
 	_gameData.window.draw(_victorySprite);
+	//(+animate screen maybe)
 }
 
 void VictoryState::onEnter() {
-	//Instantiate Buttons
 	sf::View view(sf::View(sf::FloatRect(0, 0, SCREEN_WIDTH,
 		SCREEN_HEIGHT)));
 	//Instantiate Buttons
@@ -40,5 +34,3 @@ void VictoryState::onEnter() {
 	_gameData.window.setView(view);
 }
 
-void VictoryState::onExit() {
-}
