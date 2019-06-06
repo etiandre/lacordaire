@@ -1,4 +1,6 @@
 #include "World.h"
+#include "DEFINITIONS.h"
+
 
 World::World() {}
 
@@ -20,12 +22,19 @@ World::World(int levelID) : _map(), _layers(), _objects() {
     }
     i++;
   }
+
+  playerSpawn = _getObject("playerSpawn");
+  goal = _getObject("goal");
 }
 
 void World::draw(sf::RenderWindow& window) {
   for (auto& layer : _layers) {
     window.draw(*layer.get());
   }
+
+#ifdef DEBUG
+	
+#endif  // DEBUG
 }
 
 tmx::Map& World::getMap() { return _map; }
@@ -40,14 +49,10 @@ std::unique_ptr<MapLayer>& World::getCollisionLayer() {
                           // des plateformes
 }
 
-sf::Vector2f World::getPlayerSpawn() { return _getObject("playerSpawn"); }
-
-sf::Vector2f World::getGoal() { return _getObject("goal"); }
-
 sf::Vector2f World::_getObject(const char* name) {
   for (const auto& object : _objects) {
     if (object.getName() == name) {
-      return sf::Vector2f(object.getPosition().x, object.getPosition().y); 
+      return sf::Vector2f(object.getPosition().x, object.getPosition().y);
     }
   }
   std::cout << "WARNING : did not find " << name << std::endl;

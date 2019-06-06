@@ -11,8 +11,8 @@ void StateMachine::switchState(StateName stateName) {
   if (_currentState != None) {
     _states[_currentState].get()->onExit();
   }
-    _currentState = stateName;
-    _states[_currentState].get()->onEnter();
+  _currentState = stateName;
+  _states[_currentState].get()->onEnter();
 }
 
 void StateMachine::update() { _states[_currentState].get()->update(); }

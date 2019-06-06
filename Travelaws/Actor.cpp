@@ -24,3 +24,10 @@ void Actor::update() {
 }
 
 void Actor::draw(sf::RenderWindow& window) { window.draw(sprite); }
+
+bool Actor::collidesWith(sf::Vector2f point) {
+  auto box = hitbox;
+  box.top += sprite.getPosition().x;
+  box.left += sprite.getPosition().y;
+  return box.contains(point);
+}

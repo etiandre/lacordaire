@@ -36,7 +36,7 @@ GameState::GameState(GameData& gameData)
 }
 
 void GameState::onEnter() {
-  _gameData.player.teleportTo(_gameData.world.getPlayerSpawn());
+  _gameData.player.teleportTo(_gameData.world.playerSpawn);
 }
 
 void GameState::update() {
@@ -56,6 +56,10 @@ void GameState::update() {
     if (rule.get()->active) rule.get()->update(_gameData);
   }
 
+  // WIN / LOSE
+  if (_gameData.player.collidesWith(_gameData.world.goal))
+    std::cout << "you win" << std::endl;
+
   // VIEW
   auto cameraPos = sf::Vector2f(_gameData.player.getPosition().x + 16,
                                 SCREEN_HEIGHT / SCALE_FACTOR / 2);
@@ -74,6 +78,7 @@ void GameState::update() {
   _view.setCenter(cameraPos);
   _gameData.window.setView(_view);
 
+#ifdef DEBUG
   // GUI
   ImGui::Begin("Rules");
   for (auto& rule : rules) {
@@ -88,6 +93,7 @@ void GameState::update() {
               _gameData.player.velocity.y);
   ImGui::Text("onGround : %d", _gameData.player.onGround);
   ImGui::End();  // Debug
+#endif           // DEBUG
 
   // DRAW
   _gameData.player.updateAnimation();

@@ -14,8 +14,8 @@ class World {
 
   std::unique_ptr<MapLayer>& getCollisionLayer();
 
-  sf::Vector2f getPlayerSpawn();
-  sf::Vector2f getGoal();
+  sf::Vector2f playerSpawn;
+  sf::Vector2f goal;
 
   
 
