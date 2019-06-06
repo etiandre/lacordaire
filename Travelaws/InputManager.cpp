@@ -3,9 +3,6 @@
 #include <iostream>
 
 void InputManager::manageInputs(Player &player) {
-  int X = 0;
-  int Y = 0;
-
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
     player.velocity.x = -player.moveSpeed;
     player.animator(player.animatorState().x, 0);

@@ -27,6 +27,10 @@ void StateMachine::update() {
 #endif  // DEBUG
 }
 
+void StateMachine::processEvent(sf::Event& event) {
+ _states[_currentState].get()->processEvent(event);
+}
+
 void StateMachine::processStateSwitch() {
   if (_nextState != _currentState) _switchState(_nextState);
 }

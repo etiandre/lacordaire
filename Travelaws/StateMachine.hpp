@@ -2,12 +2,7 @@
 #include "GameData.h"
 #include "State.hpp"
 
-enum StateName {
-  None,
-  InGame,
-  GameOver,
-  Victory
-};  // add Splashscreen
+enum StateName { None, InGame, GameOver, Victory };  // add Splashscreen
 
 class State;
 
@@ -16,7 +11,10 @@ class StateMachine {
   StateMachine(GameData& gameData);
   void addState(StateName stateName, std::unique_ptr<State> state);
   void requestState(StateName stateName);
+
   void update();
+  void processEvent(sf::Event& event);
+
   void processStateSwitch();
 
  private:

@@ -26,7 +26,7 @@ void Game::run() {
 #ifdef DEBUG
       ImGui::SFML::ProcessEvent(event);
 #endif
-
+      _stateMachine.processEvent(event);
       if (event.type == sf::Event::EventType::Closed) _gameData.window.close();
     }
 #ifdef DEBUG

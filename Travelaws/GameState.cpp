@@ -8,20 +8,20 @@
 #include <iostream>
 #include <tmxlite/Map.hpp>
 #include "CollisionRule.h"
+#include "DEBUG.h"
 #include "DEFINITIONS.h"
+#include "GameOverState.hpp"
 #include "GravityRule.hpp"
 #include "InputManager.hpp"
 #include "Player.h"
 #include "SFMLOrthogonalLayer.hpp"
+#include "StateMachine.hpp"
+#include "VictoryState.hpp"
 #include "VisionRule.hpp"
 #include "WindRule.hpp"
 #include "World.h"
 #include "imgui-SFML.h"
 #include "imgui.h"
-#include "GameOverState.hpp"
-#include "StateMachine.hpp"
-#include "VictoryState.hpp"
-#include "DEBUG.h"
 #pragma endregion includes
 
 GameState::GameState(GameData& gameData, StateMachine& stateMachine)
@@ -29,7 +29,6 @@ GameState::GameState(GameData& gameData, StateMachine& stateMachine)
       _inputManager(),
       _view(sf::View(sf::FloatRect(0, 0, SCREEN_WIDTH / SCALE_FACTOR,
                                    SCREEN_HEIGHT / SCALE_FACTOR))) {
-
   _gameData.player = Player();
   _gameData.world = World(1);
 
@@ -41,12 +40,14 @@ GameState::GameState(GameData& gameData, StateMachine& stateMachine)
 }
 
 void GameState::onEnter() {
-  _gameData.player.teleportTo(_gameData.world.playerSpawn.left, _gameData.world.playerSpawn.top);
+  _gameData.player.teleportTo(_gameData.world.playerSpawn.left,
+                              _gameData.world.playerSpawn.top);
 }
 
 void GameState::update() {
-  // INPUTS
-  _inputManager.manageInputs(_gameData.player);
+
+	// MOVEMENT
+	_inputManager.manageInputs(_gameData.player);
 
   // PHYSICS UPDATE
   for (auto& rule : rules) {
@@ -56,25 +57,22 @@ void GameState::update() {
   // POSITION UPDATE
   _gameData.player.update();
 
-
-
   // RULES UPDATE
   for (auto& rule : rules) {
     if (rule.get()->active) rule.get()->update(_gameData);
   }
 
- // CHECK STATE
+  // CHECK STATE
   if (_gameData.player.getPosition().y >= SCREEN_HEIGHT / SCALE_FACTOR) {
-	  _stateMachine.addState(GameOver, make_unique<GameOverState>(_gameData, _stateMachine));
-	  _stateMachine.requestState(GameOver);
+    _stateMachine.addState(
+        GameOver, make_unique<GameOverState>(_gameData, _stateMachine));
+    _stateMachine.requestState(GameOver);
+  } else if (_gameData.player.collidesWith(_gameData.world.goal)) {
+    std::cout << "you win" << std::endl;
+    _stateMachine.addState(Victory,
+                           make_unique<VictoryState>(_gameData, _stateMachine));
+    _stateMachine.requestState(Victory);
   }
-  else if (_gameData.player.collidesWith(_gameData.world.goal)) {
-	  std::cout << "you win" << std::endl;
-	  _stateMachine.addState(Victory, make_unique<VictoryState>(_gameData, _stateMachine));
-	  _stateMachine.requestState(Victory);
-  }
-
-    
 
   // VIEW
   auto cameraPos = sf::Vector2f(_gameData.player.getPosition().x + 16,

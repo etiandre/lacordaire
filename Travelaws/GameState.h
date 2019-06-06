@@ -10,7 +10,6 @@
 #include "State.hpp"
 #include "TextureManager.h"
 
-
 class GameState : public State {
  public:
   GameState(GameData& gameData, StateMachine& stateMachine);
