@@ -174,6 +174,7 @@
     <ClInclude Include="SplashscreenState.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateMachine.hpp" />
+    <ClInclude Include="FontManager.hpp" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="VictoryState.hpp" />
@@ -183,6 +184,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="GravityRule.cpp" />
