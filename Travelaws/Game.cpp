@@ -1,6 +1,8 @@
 #include "Game.h"
 #include "GameState.h"
 #include "DEBUG.h"
+#include "VictoryState.hpp"
+#include "GameOverState.hpp"
 
 Game::Game(int width, int height) : _stateMachine(_gameData) {
   _gameData.window.create(sf::VideoMode(width, height),
@@ -11,6 +13,10 @@ Game::Game(int width, int height) : _stateMachine(_gameData) {
   ImGui::SFML::Init(_gameData.window);
 #endif
   _stateMachine.addState(InGame, make_unique<GameState>(_gameData, _stateMachine));
+  _stateMachine.addState(Victory,
+                         make_unique<VictoryState>(_gameData, _stateMachine));
+  _stateMachine.addState(GameOver,
+                         make_unique<GameOverState>(_gameData, _stateMachine));
 }
 
 void Game::run() {

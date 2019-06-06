@@ -20,4 +20,5 @@ class GameState : public State {
   std::vector<std::unique_ptr<Rule>> rules;
   sf::View _view;
   InputManager _inputManager;
+  int _currentLevel;
 };

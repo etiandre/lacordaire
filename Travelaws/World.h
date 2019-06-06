@@ -6,8 +6,8 @@
 class World {
  public:
   World();
-  World(int levelID);
   void draw(sf::RenderWindow &window);
+  void loadLevel(int levelID);
 
 	tmx::Map& getMap();
   sf::Vector2i getSize();
