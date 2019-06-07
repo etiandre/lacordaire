@@ -19,7 +19,7 @@ void VictoryState::processEvent(sf::Event& event) {
 	if (event.type == sf::Event::KeyPressed) _stateMachine.requestState(InGame);
 }
 
-void VictoryState::update() {
+void VictoryState::update(sf::Time dt) {
 	_gameData.window.clear();
 	_gameData.window.draw(_victorySprite);
 	//(+animate screen maybe)

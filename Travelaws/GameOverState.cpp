@@ -19,7 +19,7 @@ void GameOverState::processEvent(sf::Event& event) {
 	if (event.type == sf::Event::KeyPressed) _stateMachine.requestState(InGame);
 }
 
-void GameOverState::update() {
+void GameOverState::update(sf::Time dt) {
 	_gameData.window.clear();
 	_gameData.window.draw(_gameOverSprite);
 	//(+ animate gameOver screen maybe)

@@ -31,7 +31,7 @@ void SplashscreenState::processEvent(sf::Event& event) {
 	if (event.type == sf::Event::KeyPressed) _stateMachine.requestState(InGame);
 }
 
-void SplashscreenState::update() {
+void SplashscreenState::update(sf::Time dt) {
 	_gameData.window.clear();
 	_gameData.window.draw(_splashscreenSprite);
 

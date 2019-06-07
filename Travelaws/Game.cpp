@@ -24,6 +24,7 @@ Game::Game(int width, int height) : _stateMachine(_gameData) {
 void Game::run() {
   sf::Event event;
   sf::Clock clock;
+  sf::Time dt;
 
   _stateMachine.requestState(Splash);
   _stateMachine.processStateSwitch();
@@ -35,7 +36,9 @@ void Game::run() {
   music.play();
 
   while (_gameData.window.isOpen()) {
-    ////////////////////   EVENTS  ////////////////////////////
+
+    dt = clock.restart();
+
     while (_gameData.window.pollEvent(event)) {
 #ifdef DEBUG
       ImGui::SFML::ProcessEvent(event);
@@ -44,9 +47,9 @@ void Game::run() {
       if (event.type == sf::Event::EventType::Closed) _gameData.window.close();
     }
 #ifdef DEBUG
-    ImGui::SFML::Update(_gameData.window, clock.restart());
+    ImGui::SFML::Update(_gameData.window, dt);
 #endif
-    _stateMachine.update();
+    _stateMachine.update(dt);
 
 #ifdef DEBUG
     ImGui::SFML::Render(_gameData.window);

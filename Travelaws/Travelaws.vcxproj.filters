@@ -52,8 +52,10 @@
     <ClCompile Include="VictoryState.cpp">
       <Filter>statemachine</Filter>
     </ClCompile>
-    <ClCompile Include="SplashscreenState.cpp" />
     <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="SplashscreenState.cpp">
+      <Filter>statemachine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEFINITIONS.h" />

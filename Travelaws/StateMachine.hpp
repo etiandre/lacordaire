@@ -12,7 +12,7 @@ class StateMachine {
   void addState(StateName stateName, std::unique_ptr<State> state);
   void requestState(StateName stateName);
 
-  void update();
+  void update(sf::Time dt);
   void processEvent(sf::Event& event);
 
   void processStateSwitch();

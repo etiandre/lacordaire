@@ -47,7 +47,7 @@ void GameState::onEnter() {
   
 }
 
-void GameState::update() {
+void GameState::update(sf::Time dt) {
 
 	// MOVEMENT
 	_inputManager.manageInputs(_gameData.player);
