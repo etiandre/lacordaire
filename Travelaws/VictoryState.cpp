@@ -1,5 +1,5 @@
 #include "VictoryState.hpp"
-#include "FontManager.hpp"
+#include "TextWriter.h"
 #include "TextureManager.h"
 
 VictoryState::VictoryState(GameData& gameData, StateMachine& stateMachine)
@@ -12,14 +12,11 @@ VictoryState::VictoryState(GameData& gameData, StateMachine& stateMachine)
   }
   std::cout << "GG, Score = " << std::endl;
   _victorySprite.setTexture(*texturePtr);
-
-  sf::Font* fontPtr = FontManager::loadFont("font", "assets/font.ttf");
-  if (!fontPtr) {
-    std::cout << "erreur chargement font !" << std::endl;
-    exit(-1);
-  }
-
-  _text.setFont(*fontPtr);
+  _ggText =
+      TextWriter::createText("gg you win",
+                             sf::Vector2f(SCREEN_WIDTH / SCALE_FACTOR / 2,
+                                          SCREEN_HEIGHT / SCALE_FACTOR / 4),
+                             sf::Color(141, 29, 206));
 }
 
 void VictoryState::processEvent(sf::Event& event) {
@@ -29,31 +26,17 @@ void VictoryState::processEvent(sf::Event& event) {
 void VictoryState::update(sf::Time dt) {
   _gameData.window.clear();
   _gameData.window.draw(_victorySprite);
-  char buf[255];
-  //     TEXT
-  _text.setString("GG YOU WIN");
-  _text.setCharacterSize(36);
-  _text.setPosition(sf::Vector2f(SCREEN_WIDTH / SCALE_FACTOR / 8,
-                                 SCREEN_HEIGHT / SCALE_FACTOR / 8));
-  _text.setFillColor(sf::Color(35, 4, 129));
-  _gameData.window.draw(_text);
-  _text.setFillColor(sf::Color(141, 29, 206));
-  _text.setPosition(sf::Vector2f(SCREEN_WIDTH / SCALE_FACTOR / 8 + 2,
-                                 SCREEN_HEIGHT / SCALE_FACTOR / 8 - 2));
-  _gameData.window.draw(_text);
-  sprintf_s(buf, "%.2f s", _gameData.time.asSeconds());
-  _text.setString(buf);
-  _text.setFillColor(sf::Color(255, 255, 255));
-  _text.setPosition(SCREEN_WIDTH / SCALE_FACTOR / 8,
-                    SCREEN_HEIGHT / SCALE_FACTOR / 4);
-  _gameData.window.draw(_text);
-  //(+animate screen maybe)
+  TextWriter::drawShadowedText(_ggText, _gameData.window);
+  TextWriter::drawShadowedText(_scoreText, _gameData.window);
 }
 
 void VictoryState::onEnter() {
   sf::View view(sf::View(sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)));
-  // Instantiate Buttons
-
+  char buf[255];
+  sprintf_s(buf, "%.2f s", _gameData.time.asSeconds());
+  _scoreText = TextWriter::createText(
+      buf, sf::Vector2f(SCREEN_WIDTH / SCALE_FACTOR / 2,
+                        SCREEN_HEIGHT / SCALE_FACTOR / 4 * 3));
   view.reset(sf::FloatRect(0, 0, SCREEN_WIDTH / SCALE_FACTOR,
                            SCREEN_HEIGHT / SCALE_FACTOR));
   _gameData.window.setView(view);

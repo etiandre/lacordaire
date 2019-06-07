@@ -12,6 +12,6 @@ public:
 	void onEnter() override;
 private:
 	sf::Sprite _splashscreenSprite;
-	sf::Text _text;
+	sf::Text _titleText;
 	InputManager _inputManager;
 };

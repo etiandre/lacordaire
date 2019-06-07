@@ -1,17 +1,19 @@
 #pragma once
+#include "DEFINITIONS.h"
 #include "GameData.h"
 #include "InputManager.hpp"
 #include "State.hpp"
-#include "DEFINITIONS.h"
 
 class GameOverState : public State {
-public:
+ public:
   GameOverState(GameData& gameData, StateMachine& stateMachine);
   void processEvent(sf::Event& event) override;
-	void update(sf::Time dt) override;
-	void onEnter() override;
-private:
-	sf::Sprite _gameOverSprite;
-	sf::Text _text;
-	InputManager _inputManager;
+  void update(sf::Time dt) override;
+  void onEnter() override;
+
+ private:
+  sf::Sprite _gameOverSprite;
+  sf::Text _text;
+  InputManager _inputManager;
+  sf::Text _gitgudText;
 };
