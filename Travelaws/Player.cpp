@@ -31,6 +31,7 @@ void Player::manageInputs(sf::Time dt) {
 		else
 			velocity.x -= _airAcceleration;
 		if (velocity.x < -_maxMoveSpeed) velocity.x = -_maxMoveSpeed;
+		_anim.update(1, dt);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 		if (onGround)
@@ -38,15 +39,18 @@ void Player::manageInputs(sf::Time dt) {
 		else
 			velocity.x += _airAcceleration;
 		if (velocity.x > _maxMoveSpeed) velocity.x = _maxMoveSpeed;
+		_anim.update(4, dt);
 	}
 	else {
 		if (onGround)
 			velocity.x *= _groundFriction;
 		else
 			velocity.x *= _airFriction;
+		_anim.update(0, dt);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && onGround) {
 		velocity.y = -_jumpAcceleration;
+		_anim.update(2, dt);
 	}
 }

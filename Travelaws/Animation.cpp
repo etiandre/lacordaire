@@ -5,18 +5,22 @@ Animation::Animation() : _currentTime(sf::seconds(0)), _switchTime(sf::seconds(1
 
 
 void Animation::update(int animationSequence, sf::Time delta) {
+
 	_currentImage.y = animationSequence;
 	_currentTime += delta;
 
 	if (_currentTime >= _switchTime) {
 		_currentTime -= _switchTime;
 		_currentImage.x++;
-		if (_currentImage.x >= _imageCount.x) { _currentImage.x -= 10; }
-	}
 
-	textureRect.left = _currentImage.x * textureRect.width;
-	textureRect.top = _currentImage.y * textureRect.height;
-	std::cout << _currentImage.y << "  " << textureRect.height << std::endl;
+		if (_currentImage.x >= _imageCount.x) {
+			_currentImage.x -= _imageCount.x;
+		}
+
+		textureRect.left = _currentImage.x * textureRect.width;
+		textureRect.top = _currentImage.y * textureRect.height;
+
+	}
 }
 
 void Animation::addAnimation(sf::Texture* texture, sf::Vector2i imageCount, sf::Time switchTime)
