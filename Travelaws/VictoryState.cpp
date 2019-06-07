@@ -1,22 +1,18 @@
 #include "VictoryState.hpp"
+#include <algorithm>
+#include "DEBUG.h"
 #include "TextWriter.h"
 #include "TextureManager.h"
 
 VictoryState::VictoryState(GameData& gameData, StateMachine& stateMachine)
-    : State(gameData, stateMachine), _inputManager() {
+    : State(gameData, stateMachine) {
   sf::Texture* texturePtr =
       TextureManager::loadTexture("Victory", "assets/textures/victory.png");
   if (!texturePtr) {
     std::cout << "erreur chargement texture Victory !" << std::endl;
     exit(1);
   }
-  std::cout << "GG, Score = " << std::endl;
   _victorySprite.setTexture(*texturePtr);
-  _ggText =
-      TextWriter::createText("gg you win",
-                             sf::Vector2f(SCREEN_WIDTH / SCALE_FACTOR / 2,
-                                          SCREEN_HEIGHT / SCALE_FACTOR / 4),
-                             sf::Color(141, 29, 206));
 }
 
 void VictoryState::processEvent(sf::Event& event) {
@@ -27,17 +23,37 @@ void VictoryState::update(sf::Time dt) {
   _gameData.window.clear();
   _gameData.window.draw(_victorySprite);
   TextWriter::drawShadowedText(_ggText, _gameData.window);
-  TextWriter::drawShadowedText(_scoreText, _gameData.window);
+  TextWriter::drawShadowedText(_timeText, _gameData.window);
+  TextWriter::drawShadowedText(_ruleText, _gameData.window);
+  TextWriter::drawShadowedText(_totalText, _gameData.window);
 }
 
 void VictoryState::onEnter() {
-  sf::View view(sf::View(sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)));
+  int timeScore = std::max((int)(50. - _gameData.time.asSeconds()), 0);
+  int ruleScore = 0;
+  for (const auto& rule : _gameData.rules)
+    if (rule.get()->active) ruleScore += rule.get()->getScore();
+
+  sf::View view(sf::View(sf::FloatRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT)));
+
+  _ggText = TextWriter::createText(
+      "you win !", sf::Vector2f(VIEW_WIDTH / 2, VIEW_HEIGHT / 5),
+      sf::Color(141, 29, 206));
   char buf[255];
-  sprintf_s(buf, "%.2f s", _gameData.time.asSeconds());
-  _scoreText = TextWriter::createText(
-      buf, sf::Vector2f(SCREEN_WIDTH / SCALE_FACTOR / 2,
-                        SCREEN_HEIGHT / SCALE_FACTOR / 4 * 3));
-  view.reset(sf::FloatRect(0, 0, SCREEN_WIDTH / SCALE_FACTOR,
-                           SCREEN_HEIGHT / SCALE_FACTOR));
+
+  sprintf_s(buf, "%zd rules=%d pts", _gameData.rules.size(), ruleScore);
+  _ruleText =
+      TextWriter::createText(buf, sf::Vector2f(VIEW_WIDTH / 2, VIEW_HEIGHT / 5 * 2),
+                             sf::Color(255, 0, 0), 20);
+
+  sprintf_s(buf, "%.2f s=%d pts", _gameData.time.asSeconds(), timeScore);
+  _timeText = TextWriter::createText(
+      buf, sf::Vector2f(VIEW_WIDTH / 2, VIEW_HEIGHT / 5 * 3),
+      sf::Color(255, 0, 0), 20);
+
+  sprintf_s(buf, "total=%d pts", timeScore + ruleScore);
+  _totalText = TextWriter::createText(
+      buf, sf::Vector2f(VIEW_WIDTH / 2, VIEW_HEIGHT / 5 * 4), sf::Color(255, 0, 0), 25);
+
   _gameData.window.setView(view);
 }

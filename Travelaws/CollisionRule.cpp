@@ -99,3 +99,5 @@ bool CollisionRule::collides(const sf::FloatRect& box,
 }
 
 const char* CollisionRule::getName() { return "Collisions"; }
+
+int CollisionRule::getScore() { return 100; }

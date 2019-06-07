@@ -2,15 +2,15 @@
 #include "Rule.h"
 
 class VisionRule : public Rule {
+ public:
+  void draw(sf::RenderWindow& window) override;
+  void update(GameData& gameData);
+  VisionRule();
+  sf::Sprite filter;
+  const char* getName();
+  int getScore() override;
 
-public:
-	void draw(sf::RenderWindow& window) override;
-	void update(GameData& gameData);
-	VisionRule();
-	sf::Sprite filter;
-	const char* getName();
-
-private:
-	sf::RectangleShape _rect1;
-	sf::RectangleShape _rect2;
+ private:
+  sf::RectangleShape _rect1;
+  sf::RectangleShape _rect2;
 };

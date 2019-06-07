@@ -12,7 +12,6 @@
 #include "DEFINITIONS.h"
 #include "GameOverState.hpp"
 #include "GravityRule.hpp"
-#include "InputManager.hpp"
 #include "Player.h"
 #include "SFMLOrthogonalLayer.hpp"
 #include "StateMachine.hpp"
@@ -26,9 +25,8 @@
 
 GameState::GameState(GameData& gameData, StateMachine& stateMachine)
     : State(gameData, stateMachine),
-      _inputManager(),
-      _view(sf::View(sf::FloatRect(0, 0, SCREEN_WIDTH / SCALE_FACTOR,
-                                   SCREEN_HEIGHT / SCALE_FACTOR))),
+      _view(sf::View(sf::FloatRect(0, 0, VIEW_WIDTH,
+                                   VIEW_HEIGHT))),
       _clock() {}
 
 void GameState::onEnter() {
@@ -51,30 +49,29 @@ void GameState::update(sf::Time dt) {
   _gameData.player.update(dt);
 
   // CHECK STATE
-  if (_gameData.player.getPosition().y >= SCREEN_HEIGHT / SCALE_FACTOR) {
+  if (_gameData.player.getPosition().y >= VIEW_HEIGHT) {
     _stateMachine.requestState(GameOver);
   } else if (_gameData.player.collidesWith(_gameData.world.goal)) {
     _gameData.currentLevel++;
     if (_gameData.currentLevel > NUM_LEVELS) _gameData.currentLevel = 1;
     _stateMachine.requestState(Victory);
-    _gameData.time = _clock.getElapsedTime();
   }
 
   // VIEW
   auto cameraPos = sf::Vector2f(_gameData.player.getPosition().x + 16,
                                 _gameData.player.getPosition().y);
-  //     SCREEN_HEIGHT / SCALE_FACTOR / 2);
-  if (cameraPos.x < SCREEN_WIDTH / SCALE_FACTOR / 2)
-    cameraPos.x = SCREEN_WIDTH / SCALE_FACTOR / 2;
+  //     VIEW_HEIGHT / 2);
+  if (cameraPos.x < VIEW_WIDTH / 2)
+    cameraPos.x = VIEW_WIDTH / 2;
   else if (cameraPos.x >
-           _gameData.world.getSize().x - SCREEN_WIDTH / SCALE_FACTOR / 2)
-    cameraPos.x = _gameData.world.getSize().x - SCREEN_WIDTH / SCALE_FACTOR / 2;
-  if (cameraPos.y < SCREEN_HEIGHT / SCALE_FACTOR / 2)
-    cameraPos.y = SCREEN_HEIGHT / SCALE_FACTOR / 2;
+           _gameData.world.getSize().x - VIEW_WIDTH / 2)
+    cameraPos.x = _gameData.world.getSize().x - VIEW_WIDTH / 2;
+  if (cameraPos.y < VIEW_HEIGHT / 2)
+    cameraPos.y = VIEW_HEIGHT / 2;
   else if (cameraPos.y >
-           _gameData.world.getSize().y - SCREEN_HEIGHT / SCALE_FACTOR / 2)
+           _gameData.world.getSize().y - VIEW_HEIGHT / 2)
     cameraPos.y =
-        _gameData.world.getSize().y - SCREEN_HEIGHT / SCALE_FACTOR / 2;
+        _gameData.world.getSize().y - VIEW_HEIGHT / 2;
 
   _view.setCenter(cameraPos);
   _gameData.window.setView(_view);
@@ -87,7 +84,7 @@ void GameState::update(sf::Time dt) {
   }
   ImGui::End();  // Rules
 
-  ImGui::Begin("Debug");
+  ImGui::Begin("GameState");
   ImGui::Text("Current level=%d", _gameData.currentLevel);
   ImGui::Text("position : x=%f y=%f", _gameData.player.getPosition().x,
               _gameData.player.getPosition().y);
@@ -106,3 +103,5 @@ void GameState::update(sf::Time dt) {
     if (rule.get()->active) rule.get()->draw(_gameData.window);
   }
 }
+
+void GameState::onExit() { _gameData.time = _clock.getElapsedTime(); }

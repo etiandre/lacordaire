@@ -3,6 +3,8 @@
 #include "TextureManager.h"
 const char* VisionRule::getName() { return "Vision"; }
 
+int VisionRule::getScore() { return 150; }
+
 void VisionRule::draw(sf::RenderWindow& window) {
   // draw mask
   window.draw(filter);

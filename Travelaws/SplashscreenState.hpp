@@ -1,6 +1,5 @@
 #pragma once
 #include "GameData.h"
-#include "InputManager.hpp"
 #include "State.hpp"
 #include "DEFINITIONS.h"
 
@@ -13,5 +12,4 @@ public:
 private:
 	sf::Sprite _splashscreenSprite;
 	sf::Text _titleText;
-	InputManager _inputManager;
 };

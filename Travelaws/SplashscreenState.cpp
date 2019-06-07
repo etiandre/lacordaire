@@ -4,7 +4,7 @@
 
 SplashscreenState::SplashscreenState(GameData& gameData,
                                      StateMachine& stateMachine)
-    : State(gameData, stateMachine), _inputManager() {
+    : State(gameData, stateMachine) {
   //   BACKGROUND
   sf::Texture* texturePtr = TextureManager::loadTexture(
       "Splashscreen", "assets/textures/splashscreen.jpg");
@@ -16,8 +16,8 @@ SplashscreenState::SplashscreenState(GameData& gameData,
 
   _titleText =
       TextWriter::createText("L.A.W.S.",
-                             sf::Vector2f(SCREEN_WIDTH / SCALE_FACTOR / 4,
-                                          SCREEN_HEIGHT / SCALE_FACTOR / 4),
+                             sf::Vector2f(VIEW_WIDTH / 4,
+                                          VIEW_HEIGHT / 4),
                              sf::Color(141, 29, 206));
 }
 
@@ -37,7 +37,7 @@ void SplashscreenState::onEnter() {
   sf::View view(sf::View(sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)));
   // _text and buttons Buttons
 
-  view.reset(sf::FloatRect(0, 0, SCREEN_WIDTH / SCALE_FACTOR,
-                           SCREEN_HEIGHT / SCALE_FACTOR));
+  view.reset(sf::FloatRect(0, 0, VIEW_WIDTH,
+                           VIEW_HEIGHT));
   _gameData.window.setView(view);
 }

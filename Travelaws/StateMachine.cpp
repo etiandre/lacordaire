@@ -24,7 +24,14 @@ void StateMachine::update(sf::Time dt) {
   ImGui::Begin("State");
   ImGui::Text("Current State : %d", _currentState);
   ImGui::Text("dt = %d ms", dt.asMilliseconds());
-  ImGui::End(); // State
+  for (int i = None+1; i <= Victory; i++) {
+    char buf[20];
+    sprintf_s(buf, "change to state %d", i);
+    if (ImGui::Button(buf)) {
+      requestState(static_cast<StateName>(i));
+    }
+  }
+  ImGui::End();  // State
 #endif  // DEBUG
 }
 

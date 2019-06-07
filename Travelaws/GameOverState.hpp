@@ -1,7 +1,6 @@
 #pragma once
 #include "DEFINITIONS.h"
 #include "GameData.h"
-#include "InputManager.hpp"
 #include "State.hpp"
 
 class GameOverState : public State {
@@ -14,6 +13,5 @@ class GameOverState : public State {
  private:
   sf::Sprite _gameOverSprite;
   sf::Text _text;
-  InputManager _inputManager;
   sf::Text _gitgudText;
 };
