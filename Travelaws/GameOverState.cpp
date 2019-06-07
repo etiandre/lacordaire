@@ -11,13 +11,11 @@ GameOverState::GameOverState(GameData& gameData, StateMachine& stateMachine)
     std::cout << "erreur chargement texture gameOver !" << std::endl;
     exit(1);
   }
-  std::cout << "GG, Score = " << std::endl;
   _gameOverSprite.setTexture(*texturePtr);
-
   _gitgudText =
       TextWriter::createText("git gud",
-                             sf::Vector2f(SCREEN_WIDTH / SCALE_FACTOR / 2,
-                                          SCREEN_HEIGHT / SCALE_FACTOR / 8),
+                             sf::Vector2f(VIEW_WIDTH / 2,
+                                          VIEW_HEIGHT / 8),
                              sf::Color(141, 29, 206));
 }
 
@@ -35,7 +33,7 @@ void GameOverState::onEnter() {
   sf::View view(sf::View(sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)));
   // Instantiate Buttons
 
-  view.reset(sf::FloatRect(0, 0, SCREEN_WIDTH / SCALE_FACTOR,
-                           SCREEN_HEIGHT / SCALE_FACTOR));
+  view.reset(sf::FloatRect(0, 0, VIEW_WIDTH,
+                           VIEW_HEIGHT));
   _gameData.window.setView(view);
 }

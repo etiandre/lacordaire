@@ -7,6 +7,7 @@ class CollisionRule : public Rule {
   CollisionRule();
   void update(GameData& gameData, sf::Time dt) override;
   const char* getName();
+  int getScore() override;
 
  private:
   bool collides(const sf::FloatRect& box, const tmx::Vector2u& tileSize,

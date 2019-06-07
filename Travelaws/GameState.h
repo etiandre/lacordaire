@@ -15,6 +15,8 @@ class GameState : public State {
   void onEnter() override;
   void update(sf::Time dt) override;
 
+  void onExit() override;
+
  private:
   sf::View _view;
   sf::Clock _clock;

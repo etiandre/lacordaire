@@ -8,4 +8,5 @@ class GravityRule : public Rule {
  public:
   void update(GameData& gameData, sf::Time dt);
   const char* getName();
+  int getScore() override;
 };

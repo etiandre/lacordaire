@@ -5,3 +5,5 @@ void GravityRule::update (GameData& gameData, sf::Time dt) {
 }
 
 const char* GravityRule::getName() { return "Gravite"; }
+
+int GravityRule::getScore() { return 50; }

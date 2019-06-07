@@ -7,6 +7,10 @@
 #define NUM_LEVELS 2
 
 
+#define VIEW_WIDTH SCREEN_WIDTH / SCALE_FACTOR
+#define VIEW_HEIGHT SCREEN_HEIGHT / SCALE_FACTOR
+
+
 #define SPLASH_SCENE_BACKGROUND_FILEPATH "assets/textures/Splashscreen.jpg"
 /* Example:
 #define MAIN_MENU_BACKGROUND_FILEPATH "Resources/res/sky.png"
