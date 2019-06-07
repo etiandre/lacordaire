@@ -4,7 +4,7 @@
 
 SplashscreenState::SplashscreenState(GameData& gameData,
                                      StateMachine& stateMachine)
-    : State(gameData, stateMachine), _inputManager() {
+    : State(gameData, stateMachine) {
   //   BACKGROUND
   sf::Texture* texturePtr = TextureManager::loadTexture(
       "Splashscreen", "assets/textures/splashscreen.jpg");

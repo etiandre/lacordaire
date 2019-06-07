@@ -1,6 +1,5 @@
 #pragma once
 #include "GameData.h"
-#include "InputManager.hpp"
 #include "State.hpp"
 #include "DEFINITIONS.h"
 
@@ -14,5 +13,4 @@ private:
 	sf::Sprite _victorySprite;
 	sf::Text _ggText;
 	sf::Text _scoreText;
-	InputManager _inputManager;
 };

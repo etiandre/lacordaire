@@ -4,7 +4,7 @@
 #include "TextureManager.h"
 
 GameOverState::GameOverState(GameData& gameData, StateMachine& stateMachine)
-    : State(gameData, stateMachine), _inputManager() {
+    : State(gameData, stateMachine) {
   sf::Texture* texturePtr =
       TextureManager::loadTexture("GameOver", "assets/textures/gameover.png");
   if (!texturePtr) {

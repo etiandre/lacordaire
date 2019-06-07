@@ -3,7 +3,7 @@
 #include "TextureManager.h"
 
 VictoryState::VictoryState(GameData& gameData, StateMachine& stateMachine)
-    : State(gameData, stateMachine), _inputManager() {
+    : State(gameData, stateMachine) {
   sf::Texture* texturePtr =
       TextureManager::loadTexture("Victory", "assets/textures/victory.png");
   if (!texturePtr) {

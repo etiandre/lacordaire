@@ -173,7 +173,6 @@
     <ClInclude Include="GameData.h" />
     <ClInclude Include="GameOverState.hpp" />
     <ClInclude Include="GravityRule.hpp" />
-    <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rule.h" />
     <ClInclude Include="SFMLOrthogonalLayer.hpp" />
@@ -202,7 +201,6 @@
     <ClCompile Include="imgui\imgui_demo.cpp" />
     <ClCompile Include="imgui\imgui_draw.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
-    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="CollisionRule.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />

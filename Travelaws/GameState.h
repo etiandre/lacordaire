@@ -4,7 +4,6 @@
 #include <string>
 #include <tmxlite/Map.hpp>
 #include "GameData.h"
-#include "InputManager.hpp"
 #include "Player.h"
 #include "Rule.h"
 #include "State.hpp"
@@ -18,6 +17,5 @@ class GameState : public State {
 
  private:
   sf::View _view;
-  InputManager _inputManager;
   sf::Clock _clock;
 };

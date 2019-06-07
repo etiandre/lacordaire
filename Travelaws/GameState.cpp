@@ -12,7 +12,6 @@
 #include "DEFINITIONS.h"
 #include "GameOverState.hpp"
 #include "GravityRule.hpp"
-#include "InputManager.hpp"
 #include "Player.h"
 #include "SFMLOrthogonalLayer.hpp"
 #include "StateMachine.hpp"
@@ -26,7 +25,6 @@
 
 GameState::GameState(GameData& gameData, StateMachine& stateMachine)
     : State(gameData, stateMachine),
-      _inputManager(),
       _view(sf::View(sf::FloatRect(0, 0, SCREEN_WIDTH / SCALE_FACTOR,
                                    SCREEN_HEIGHT / SCALE_FACTOR))),
       _clock() {}
