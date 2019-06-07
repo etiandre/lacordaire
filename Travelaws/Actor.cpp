@@ -3,7 +3,8 @@
 #include "TextureManager.h"
 #include "DEBUG.h"
 
-Actor::Actor(const char* name) : _name(name), _inertia(0.9f), velocity() {}
+Actor::Actor(const char* name) : _name(name), _inertia(0.9f), velocity(), _anim() {
+}
 
 void Actor::teleportTo(float x, float y) {
   velocity.x = 0;
@@ -25,6 +26,7 @@ void Actor::update(sf::Time dt) {
 }
 
 void Actor::draw(sf::RenderWindow& window) { window.draw(sprite);
+sprite.setTextureRect(_anim.textureRect);
 #ifdef DEBUG
   sf::Vertex line[2];
   line[0].position = sprite.getPosition();

@@ -64,6 +64,7 @@
     <ClCompile Include="ColorUtil.cpp">
       <Filter>lib</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEFINITIONS.h" />
@@ -121,6 +122,8 @@
     <ClInclude Include="ColorUtil.h">
       <Filter>lib</Filter>
     </ClInclude>
+    <ClInclude Include="FontManager.hpp" />
+    <ClInclude Include="Animation.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="rules">

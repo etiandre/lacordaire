@@ -5,10 +5,7 @@
 class Player : public Actor {
  public:
   Player();
-  void updateAnimation();
   void manageInputs(sf::Time dt);
-  void animator(int x, int y);
-  sf::Vector2i animatorState();
   bool onGround = false;
 
  private:
