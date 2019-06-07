@@ -1,8 +1,8 @@
 #include "Actor.h"
+#include <iostream>
 #include "DEBUG.h"
 #include "DEFINITIONS.h"
 #include "TextureManager.h"
-#include <iostream>
 
 Actor::Actor(const char* name)
     : _name(name), _inertia(0.9f), velocity(), _anim() {}
@@ -22,9 +22,7 @@ sf::Vector2f Actor::getPosition() { return sprite.getPosition(); }
 void Actor::update(sf::Time dt) {
   float x = sprite.getPosition().x + velocity.x * dt.asSeconds();
   float y = sprite.getPosition().y + velocity.y * dt.asSeconds();
-  std::cout << x << " " << y << std::endl;  
-	// velocity.x *= _inertia;
-               sprite.setPosition(x, y);
+  sprite.setPosition(x, y);
 }
 
 void Actor::draw(sf::RenderWindow& window) {
