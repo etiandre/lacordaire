@@ -21,8 +21,7 @@ Player::Player()
 		exit(1);
 	}
 	sprite.setTexture(*texturePointer);
-	// sprite.setTextureRect(sf::IntRect(0, 0, 32, 32));
-	_anim.addAnimation(texturePointer, sf::Vector2i(10, 10), sf::seconds(0.25));
+	_anim.addAnimation(texturePointer, sf::Vector2i(10, 10), sf::seconds(0.1f));
 }
 
 void Player::manageInputs(sf::Time dt) {
