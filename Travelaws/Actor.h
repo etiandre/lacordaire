@@ -1,23 +1,25 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Animation.hpp"
 
 class Actor {
- public:
-  Actor(const char* name);
-  void teleportTo(float x, float y);
-  void teleportTo(sf::Vector2f position);
-  sf::Vector2f getPosition();
-  virtual void update();
+public:
+	Actor(const char* name);
+	void teleportTo(float x, float y);
+	void teleportTo(sf::Vector2f position);
+	sf::Vector2f getPosition();
+	virtual void update(sf::Time dt);
 
-  sf::Vector2f velocity;
+	void draw(sf::RenderWindow& window);
+	bool collidesWith(sf::FloatRect rect);
 
-  sf::Sprite sprite;
-  sf::FloatRect hitbox;
-  void draw(sf::RenderWindow& window);
+	sf::Vector2f velocity;
+	sf::Sprite sprite;
+	sf::FloatRect hitbox;
 
-  bool collidesWith(sf::FloatRect rect);
 
- protected:
-  float _inertia;
-  const char* _name;
+protected:
+	Animation _anim;
+	float _inertia;
+	const char* _name;
 };

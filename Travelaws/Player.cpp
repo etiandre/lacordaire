@@ -2,6 +2,7 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 #include "TextureManager.h"
+#include "Animation.hpp"
 
 Player::Player() : Actor("Player"), moveSpeed(2) {
   hitbox = sf::FloatRect(10, 22, 12, 10);
@@ -13,20 +14,5 @@ Player::Player() : Actor("Player"), moveSpeed(2) {
   }
   sprite.setTexture(*texturePointer);
   sprite.setTextureRect(sf::IntRect(0, 0, 32, 32));
-  _animation.x = 0, _animation.y = 0;
-}
-
-sf::Vector2i Player::animatorState() { return _animation; }
-
-void Player::animator(int x, int y) {
-  _animation.x = x;
-  _animation.y = y;
-}
-
-void Player::updateAnimation() {
-  if (_animation.x >= 5) {
-    _animation.x -= 5;
-  }
-  sprite.setTextureRect(
-      sf::IntRect(_animation.x * 32, _animation.y * 32, 32, 32));
+  _anim.addAnimation(texturePointer, sf::Vector2i(10, 3), sf::seconds(0.25));
 }

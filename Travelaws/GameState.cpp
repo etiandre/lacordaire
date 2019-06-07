@@ -111,7 +111,6 @@ void GameState::update() {
 #endif           // DEBUG
 
   // DRAW
-  _gameData.player.updateAnimation();
   _gameData.window.clear();
   _gameData.world.draw(_gameData.window);
   _gameData.player.draw(_gameData.window);
