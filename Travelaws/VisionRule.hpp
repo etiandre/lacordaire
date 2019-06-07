@@ -4,7 +4,7 @@
 class VisionRule : public Rule {
  public:
   void draw(sf::RenderWindow& window) override;
-  void update(GameData& gameData);
+  void update(GameData& gameData, sf::Time dt);
   VisionRule();
   sf::Sprite filter;
   const char* getName();
