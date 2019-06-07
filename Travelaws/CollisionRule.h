@@ -5,7 +5,7 @@
 class CollisionRule : public Rule {
  public:
   CollisionRule();
-  void update(GameData& gameData) override;
+  void update(GameData& gameData, sf::Time dt) override;
   const char* getName();
 
  private:
@@ -13,5 +13,5 @@ class CollisionRule : public Rule {
                 const tmx::Vector2u& tileCount, std::unique_ptr<MapLayer>& collisionLayer);
   const tmx::Vector2u tileSize;
   const tmx::Vector2u tileCount;
-  const float _epsilon = 0.001;
+  const float _epsilon = 0.01;
 };
