@@ -13,6 +13,9 @@ Player::Player() : Actor("Player"), moveSpeed(2) {
     exit(1);
   }
   sprite.setTexture(*texturePointer);
-  sprite.setTextureRect(sf::IntRect(0, 0, 32, 32));
-  _anim.addAnimation(texturePointer, sf::Vector2i(10, 3), sf::seconds(0.25));
+ // sprite.setTextureRect(sf::IntRect(0, 0, 32, 32));
+  _anim.addAnimation(texturePointer, sf::Vector2i(10, 10), sf::seconds(0.25));
 }
+
+
+// Implémenter choix des anim dans update() override _anim.update(2, dt);

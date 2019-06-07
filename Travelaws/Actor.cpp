@@ -22,10 +22,12 @@ void Actor::update(sf::Time dt) {
   float y = sprite.getPosition().y + velocity.y;
   velocity.x *= _inertia;
   sprite.setPosition(x, y);
-  _anim.update(0, dt);
 }
 
-void Actor::draw(sf::RenderWindow& window) { window.draw(sprite); }
+void Actor::draw(sf::RenderWindow& window) {
+	sprite.setTextureRect(_anim.textureRect);
+	window.draw(sprite);
+}
 
 bool Actor::collidesWith(sf::FloatRect rect) {
   auto box = hitbox;

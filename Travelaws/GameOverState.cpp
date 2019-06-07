@@ -16,7 +16,7 @@ GameOverState::GameOverState(GameData& gameData, StateMachine& stateMachine) :
 	_gameOverSprite.setTexture(*texturePtr);
 
 	sf::Font* fontPtr =
-		FontManager::loadFont("8bitfont", "assets/8bitfont.ttf");
+		FontManager::loadFont("font", "assets/font.ttf");
 	if (!fontPtr)
 	{
 		std::cout << "erreur chargement font !" << std::endl;
@@ -30,7 +30,7 @@ void GameOverState::processEvent(sf::Event& event) {
 	if (event.type == sf::Event::KeyPressed) _stateMachine.requestState(InGame);
 }
 
-void GameOverState::update() {
+void GameOverState::update(sf::Time dt) {
 	_gameData.window.clear();
 	_gameData.window.draw(_gameOverSprite);
 	//(+ animate gameOver screen maybe)
@@ -40,7 +40,6 @@ void GameOverState::update() {
 	_text.setCharacterSize(36);
 	_text.setPosition(sf::Vector2f(SCREEN_WIDTH / SCALE_FACTOR / 8, SCREEN_HEIGHT / SCALE_FACTOR / 8));
 	_text.setFillColor(sf::Color(35, 4, 129));
-	_text.setStyle(sf::Text::Bold | sf::Text::Underlined);
 	_gameData.window.draw(_text);
 	_text.setFillColor(sf::Color(141, 29, 206));
 	_text.setPosition(sf::Vector2f(SCREEN_WIDTH / SCALE_FACTOR / 8 + 2, SCREEN_HEIGHT / SCALE_FACTOR / 8 - 2));

@@ -7,4 +7,6 @@ void State::onEnter() {}
 
 void State::onExit() {}
 
+void State::update(sf::Time dt) {}
+
 void State::processEvent(sf::Event& event) {}

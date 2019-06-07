@@ -14,11 +14,10 @@ class GameState : public State {
  public:
   GameState(GameData& gameData, StateMachine& stateMachine);
   void onEnter() override;
-  void update() override;
+  void update(sf::Time dt) override;
 
  private:
-  std::vector<std::unique_ptr<Rule>> rules;
   sf::View _view;
   InputManager _inputManager;
-  int _currentLevel;
+  sf::Clock _clock;
 };

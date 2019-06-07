@@ -18,11 +18,12 @@ void StateMachine::_switchState(StateName stateName) {
   _states[_currentState].get()->onEnter();
 }
 
-void StateMachine::update() {
-  _states[_currentState].get()->update();
+void StateMachine::update(sf::Time dt) {
+  _states[_currentState].get()->update(dt);
 #ifdef DEBUG
   ImGui::Begin("State");
   ImGui::Text("Current State : %d", _currentState);
+  ImGui::Text("dt = %d ms", dt.asMilliseconds());
   ImGui::End(); // State
 #endif  // DEBUG
 }

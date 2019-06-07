@@ -1,4 +1,5 @@
 #include "Animation.hpp"
+#include <iostream>
 
 Animation::Animation() : _currentTime(sf::seconds(0)), _switchTime(sf::seconds(1)) {}
 
@@ -15,6 +16,7 @@ void Animation::update(int animationSequence, sf::Time delta) {
 
 	textureRect.left = _currentImage.x * textureRect.width;
 	textureRect.top = _currentImage.y * textureRect.height;
+	std::cout << _currentImage.y << "  " << textureRect.height << std::endl;
 }
 
 void Animation::addAnimation(sf::Texture* texture, sf::Vector2i imageCount, sf::Time switchTime)

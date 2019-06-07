@@ -8,7 +8,7 @@ class VictoryState : public State {
 public:
   VictoryState(GameData& gameData, StateMachine& stateMachine);
   void processEvent(sf::Event& event) override;
-	void update() override;
+  void update(sf::Time dt) override;
 	void onEnter() override;
 private:
 	sf::Sprite _victorySprite;
