@@ -35,7 +35,7 @@ void VictoryState::update() {
 	_gameData.window.draw(_victorySprite);
 
 	//     TEXT 
-	_text.setString("GG YOU WIN");
+	_text.setString("GG \n YOU WIN");
 	_text.setCharacterSize(36);
 	_text.setPosition(sf::Vector2f(SCREEN_WIDTH / SCALE_FACTOR / 8, SCREEN_HEIGHT / SCALE_FACTOR / 8));
 	_text.setFillColor(sf::Color(35, 4, 129));
