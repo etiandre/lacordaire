@@ -12,5 +12,6 @@ public:
 	void onEnter() override;
 private:
 	sf::Sprite _gameOverSprite;
+	sf::Text _text;
 	InputManager _inputManager;
 };
