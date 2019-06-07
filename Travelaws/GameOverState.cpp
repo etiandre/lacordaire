@@ -30,10 +30,6 @@ void GameOverState::update(sf::Time dt) {
 }
 
 void GameOverState::onEnter() {
-  sf::View view(sf::View(sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)));
-  // Instantiate Buttons
-
-  view.reset(sf::FloatRect(0, 0, VIEW_WIDTH,
-                           VIEW_HEIGHT));
+  sf::View view(sf::View(sf::FloatRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT)));
   _gameData.window.setView(view);
 }

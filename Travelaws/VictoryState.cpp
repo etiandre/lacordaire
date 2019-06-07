@@ -16,7 +16,7 @@ VictoryState::VictoryState(GameData& gameData, StateMachine& stateMachine)
 }
 
 void VictoryState::processEvent(sf::Event& event) {
-  if (event.type == sf::Event::KeyPressed) _stateMachine.requestState(InGame);
+  if (event.type == sf::Event::KeyPressed) _stateMachine.requestState(PreGame);
 }
 
 void VictoryState::update(sf::Time dt) {

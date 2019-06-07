@@ -64,6 +64,9 @@
       <Filter>lib</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="PreGameState.cpp">
+      <Filter>statemachine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEFINITIONS.h" />
@@ -122,6 +125,9 @@
     </ClInclude>
     <ClInclude Include="FontManager.hpp" />
     <ClInclude Include="Animation.hpp" />
+    <ClInclude Include="PreGameState.h">
+      <Filter>statemachine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="rules">

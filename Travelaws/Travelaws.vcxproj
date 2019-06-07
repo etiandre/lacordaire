@@ -174,6 +174,7 @@
     <ClInclude Include="GameOverState.hpp" />
     <ClInclude Include="GravityRule.hpp" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PreGameState.h" />
     <ClInclude Include="Rule.h" />
     <ClInclude Include="SFMLOrthogonalLayer.hpp" />
     <ClInclude Include="SplashscreenState.hpp" />
@@ -204,6 +205,7 @@
     <ClCompile Include="CollisionRule.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PreGameState.cpp" />
     <ClCompile Include="SplashscreenState.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />

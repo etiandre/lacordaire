@@ -7,6 +7,7 @@
 #include "SFML/Audio.hpp"
 #include "SplashscreenState.hpp"
 #include "VictoryState.hpp"
+#include "PreGameState.h"
 
 Game::Game(int width, int height) : _stateMachine(_gameData) {
   _gameData.window.create(sf::VideoMode(width, height),
@@ -31,6 +32,8 @@ Game::Game(int width, int height) : _stateMachine(_gameData) {
 
   _stateMachine.addState(
       Splash, make_unique<SplashscreenState>(_gameData, _stateMachine));
+  _stateMachine.addState(PreGame,
+                         make_unique<PreGameState>(_gameData, _stateMachine));
   _stateMachine.addState(InGame,
                          make_unique<GameState>(_gameData, _stateMachine));
   _stateMachine.addState(Victory,

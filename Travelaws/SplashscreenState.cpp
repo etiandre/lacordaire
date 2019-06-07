@@ -22,7 +22,7 @@ SplashscreenState::SplashscreenState(GameData& gameData,
 }
 
 void SplashscreenState::processEvent(sf::Event& event) {
-  if (event.type == sf::Event::KeyPressed) _stateMachine.requestState(InGame);
+  if (event.type == sf::Event::KeyPressed) _stateMachine.requestState(PreGame);
 }
 
 void SplashscreenState::update(sf::Time dt) {
@@ -34,10 +34,6 @@ void SplashscreenState::update(sf::Time dt) {
 }
 
 void SplashscreenState::onEnter() {
-  sf::View view(sf::View(sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)));
-  // _text and buttons Buttons
-
-  view.reset(sf::FloatRect(0, 0, VIEW_WIDTH,
-                           VIEW_HEIGHT));
+  sf::View view(sf::View(sf::FloatRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT)));
   _gameData.window.setView(view);
 }
