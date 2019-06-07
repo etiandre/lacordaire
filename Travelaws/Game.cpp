@@ -12,7 +12,7 @@
 
 Game::Game(int width, int height) : _stateMachine(_gameData) {
   _gameData.window.create(sf::VideoMode(width, height),
-                          "Travelaws 0.0.0.0.1 alpha dx+ TEST RELEASE");
+                          "L.A.W.S. 0.9 alpha dx+ TEST RELEASE");
   _gameData.window.setFramerateLimit(60);
   _gameData.window.setView(_view);
   _gameData.window.setKeyRepeatEnabled(false);

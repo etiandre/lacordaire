@@ -31,7 +31,7 @@ VisionRule::VisionRule() {
 	filter.setTexture(*texturePointer);
 
 	// Generate the 2 rectangle completing the mask
-	_rect1.setSize(sf::Vector2f((float)(VIEW_WIDTH - filter.getTexture()->getSize().x) / 2.0f, 2*(float)VIEW_HEIGHT));
+	_rect1.setSize(sf::Vector2f((float)(VIEW_WIDTH - filter.getTexture()->getSize().x)*4 / 2.0f, 2*(float)VIEW_HEIGHT));
 	_rect1.setFillColor(sf::Color());
 	_rect2.setSize(sf::Vector2f((float)(VIEW_WIDTH - filter.getTexture()->getSize().x)*4 / 2.0f, 2*(float)VIEW_HEIGHT));
 	_rect2.setFillColor(sf::Color());

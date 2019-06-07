@@ -1,35 +1,33 @@
 #include "Animation.hpp"
 #include <iostream>
 
-Animation::Animation() : _currentTime(sf::seconds(0)), _switchTime(sf::seconds(1)) {}
+Animation::Animation() {}
 
+void Animation::playAnimation(int animationID, sf::Time dt) {
+  _currentImage.y = animationID;
+  _currentTime += dt;
 
-void Animation::update(int animationSequence, sf::Time delta) {
+  if (_currentTime >= _switchTime) {
+    _currentTime -= _switchTime;
+    _currentImage.x++;
 
-	_currentImage.y = animationSequence;
-	_currentTime += delta;
+    if (_currentImage.x >= _imageCount.x) {
+      _currentImage.x -= _imageCount.x;
+    }
 
-	if (_currentTime >= _switchTime) {
-		_currentTime -= _switchTime;
-		_currentImage.x++;
-
-		if (_currentImage.x >= _imageCount.x) {
-			_currentImage.x -= _imageCount.x;
-		}
-
-		textureRect.left = _currentImage.x * textureRect.width;
-		textureRect.top = _currentImage.y * textureRect.height;
-
-	}
+    textureRect.left = _currentImage.x * textureRect.width;
+    textureRect.top = _currentImage.y * textureRect.height;
+  }
 }
 
-void Animation::addAnimation(sf::Texture* texture, sf::Vector2i imageCount, sf::Time switchTime)
-{
-	_imageCount = imageCount;
-	_switchTime = switchTime;
-	_currentTime = sf::Time();
-	_currentImage.x = 0;
+void Animation::setAnimationTexture(sf::Texture* texture,
+                                    sf::Vector2i frameCount,
+                                    sf::Time timePerFrame) {
+  _imageCount = frameCount;
+  _switchTime = timePerFrame;
+  _currentTime = sf::Time();
+  _currentImage.x = 0;
 
-	textureRect.width = texture->getSize().x / ((float)imageCount.x);
-	textureRect.height = texture->getSize().y / ((float)imageCount.y);
+  textureRect.width = texture->getSize().x / ((float)frameCount.x);
+  textureRect.height = texture->getSize().y / ((float)frameCount.y);
 }
