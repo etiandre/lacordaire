@@ -59,8 +59,10 @@ bool CollisionRule::collides(const sf::FloatRect& box,
 
   if (leftTile < 0) leftTile = 0;
   if (topTile < 0) topTile = 0;
-  if (rightTile > tileCount.x - 1) rightTile = tileCount.x - 1;
-  if (bottomTile > tileCount.y - 1) rightTile = tileCount.y - 1;
+  if (rightTile > tileCount.x - 1)
+		rightTile = tileCount.x - 1;
+  if (bottomTile > tileCount.y - 1)
+		bottomTile = tileCount.y - 1;
 
   for (int i = leftTile; i <= rightTile; i++) {
     for (int j = topTile; j <= bottomTile; j++) {
