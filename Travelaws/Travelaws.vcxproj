@@ -162,6 +162,7 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="CollisionRule.h" />
+    <ClInclude Include="ColorUtil.h" />
     <ClInclude Include="DEFINITIONS.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameData.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="FontManager.hpp" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="TextWriter.h" />
     <ClInclude Include="VictoryState.hpp" />
     <ClInclude Include="VisionRule.hpp" />
     <ClInclude Include="WindRule.hpp" />
@@ -184,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="ColorUtil.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameOverState.cpp" />
@@ -202,6 +205,7 @@
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="TextWriter.cpp" />
     <ClCompile Include="VictoryState.cpp" />
     <ClCompile Include="VisionRule.cpp" />
     <ClCompile Include="WindRule.cpp" />

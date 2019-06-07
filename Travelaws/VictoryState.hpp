@@ -12,6 +12,7 @@ public:
 	void onEnter() override;
 private:
 	sf::Sprite _victorySprite;
-	sf::Text _text;
+	sf::Text _ggText;
+	sf::Text _scoreText;
 	InputManager _inputManager;
 };
