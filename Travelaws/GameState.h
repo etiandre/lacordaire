@@ -20,5 +20,4 @@ class GameState : public State {
   sf::View _view;
   InputManager _inputManager;
   sf::Clock _clock;
-  int _currentLevel;
 };

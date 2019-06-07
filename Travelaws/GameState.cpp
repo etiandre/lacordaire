@@ -29,20 +29,10 @@ GameState::GameState(GameData& gameData, StateMachine& stateMachine)
       _inputManager(),
       _view(sf::View(sf::FloatRect(0, 0, SCREEN_WIDTH / SCALE_FACTOR,
                                    SCREEN_HEIGHT / SCALE_FACTOR))),
-      _clock() {
-  _gameData.player = Player();
-  _gameData.world = World();
-
-  _gameData.rules.push_back(std::make_unique<GravityRule>());
-  // rules.push_back(std::make_unique<WindRule>());
-  // rules.push_back(std::make_unique<VisionRule>());
-  _gameData.rules.push_back(
-      std::make_unique<CollisionRule>());  //!\\ Collision has to be last !
-  _gameData.currentLevel = 1;
-}
+      _clock() {}
 
 void GameState::onEnter() {
-  _gameData.world.loadLevel(_currentLevel);
+  _gameData.world.loadLevel(_gameData.currentLevel);
   _gameData.player.teleportTo(_gameData.world.playerSpawn.left,
                               _gameData.world.playerSpawn.top);
   _clock.restart();
@@ -69,8 +59,8 @@ void GameState::update(sf::Time dt) {
   if (_gameData.player.getPosition().y >= SCREEN_HEIGHT / SCALE_FACTOR) {
     _stateMachine.requestState(GameOver);
   } else if (_gameData.player.collidesWith(_gameData.world.goal)) {
-    _currentLevel++;
-    if (_currentLevel > NUM_LEVELS) _currentLevel = 1;
+    _gameData.currentLevel++;
+    if (_gameData.currentLevel > NUM_LEVELS) _gameData.currentLevel = 1;
     _stateMachine.requestState(Victory);
     _gameData.time = _clock.getElapsedTime();
   }
@@ -103,7 +93,7 @@ void GameState::update(sf::Time dt) {
   ImGui::End();  // Rules
 
   ImGui::Begin("Debug");
-  ImGui::Text("Current level=%d", _currentLevel);
+  ImGui::Text("Current level=%d", _gameData.currentLevel);
   ImGui::Text("position : x=%f y=%f", _gameData.player.getPosition().x,
               _gameData.player.getPosition().y);
   ImGui::Text("vitesse : x=%0.3f y=%0.3f", _gameData.player.velocity.x,
