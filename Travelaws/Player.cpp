@@ -1,9 +1,14 @@
 #include "Player.h"
+#include <algorithm>
 #include <iostream>
 #include "SFML/Graphics.hpp"
 #include "TextureManager.h"
 
-Player::Player() : Actor("Player"), moveSpeed(2) {
+Player::Player()
+    : Actor("Player"),
+      _maxMoveSpeed(3),
+      _acceleration(0.3),
+      _jumpAcceleration(6) {
   hitbox = sf::FloatRect(10, 22, 12, 10);
   sf::Texture* texturePointer =
       TextureManager::loadTexture("player", "assets/textures/slime.png");
@@ -29,4 +34,24 @@ void Player::updateAnimation() {
   }
   sprite.setTextureRect(
       sf::IntRect(_animation.x * 32, _animation.y * 32, 32, 32));
+}
+
+void Player::manageInputs() {
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+    velocity.x -= _acceleration;
+    if (velocity.x < -_maxMoveSpeed) velocity.x = -_maxMoveSpeed;
+
+    animator(animatorState().x, 0);
+    animator(animatorState().x + 1, animatorState().y);
+  } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+    velocity.x += _acceleration;
+    if (velocity.x > _maxMoveSpeed) velocity.x = _maxMoveSpeed;
+
+    animator(animatorState().x, 1);
+    animator(animatorState().x + 1, animatorState().y);
+  }
+
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && onGround) {
+    velocity.y = -_jumpAcceleration;
+  }
 }

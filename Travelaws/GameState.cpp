@@ -40,7 +40,7 @@ void GameState::onEnter() {
 
 void GameState::update(sf::Time dt) {
   // MOVEMENT
-  _inputManager.manageInputs(_gameData.player);
+  _gameData.player.manageInputs();
 
   // PHYSICS UPDATE
   for (auto& rule : _gameData.rules) {
@@ -49,11 +49,6 @@ void GameState::update(sf::Time dt) {
 
   // POSITION UPDATE
   _gameData.player.update();
-
-  // RULES UPDATE
-  for (auto& rule : _gameData.rules) {
-    if (rule.get()->active) rule.get()->update(_gameData);
-  }
 
   // CHECK STATE
   if (_gameData.player.getPosition().y >= SCREEN_HEIGHT / SCALE_FACTOR) {
