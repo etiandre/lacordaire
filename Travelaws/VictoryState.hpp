@@ -12,5 +12,6 @@ public:
 	void onEnter() override;
 private:
 	sf::Sprite _victorySprite;
+	sf::Text _text;
 	InputManager _inputManager;
 };
