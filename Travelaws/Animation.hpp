@@ -5,9 +5,9 @@ class Animation
 {
 public:
 	Animation();
-	void update(int animationSequence, sf::Time delta);
+	void playAnimation(int animationSequence, sf::Time delta);
 	sf::IntRect textureRect;
-	void addAnimation(sf::Texture* texture, sf::Vector2i imageCount, sf::Time switchTime);
+	void setAnimationTexture(sf::Texture* texture, sf::Vector2i imageCount, sf::Time switchTime);
 
 private:
 	sf::Vector2i _imageCount;
