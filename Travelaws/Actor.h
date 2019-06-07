@@ -7,7 +7,7 @@ class Actor {
   void teleportTo(float x, float y);
   void teleportTo(sf::Vector2f position);
   sf::Vector2f getPosition();
-  virtual void update();
+  virtual void update(sf::Time dt);
 
   sf::Vector2f velocity;
 

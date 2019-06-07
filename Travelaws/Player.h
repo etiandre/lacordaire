@@ -6,14 +6,17 @@ class Player : public Actor {
  public:
   Player();
   void updateAnimation();
-  void manageInputs();
+  void manageInputs(sf::Time dt);
   void animator(int x, int y);
   sf::Vector2i animatorState();
   bool onGround = false;
 
  private:
   sf::Vector2i _animation;
-  float _acceleration;
+  float _airAcceleration;
+  float _groundAcceleration;
   float _jumpAcceleration;
   float _maxMoveSpeed;
+  float _groundFriction;
+  float _airFriction;
 };
