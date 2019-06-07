@@ -28,32 +28,32 @@ GameState::GameState(GameData& gameData, StateMachine& stateMachine)
     : State(gameData, stateMachine),
       _inputManager(),
       _view(sf::View(sf::FloatRect(0, 0, SCREEN_WIDTH / SCALE_FACTOR,
-                                   SCREEN_HEIGHT / SCALE_FACTOR))) {
+                                   SCREEN_HEIGHT / SCALE_FACTOR))),
+      _clock() {
   _gameData.player = Player();
   _gameData.world = World();
 
-  rules.push_back(std::make_unique<GravityRule>());
+  _gameData.rules.push_back(std::make_unique<GravityRule>());
   // rules.push_back(std::make_unique<WindRule>());
   // rules.push_back(std::make_unique<VisionRule>());
-  rules.push_back(
+  _gameData.rules.push_back(
       std::make_unique<CollisionRule>());  //!\\ Collision has to be last !
-  _currentLevel = 1;
+  _gameData.currentLevel = 1;
 }
 
 void GameState::onEnter() {
   _gameData.world.loadLevel(_currentLevel);
   _gameData.player.teleportTo(_gameData.world.playerSpawn.left,
                               _gameData.world.playerSpawn.top);
-  
+  _clock.restart();
 }
 
 void GameState::update(sf::Time dt) {
-
-	// MOVEMENT
-	_inputManager.manageInputs(_gameData.player);
+  // MOVEMENT
+  _inputManager.manageInputs(_gameData.player);
 
   // PHYSICS UPDATE
-  for (auto& rule : rules) {
+  for (auto& rule : _gameData.rules) {
     if (rule.get()->active) rule.get()->update(_gameData);
   }
 
@@ -61,7 +61,7 @@ void GameState::update(sf::Time dt) {
   _gameData.player.update();
 
   // RULES UPDATE
-  for (auto& rule : rules) {
+  for (auto& rule : _gameData.rules) {
     if (rule.get()->active) rule.get()->update(_gameData);
   }
 
@@ -72,11 +72,13 @@ void GameState::update(sf::Time dt) {
     _currentLevel++;
     if (_currentLevel > NUM_LEVELS) _currentLevel = 1;
     _stateMachine.requestState(Victory);
+    _gameData.time = _clock.getElapsedTime();
   }
 
   // VIEW
-  auto cameraPos = sf::Vector2f(_gameData.player.getPosition().x + 16, _gameData.player.getPosition().y);
-                           //     SCREEN_HEIGHT / SCALE_FACTOR / 2);
+  auto cameraPos = sf::Vector2f(_gameData.player.getPosition().x + 16,
+                                _gameData.player.getPosition().y);
+  //     SCREEN_HEIGHT / SCALE_FACTOR / 2);
   if (cameraPos.x < SCREEN_WIDTH / SCALE_FACTOR / 2)
     cameraPos.x = SCREEN_WIDTH / SCALE_FACTOR / 2;
   else if (cameraPos.x >
@@ -95,7 +97,7 @@ void GameState::update(sf::Time dt) {
 #ifdef DEBUG
   // GUI
   ImGui::Begin("Rules");
-  for (auto& rule : rules) {
+  for (auto& rule : _gameData.rules) {
     ImGui::Checkbox(rule.get()->getName(), &rule.get()->active);
   }
   ImGui::End();  // Rules
@@ -116,7 +118,7 @@ void GameState::update(sf::Time dt) {
   _gameData.world.draw(_gameData.window);
   _gameData.player.draw(_gameData.window);
   // RULES DRAW
-  for (auto& rule : rules) {
+  for (auto& rule : _gameData.rules) {
     if (rule.get()->active) rule.get()->draw(_gameData.window);
   }
 }

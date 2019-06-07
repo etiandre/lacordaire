@@ -1,6 +1,8 @@
 #pragma once
 #include "GameData.h"
 
+struct GameData;
+
 class Rule {
  public:
   virtual void update(GameData& gameData){};

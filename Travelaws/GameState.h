@@ -17,8 +17,8 @@ class GameState : public State {
   void update(sf::Time dt) override;
 
  private:
-  std::vector<std::unique_ptr<Rule>> rules;
   sf::View _view;
   InputManager _inputManager;
+  sf::Clock _clock;
   int _currentLevel;
 };
