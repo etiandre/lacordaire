@@ -1,10 +1,11 @@
 #include "Actor.h"
+#include "DEBUG.h"
 #include "DEFINITIONS.h"
 #include "TextureManager.h"
-#include "DEBUG.h"
+#include <iostream>
 
-Actor::Actor(const char* name) : _name(name), _inertia(0.9f), velocity(), _anim() {
-}
+Actor::Actor(const char* name)
+    : _name(name), _inertia(0.9f), velocity(), _anim() {}
 
 void Actor::teleportTo(float x, float y) {
   velocity.x = 0;
@@ -21,12 +22,14 @@ sf::Vector2f Actor::getPosition() { return sprite.getPosition(); }
 void Actor::update(sf::Time dt) {
   float x = sprite.getPosition().x + velocity.x * dt.asSeconds();
   float y = sprite.getPosition().y + velocity.y * dt.asSeconds();
-  //velocity.x *= _inertia;
-  sprite.setPosition(x, y);
+  std::cout << x << " " << y << std::endl;  
+	// velocity.x *= _inertia;
+               sprite.setPosition(x, y);
 }
 
-void Actor::draw(sf::RenderWindow& window) { window.draw(sprite);
-sprite.setTextureRect(_anim.textureRect);
+void Actor::draw(sf::RenderWindow& window) {
+  window.draw(sprite);
+  sprite.setTextureRect(_anim.textureRect);
 #ifdef DEBUG
   sf::Vertex line[2];
   line[0].position = sprite.getPosition();

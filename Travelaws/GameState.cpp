@@ -25,14 +25,14 @@
 
 GameState::GameState(GameData& gameData, StateMachine& stateMachine)
     : State(gameData, stateMachine),
-      _view(sf::View(sf::FloatRect(0, 0, VIEW_WIDTH,
-                                   VIEW_HEIGHT))),
+      _view(sf::View(sf::FloatRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT))),
       _clock() {}
 
 void GameState::onEnter() {
   _gameData.world.loadLevel(_gameData.currentLevel);
   _gameData.player.teleportTo(_gameData.world.playerSpawn.left,
                               _gameData.world.playerSpawn.top);
+  _gameData.player.velocity = sf::Vector2f();
   _clock.restart();
 }
 
@@ -63,15 +63,12 @@ void GameState::update(sf::Time dt) {
   //     VIEW_HEIGHT / 2);
   if (cameraPos.x < VIEW_WIDTH / 2)
     cameraPos.x = VIEW_WIDTH / 2;
-  else if (cameraPos.x >
-           _gameData.world.getSize().x - VIEW_WIDTH / 2)
+  else if (cameraPos.x > _gameData.world.getSize().x - VIEW_WIDTH / 2)
     cameraPos.x = _gameData.world.getSize().x - VIEW_WIDTH / 2;
   if (cameraPos.y < VIEW_HEIGHT / 2)
     cameraPos.y = VIEW_HEIGHT / 2;
-  else if (cameraPos.y >
-           _gameData.world.getSize().y - VIEW_HEIGHT / 2)
-    cameraPos.y =
-        _gameData.world.getSize().y - VIEW_HEIGHT / 2;
+  else if (cameraPos.y > _gameData.world.getSize().y - VIEW_HEIGHT / 2)
+    cameraPos.y = _gameData.world.getSize().y - VIEW_HEIGHT / 2;
 
   _view.setCenter(cameraPos);
   _gameData.window.setView(_view);
@@ -85,12 +82,13 @@ void GameState::update(sf::Time dt) {
   ImGui::End();  // Rules
 
   ImGui::Begin("GameState");
-  ImGui::Text("Current level=%d", _gameData.currentLevel);
   ImGui::Text("position : x=%f y=%f", _gameData.player.getPosition().x,
               _gameData.player.getPosition().y);
   ImGui::Text("vitesse : x=%0.3f y=%0.3f", _gameData.player.velocity.x,
               _gameData.player.velocity.y);
   ImGui::Text("onGround : %d", _gameData.player.onGround);
+  ImGui::Separator();
+  if (ImGui::InputInt("Current level", &_gameData.currentLevel)) onEnter();
   ImGui::End();  // Debug
 #endif           // DEBUG
 

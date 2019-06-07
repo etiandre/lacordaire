@@ -1,5 +1,7 @@
 #include "GravityRule.hpp"
 
+GravityRule::GravityRule() : gSquared(900) {}
+
 void GravityRule::update (GameData& gameData, sf::Time dt) {
   gameData.player.velocity.y += gSquared * dt.asSeconds();
 }

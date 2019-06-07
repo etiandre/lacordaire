@@ -10,7 +10,7 @@ Player::Player()
 	_maxMoveSpeed(180),
 	_groundAcceleration(18),
 	_airAcceleration(6),
-	_jumpAcceleration(100),
+	_jumpAcceleration(350),
 	_groundFriction(0.5),
 	_airFriction(1) {
 	hitbox = sf::FloatRect(10, 22, 12, 10);

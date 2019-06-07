@@ -24,7 +24,7 @@
 </data>
  </layer>
  <objectgroup id="6" name="Objects">
-  <object id="3" name="playerSpawn" x="21.5" y="192.5">
+  <object id="3" name="playerSpawn" x="20.75" y="121.125">
    <point/>
   </object>
   <object id="5" name="goal" x="1504" y="42.625" width="77.875" height="84.25"/>
