@@ -11,7 +11,7 @@ PreGameState::PreGameState(GameData& gameData, StateMachine& stateMachine)
 	// Create "buttons" to enable or not the rules
 
 	_rule1 = TextWriter::createText(
-		"Gravity: ON", sf::Vector2f(VIEW_WIDTH * 1 / 4, VIEW_HEIGHT * 10 / 16), sf::Color::White, 24);
+		"Gravity: ON", sf::Vector2f(VIEW_WIDTH * 1 / 4, VIEW_HEIGHT * 10 / 16), sf::Color::White, 20);
 	_rule2 = TextWriter::createText(
 		"Wind: ON", sf::Vector2f(VIEW_WIDTH * 3 / 4, VIEW_HEIGHT * 10 / 16), sf::Color::White, 24);
 	_rule3 = TextWriter::createText(
@@ -45,8 +45,8 @@ void PreGameState::processEvent(sf::Event& event) {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) _stateMachine.requestState(InGame);
 
 	sf::Vector2i mousePos = sf::Mouse::getPosition(_gameData.window);
-	sf::Vector2f mouseLocalPosFloat(mousePos.x / SCALE_FACTOR, mousePos.y / SCALE_FACTOR);
-
+	sf::Vector2f mouseLocalPosFloat(mousePos.x * VIEW_WIDTH / ((float)_gameData.window.getSize().x),
+		mousePos.y * VIEW_HEIGHT / (float)_gameData.window.getSize().y );
 	//////// Mouse tracking
 
 	// Checks if mouse is on a button and change its color accordingly
@@ -82,14 +82,32 @@ void PreGameState::processEvent(sf::Event& event) {
 
 	//Handles buttons click
 	if (event.type == sf::Event::MouseButtonPressed) {
-		if (_rule1ButtonImage.getGlobalBounds().contains(mouseLocalPosFloat))
+		if (_rule1ButtonImage.getGlobalBounds().contains(mouseLocalPosFloat)) {
 			_gameData.rules[0]->active = !_gameData.rules[0]->active;
-		else if (_rule2ButtonImage.getGlobalBounds().contains(mouseLocalPosFloat))
+			string text = "Gravity: ON";
+			if (!_gameData.rules[0]->active) { text = "Gravity: OFF"; }
+			_rule1 = TextWriter::createText( text, sf::Vector2f(VIEW_WIDTH * 1 / 4, VIEW_HEIGHT * 10 / 16), sf::Color::White, 20);
+		}
+			
+		else if (_rule2ButtonImage.getGlobalBounds().contains(mouseLocalPosFloat)) {
 			_gameData.rules[1]->active = !_gameData.rules[1]->active;
-		else if (_rule3ButtonImage.getGlobalBounds().contains(mouseLocalPosFloat))
+			string text = "Wind: ON";
+			if (!_gameData.rules[1]->active) { text = "Wind: OFF"; }
+			_rule2 = TextWriter::createText(text, sf::Vector2f(VIEW_WIDTH * 3 / 4, VIEW_HEIGHT * 10 / 16), sf::Color::White, 24);
+		}
+			
+		else if (_rule3ButtonImage.getGlobalBounds().contains(mouseLocalPosFloat)) {
 			_gameData.rules[2]->active = !_gameData.rules[2]->active;
-		else if (_rule4ButtonImage.getGlobalBounds().contains(mouseLocalPosFloat))
+			string text = "Vision: ON";
+			if (!_gameData.rules[2]->active) { text = "Vision: OFF"; }
+			_rule3 = TextWriter::createText(text, sf::Vector2f(VIEW_WIDTH * 1 / 4, VIEW_HEIGHT * 13 / 16), sf::Color::White, 24);
+		}
+		else if (_rule4ButtonImage.getGlobalBounds().contains(mouseLocalPosFloat)) {
 			_gameData.rules[3]->active = !_gameData.rules[3]->active;
+			string text = "Collision: ON";
+			if (!_gameData.rules[3]->active) { text = "Collision: OFF"; }
+			_rule4 = TextWriter::createText(text, sf::Vector2f(VIEW_WIDTH * 3 / 4, VIEW_HEIGHT * 13 / 16), sf::Color::White, 20);
+		}
 	}
 	//////////
 }
@@ -106,6 +124,7 @@ void PreGameState::update(sf::Time dt) {
 	_gameData.window.draw(_rule2ButtonImage);
 	_gameData.window.draw(_rule3ButtonImage);
 	_gameData.window.draw(_rule4ButtonImage);
+
 
 	TextWriter::drawShadowedText(_titleText, _gameData.window);
 	TextWriter::drawShadowedText(_rule1, _gameData.window);
