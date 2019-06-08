@@ -4,6 +4,8 @@
 #include "GameOverState.hpp"
 #include "GameState.h"
 #include "GravityRule.hpp"
+#include "WindRule.hpp"
+#include "VisionRule.hpp"
 #include "SFML/Audio.hpp"
 #include "SplashscreenState.hpp"
 #include "VictoryState.hpp"
@@ -24,8 +26,8 @@ Game::Game(int width, int height) : _stateMachine(_gameData) {
 
   //!\\ Collision has to be last !
   _gameData.rules.push_back(std::make_unique<GravityRule>());
-  // rules.push_back(std::make_unique<WindRule>());
-  // rules.push_back(std::make_unique<VisionRule>());
+  _gameData.rules.push_back(std::make_unique<WindRule>());
+  _gameData.rules.push_back(std::make_unique<VisionRule>());
   _gameData.rules.push_back(std::make_unique<CollisionRule>());
 
   _gameData.currentLevel = 1;

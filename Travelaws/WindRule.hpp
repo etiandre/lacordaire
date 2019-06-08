@@ -3,10 +3,10 @@
 
 class WindRule : public Rule {
  public:
-  void update(GameData& gameData);
+  void update(GameData& gameData, sf::Time dt);
   const char* getName();
   int getScore() override;
 
  private:
-  int _windForce = 0;
+  const float _windForce = -60;
 };
