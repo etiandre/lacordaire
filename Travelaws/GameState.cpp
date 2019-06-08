@@ -15,18 +15,17 @@
 #include "Player.h"
 #include "SFMLOrthogonalLayer.hpp"
 #include "StateMachine.hpp"
-#include "VictoryState.hpp"
-#include "VisionRule.hpp"
-#include "WindRule.hpp"
+#include "TextWriter.h"
 #include "World.h"
-#include "imgui-SFML.h"
-#include "imgui.h"
 #pragma endregion includes
 
 GameState::GameState(GameData& gameData, StateMachine& stateMachine)
     : State(gameData, stateMachine),
       _view(sf::View(sf::FloatRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT))),
-      _clock() {}
+      _clock(),
+      _topText(TextWriter::createText(
+          "", sf::Vector2f(),
+          sf::Color(255, 255, 255), 15)) {}
 
 void GameState::onEnter() {
   _gameData.world.loadLevel(_gameData.currentLevel);
@@ -73,6 +72,11 @@ void GameState::update(sf::Time dt) {
   _view.setCenter(cameraPos);
   _gameData.window.setView(_view);
 
+  char buf[100];
+  sprintf_s(buf, "%0.2f", _clock.getElapsedTime().asSeconds());
+  _topText.setPosition(_gameData.window.mapPixelToCoords(sf::Vector2i(SCREEN_WIDTH/2, SCREEN_HEIGHT/8)));
+  _topText.setString(buf);
+
 #ifdef DEBUG
   // GUI
   ImGui::Begin("Rules");
@@ -96,6 +100,7 @@ void GameState::update(sf::Time dt) {
   _gameData.window.clear();
   _gameData.world.draw(_gameData.window);
   _gameData.player.draw(_gameData.window);
+  TextWriter::drawShadowedText(_topText, _gameData.window);
   // RULES DRAW
   for (auto& rule : _gameData.rules) {
     if (rule.get()->active) rule.get()->draw(_gameData.window);

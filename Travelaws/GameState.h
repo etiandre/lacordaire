@@ -20,4 +20,5 @@ class GameState : public State {
  private:
   sf::View _view;
   sf::Clock _clock;
+  sf::Text _topText;
 };
