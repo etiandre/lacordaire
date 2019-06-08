@@ -7,7 +7,7 @@
 VictoryState::VictoryState(GameData& gameData, StateMachine& stateMachine)
     : State(gameData, stateMachine) {
   sf::Texture* texturePtr =
-      TextureManager::loadTexture("Victory", "assets/textures/victory.png");
+      TextureManager::loadTexture("Victory", "assets/textures/victory.jpg");
   if (!texturePtr) {
     std::cout << "erreur chargement texture Victory !" << std::endl;
     exit(1);

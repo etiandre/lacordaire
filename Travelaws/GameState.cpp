@@ -74,7 +74,7 @@ void GameState::update(sf::Time dt) {
 
   char buf[100];
   sprintf_s(buf, "%0.2f", _clock.getElapsedTime().asSeconds());
-  _topText.setPosition(_gameData.window.mapPixelToCoords(sf::Vector2i(SCREEN_WIDTH/2, SCREEN_HEIGHT/8)));
+  _topText.setPosition(_gameData.window.mapPixelToCoords(sf::Vector2i(4*SCREEN_WIDTH/5, SCREEN_HEIGHT/8)));
   _topText.setString(buf);
 
 #ifdef DEBUG
@@ -100,11 +100,12 @@ void GameState::update(sf::Time dt) {
   _gameData.window.clear();
   _gameData.world.draw(_gameData.window);
   _gameData.player.draw(_gameData.window);
-  TextWriter::drawShadowedText(_topText, _gameData.window);
   // RULES DRAW
   for (auto& rule : _gameData.rules) {
     if (rule.get()->active) rule.get()->draw(_gameData.window);
   }
+  TextWriter::drawShadowedText(_topText, _gameData.window);
+
 }
 
 void GameState::onExit() { _gameData.time = _clock.getElapsedTime(); }
