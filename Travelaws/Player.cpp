@@ -25,7 +25,7 @@ Player::Player()
 }
 
 void Player::manageInputs(sf::Time dt) {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
 		if (onGround)
 			velocity.x -= _groundAcceleration;
 		else
@@ -33,7 +33,7 @@ void Player::manageInputs(sf::Time dt) {
 		if (velocity.x < -_maxMoveSpeed) velocity.x = -_maxMoveSpeed;
 		_anim.playAnimation(WalkLeft, dt);
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)|| sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 		if (onGround)
 			velocity.x += _groundAcceleration;
 		else
@@ -49,7 +49,7 @@ void Player::manageInputs(sf::Time dt) {
 		_anim.playAnimation(Idle, dt);
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && onGround) {
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) && onGround) {
 		velocity.y = -_jumpAcceleration;
 	}
 }

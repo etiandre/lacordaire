@@ -4,6 +4,8 @@
 #include "TextWriter.h"
 #include "TextureManager.h"
 
+
+// Constructor
 VictoryState::VictoryState(GameData& gameData, StateMachine& stateMachine)
     : State(gameData, stateMachine) {
   sf::Texture* texturePtr =
@@ -15,10 +17,12 @@ VictoryState::VictoryState(GameData& gameData, StateMachine& stateMachine)
   _victorySprite.setTexture(*texturePtr);
 }
 
+// Requests State change at the end of the current frame
 void VictoryState::processEvent(sf::Event& event) {
   if (event.type == sf::Event::KeyPressed) _stateMachine.requestState(PreGame);
 }
 
+// Victory state's graphics update, displays the content created during onEnter
 void VictoryState::update(sf::Time dt) {
   _gameData.window.clear();
   _gameData.window.draw(_victorySprite);
@@ -28,6 +32,7 @@ void VictoryState::update(sf::Time dt) {
   TextWriter::drawShadowedText(_totalText, _gameData.window);
 }
 
+// Initializes Victory state's content
 void VictoryState::onEnter() {
   int timeScore = std::max((int)(50. - _gameData.time.asSeconds()), 0);
   int ruleScore = 0;
