@@ -57,9 +57,6 @@
     <ClCompile Include="FontManager.cpp">
       <Filter>lib</Filter>
     </ClCompile>
-    <ClCompile Include="TextWriter.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
     <ClCompile Include="ColorUtil.cpp">
       <Filter>lib</Filter>
     </ClCompile>
@@ -67,6 +64,7 @@
     <ClCompile Include="PreGameState.cpp">
       <Filter>statemachine</Filter>
     </ClCompile>
+    <ClCompile Include="TextWriter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEFINITIONS.h" />
@@ -114,12 +112,6 @@
     <ClInclude Include="SplashscreenState.hpp">
       <Filter>statemachine</Filter>
     </ClInclude>
-    <ClInclude Include="FontManager.hpp">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="TextWriter.h">
-      <Filter>lib</Filter>
-    </ClInclude>
     <ClInclude Include="ColorUtil.h">
       <Filter>lib</Filter>
     </ClInclude>
@@ -128,6 +120,10 @@
     <ClInclude Include="PreGameState.h">
       <Filter>statemachine</Filter>
     </ClInclude>
+    <ClInclude Include="FontManager.hpp">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TextWriter.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="rules">
