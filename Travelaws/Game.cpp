@@ -54,7 +54,7 @@ void Game::run() {
 
 	////////////////////// AUDIO ///////////////////
 	sf::Music music;
-	if (!music.openFromFile("assets/music.ogg")) exit(-1);
+	if (!music.openFromFile("assets/sounds/music.ogg")) exit(-1);
 	music.play();
 	music.setLoop(true);
 
@@ -76,7 +76,7 @@ void Game::run() {
 #ifdef DEBUG
 		ImGui::SFML::Render(_gameData.window);
 #endif
-
+		
 		_gameData.window.display();
 		_stateMachine.processStateSwitch();
 	}

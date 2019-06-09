@@ -1,6 +1,10 @@
 #pragma once
+#include <thread>
 #include "GameData.h"
 #include "StateMachine.hpp"
+#include "SFML/Audio.hpp"
+#include "SoundManager.h"
+
 
 class StateMachine;
 
