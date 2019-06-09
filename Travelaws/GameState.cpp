@@ -19,43 +19,58 @@
 #include "World.h"
 #pragma endregion includes
 
+sf::Vector2f lerp(sf::Vector2f a, sf::Vector2f b, float t) {
+  return a * (1 - t) + b * t;
+}
+
 GameState::GameState(GameData& gameData, StateMachine& stateMachine)
     : State(gameData, stateMachine),
       _view(sf::View(sf::FloatRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT))),
       _clock(),
-      _topText(TextWriter::createText(
-          "", sf::Vector2f(),
-          sf::Color(255, 255, 255), 15)) {}
+      _topText(TextWriter::createText("", sf::Vector2f(),
+                                      sf::Color(255, 255, 255), 15)),
+      _countdown(),
+      _countdownText(TextWriter::createText(
+          "", sf::Vector2f(VIEW_WIDTH / 2, VIEW_HEIGHT / 2),
+          sf::Color(255, 255, 0))) {}
 
 void GameState::onEnter() {
   _gameData.world.loadLevel(_gameData.currentLevel);
   _gameData.player.teleportTo(_gameData.world.playerSpawn.left,
                               _gameData.world.playerSpawn.top);
   _gameData.player.velocity = sf::Vector2f();
+  _countdown = sf::seconds(3);
   _clock.restart();
 }
 
 void GameState::update(sf::Time dt) {
-  // MOVEMENT
-  _gameData.player.manageInputs(dt);
+  if (_countdown > sf::Time()) {
+    char buf[10];
+    sprintf_s(buf, "%0.1f", _countdown.asSeconds());
+    _countdownText.setString(buf);
+    _countdown -= dt;
+    _clock.restart();
+  } else {
+    // MOVEMENT
+    _gameData.player.manageInputs(dt);
 
-  // PHYSICS UPDATE
-  for (auto& rule : _gameData.rules) {
-    if (rule.get()->active) rule.get()->update(_gameData, dt);
+    // PHYSICS UPDATE
+    for (auto& rule : _gameData.rules) {
+      if (rule.get()->active) rule.get()->update(_gameData, dt);
+    }
+
+    // POSITION UPDATE
+    _gameData.player.update(dt);
+
+    // CHECK STATE
+    if (_gameData.player.getPosition().y >= VIEW_HEIGHT) {
+      _stateMachine.requestState(GameOver);
+    } else if (_gameData.player.collidesWith(_gameData.world.goal)) {
+      _gameData.currentLevel++;
+      if (_gameData.currentLevel > NUM_LEVELS) _gameData.currentLevel = 1;
+      _stateMachine.requestState(Victory);
+    }
   }
-
-  // POSITION UPDATE
-  _gameData.player.update(dt);
-
-  // CHECK STATE
-  if (_gameData.player.getPosition().y >= VIEW_HEIGHT) {
-    _stateMachine.requestState(GameOver);
-  } else if (_gameData.player.collidesWith(_gameData.world.goal)) {
-    _gameData.currentLevel++;
-    if (_gameData.currentLevel > NUM_LEVELS) _gameData.currentLevel = 1;
-    _stateMachine.requestState(Victory);
-  }
-
   // VIEW
   auto cameraPos = sf::Vector2f(_gameData.player.getPosition().x + 16,
                                 _gameData.player.getPosition().y);
@@ -68,13 +83,13 @@ void GameState::update(sf::Time dt) {
     cameraPos.y = VIEW_HEIGHT / 2;
   else if (cameraPos.y > _gameData.world.getSize().y - VIEW_HEIGHT / 2)
     cameraPos.y = _gameData.world.getSize().y - VIEW_HEIGHT / 2;
-
-  _view.setCenter(cameraPos);
+  _view.setCenter(lerp(cameraPos, _view.getCenter(), 0.9));
   _gameData.window.setView(_view);
 
   char buf[100];
   sprintf_s(buf, "%0.2f", _clock.getElapsedTime().asSeconds());
-  _topText.setPosition(_gameData.window.mapPixelToCoords(sf::Vector2i(4*SCREEN_WIDTH/5, SCREEN_HEIGHT/8)));
+  _topText.setPosition(_gameData.window.mapPixelToCoords(
+      sf::Vector2i(4 * SCREEN_WIDTH / 5, SCREEN_HEIGHT / 8)));
   _topText.setString(buf);
 
 #ifdef DEBUG
@@ -93,7 +108,7 @@ void GameState::update(sf::Time dt) {
   ImGui::Text("onGround : %d", _gameData.player.onGround);
   ImGui::Separator();
   if (ImGui::InputInt("Current level", &_gameData.currentLevel)) onEnter();
-  ImGui::End();  // Debug
+  ImGui::End();  // GameState
 #endif           // DEBUG
 
   // DRAW
@@ -105,7 +120,8 @@ void GameState::update(sf::Time dt) {
     if (rule.get()->active) rule.get()->draw(_gameData.window);
   }
   TextWriter::drawShadowedText(_topText, _gameData.window);
-
+  if (_countdown > sf::Time())
+    TextWriter::drawRainbowText(_countdownText, _gameData.window);
 }
 
 void GameState::onExit() { _gameData.time = _clock.getElapsedTime(); }
