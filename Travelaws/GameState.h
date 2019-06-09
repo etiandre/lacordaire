@@ -21,4 +21,6 @@ class GameState : public State {
   sf::View _view;
   sf::Clock _clock;
   sf::Text _topText;
+  sf::Text _countdownText;
+  sf::Time _countdown;
 };

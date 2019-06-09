@@ -33,8 +33,7 @@ void TextWriter::drawRainbowText(sf::Text& text, sf::RenderWindow& window) {
   auto v = std::get<2>(hsv);
   sf::FloatRect box = text.getGlobalBounds();
   int i = 0;
-  while (box.intersects(sf::FloatRect(0, 0, VIEW_WIDTH,
-                                      VIEW_HEIGHT))) {
+  while (box.intersects(sf::FloatRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT))) {
     sf::Text shadow = text;
     shadow.move(5 * i, 5 * i);
     box = shadow.getGlobalBounds();
