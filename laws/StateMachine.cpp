@@ -24,7 +24,7 @@ void StateMachine::update(sf::Time dt) {
   ImGui::Begin("State");
   ImGui::Text("Current State : %d", _currentState);
   ImGui::Text("dt = %d ms", dt.asMilliseconds());
-  for (int i = None+1; i <= Victory; i++) {
+  for (int i = None + 1; i <= Victory; i++) {
     char buf[20];
     sprintf_s(buf, "change to state %d", i);
     if (ImGui::Button(buf)) {
@@ -32,11 +32,11 @@ void StateMachine::update(sf::Time dt) {
     }
   }
   ImGui::End();  // State
-#endif  // DEBUG
+#endif           // DEBUG
 }
 
 void StateMachine::processEvent(sf::Event& event) {
- _states[_currentState].get()->processEvent(event);
+  _states[_currentState].get()->processEvent(event);
 }
 
 void StateMachine::processStateSwitch() {

@@ -1,7 +1,6 @@
 #include "World.h"
 #include "DEFINITIONS.h"
 
-
 World::World() {}
 
 void World::draw(sf::RenderWindow& window) {
@@ -42,7 +41,7 @@ sf::Vector2i World::getSize() {
 
 std::unique_ptr<MapLayer>& World::getCollisionLayer() {
   return _layers.back();  // on part du principe que le dernier layer est celui
-                          // des plateformes
+                          // des plateformes donc celui qui nous intéresse
 }
 
 sf::FloatRect World::_getObjectRect(const char* name) {

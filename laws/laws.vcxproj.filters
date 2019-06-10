@@ -64,7 +64,9 @@
     <ClCompile Include="PreGameState.cpp">
       <Filter>statemachine</Filter>
     </ClCompile>
-    <ClCompile Include="TextWriter.cpp" />
+    <ClCompile Include="TextWriter.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEFINITIONS.h" />
@@ -123,8 +125,12 @@
     <ClInclude Include="FontManager.hpp">
       <Filter>lib</Filter>
     </ClInclude>
-    <ClInclude Include="TextWriter.h" />
-    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="SoundManager.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TextWriter.h">
+      <Filter>lib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="rules">

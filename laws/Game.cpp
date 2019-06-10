@@ -4,34 +4,36 @@
 #include "GameOverState.hpp"
 #include "GameState.h"
 #include "GravityRule.hpp"
-#include "WindRule.hpp"
-#include "VisionRule.hpp"
+#include "PreGameState.h"
 #include "SFML/Audio.hpp"
 #include "SplashscreenState.hpp"
 #include "VictoryState.hpp"
-#include "PreGameState.h"
+#include "VisionRule.hpp"
+#include "WindRule.hpp"
 
 Game::Game(int width, int height) : _stateMachine(_gameData) {
-	_gameData.window.create(sf::VideoMode(width, height),
-		"L.A.W.S. 0.9 alpha dx+ TEST RELEASE");
-	_gameData.window.setFramerateLimit(60);
-	_gameData.window.setView(_view);
-	_gameData.window.setKeyRepeatEnabled(false);
+  _gameData.window.create(sf::VideoMode(width, height),
+                          "L.A.W.S. 0.9 alpha dx+ TEST RELEASE");
+  _gameData.window.setFramerateLimit(60);
+  _gameData.window.setView(_view);
+  _gameData.window.setKeyRepeatEnabled(false);
 #ifdef DEBUG
-	ImGui::SFML::Init(_gameData.window);
+  ImGui::SFML::Init(_gameData.window);
 #endif
+  // initialize gameData
+  _gameData.player = Player();
+  _gameData.world = World();
 
-	_gameData.player = Player();
-	_gameData.world = World();
+  // add rules
+  //!\\ Collision has to be last !
+  _gameData.rules.push_back(std::make_unique<GravityRule>());
+  _gameData.rules.push_back(std::make_unique<WindRule>());
+  _gameData.rules.push_back(std::make_unique<VisionRule>());
+  _gameData.rules.push_back(std::make_unique<CollisionRule>());
 
-	//!\\ Collision has to be last !
-	_gameData.rules.push_back(std::make_unique<GravityRule>());
-	_gameData.rules.push_back(std::make_unique<WindRule>());
-	_gameData.rules.push_back(std::make_unique<VisionRule>());
-	_gameData.rules.push_back(std::make_unique<CollisionRule>());
+  _gameData.currentLevel = 1;
 
-	_gameData.currentLevel = 1;
-
+  // initialize stateMachine
   _stateMachine.addState(
       Splash, make_unique<SplashscreenState>(_gameData, _stateMachine));
   _stateMachine.addState(PreGame,
@@ -45,43 +47,48 @@ Game::Game(int width, int height) : _stateMachine(_gameData) {
 }
 
 void Game::run() {
-	sf::Event event;
-	sf::Clock clock;
-	sf::Time dt;
+  sf::Event event;
+  sf::Clock clock;
+  sf::Time dt;
 
-	_stateMachine.requestState(Splash);
-	_stateMachine.processStateSwitch();
+  _stateMachine.requestState(Splash);
+  _stateMachine.processStateSwitch();
 
-	////////////////////// AUDIO ///////////////////
-	sf::Music music;
-	if (!music.openFromFile("assets/sounds/music.ogg")) exit(-1);
-	music.play();
-	music.setLoop(true);
+  ////////////////////// AUDIO ///////////////////
+  sf::Music music;
+  if (!music.openFromFile("assets/sounds/music.ogg")) exit(-1);
+  music.play();
+  music.setLoop(true);
 
-	while (_gameData.window.isOpen()) {
-		dt = clock.restart();
+  // main window loop
+  while (_gameData.window.isOpen()) {
+    dt = clock.restart();
 
-		while (_gameData.window.pollEvent(event)) {
+    // process events
+    while (_gameData.window.pollEvent(event)) {
 #ifdef DEBUG
-			ImGui::SFML::ProcessEvent(event);
+      ImGui::SFML::ProcessEvent(event);
 #endif
-			_stateMachine.processEvent(event);
-			if (event.type == sf::Event::EventType::Closed) _gameData.window.close();
-		}
+      _stateMachine.processEvent(event);
+      if (event.type == sf::Event::EventType::Closed) _gameData.window.close();
+    }
 #ifdef DEBUG
-		ImGui::SFML::Update(_gameData.window, dt);
+    ImGui::SFML::Update(_gameData.window, dt);
 #endif
-		_stateMachine.update(dt);
+    // update current state and draw screen
+    _stateMachine.update(dt);
 
 #ifdef DEBUG
-		ImGui::SFML::Render(_gameData.window);
+    ImGui::SFML::Render(_gameData.window);
 #endif
-		
-		_gameData.window.display();
-		_stateMachine.processStateSwitch();
-	}
+    // display screen
+    _gameData.window.display();
+
+    // switch state if it has been requested
+    _stateMachine.processStateSwitch();
+  }
 
 #ifdef DEBUG
-	ImGui::SFML::Shutdown();
+  ImGui::SFML::Shutdown();
 #endif
 }

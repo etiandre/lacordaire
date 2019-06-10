@@ -1,32 +1,32 @@
 #include "Animation.hpp"
 #include <iostream>
 
-Animation::Animation() {}
+Animator::Animator() {}
 
-void Animation::playAnimation(int animationID, sf::Time dt) {
-  _currentImage.y = animationID;
+void Animator::playAnimation(int animationID, sf::Time dt) {
+  _currentFrame.y = animationID;
   _currentTime += dt;
 
-  if (_currentTime >= _switchTime) {
-    _currentTime -= _switchTime;
-    _currentImage.x++;
+  if (_currentTime >= _timePerFrame) {
+    _currentTime -= _timePerFrame;
+    _currentFrame.x++;
 
-    if (_currentImage.x >= _imageCount.x) {
-      _currentImage.x -= _imageCount.x;
+    if (_currentFrame.x >= _frameCount.x) {
+      _currentFrame.x -= _frameCount.x;
     }
 
-    textureRect.left = _currentImage.x * textureRect.width;
-    textureRect.top = _currentImage.y * textureRect.height;
+    textureRect.left = _currentFrame.x * textureRect.width;
+    textureRect.top = _currentFrame.y * textureRect.height;
   }
 }
 
-void Animation::setAnimationTexture(sf::Texture* texture,
+void Animator::setAnimationTexture(sf::Texture* texture,
                                     sf::Vector2i frameCount,
                                     sf::Time timePerFrame) {
-  _imageCount = frameCount;
-  _switchTime = timePerFrame;
+  _frameCount = frameCount;
+  _timePerFrame = timePerFrame;
   _currentTime = sf::Time();
-  _currentImage.x = 0;
+  _currentFrame.x = 0;
 
   textureRect.width = texture->getSize().x / ((float)frameCount.x);
   textureRect.height = texture->getSize().y / ((float)frameCount.y);

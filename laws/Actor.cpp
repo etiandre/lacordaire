@@ -5,7 +5,7 @@
 #include "TextureManager.h"
 
 Actor::Actor(const char* name)
-    : _name(name), _inertia(0.9f), velocity(), _anim() {}
+    : _name(name), velocity(), _anim() {}
 
 void Actor::teleportTo(float x, float y) {
   velocity.x = 0;
@@ -20,6 +20,7 @@ void Actor::teleportTo(sf::Vector2f position) {
 sf::Vector2f Actor::getPosition() { return sprite.getPosition(); }
 
 void Actor::update(sf::Time dt) {
+	// met à jour la position en tenant compte de la vitesse
   float x = sprite.getPosition().x + velocity.x * dt.asSeconds();
   float y = sprite.getPosition().y + velocity.y * dt.asSeconds();
   sprite.setPosition(x, y);
@@ -29,6 +30,7 @@ void Actor::draw(sf::RenderWindow& window) {
   window.draw(sprite);
   sprite.setTextureRect(_anim.textureRect);
 #ifdef DEBUG
+	// dessine le vecteur vitesse en rouge
   sf::Vertex line[2];
   line[0].position = sprite.getPosition();
   line[0].color = sf::Color::Red;
