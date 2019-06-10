@@ -42,7 +42,12 @@ PreGameState::PreGameState(GameData& gameData, StateMachine& stateMachine)
 }
 
 void PreGameState::processEvent(sf::Event& event) {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) _stateMachine.requestState(InGame);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+		_stateMachine.requestState(InGame);
+
+		std::thread thread_object(playSound(), "assets/sounds/rules.ogg");
+		thread_object.detach();
+	}
 
 	sf::Vector2i mousePos = sf::Mouse::getPosition(_gameData.window);
 	sf::Vector2f mouseLocalPosFloat(mousePos.x * VIEW_WIDTH / ((float)_gameData.window.getSize().x),

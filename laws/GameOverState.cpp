@@ -32,4 +32,6 @@ void GameOverState::update(sf::Time dt) {
 void GameOverState::onEnter() {
   sf::View view(sf::View(sf::FloatRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT)));
   _gameData.window.setView(view);
+  std::thread thread_object(playSound(), "assets/sounds/gameover.wav");
+  thread_object.detach();
 }

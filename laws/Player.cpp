@@ -1,9 +1,13 @@
+#include <thread>
+
 #include "Player.h"
 #include <algorithm>
 #include <iostream>
 #include "SFML/Graphics.hpp"
 #include "TextureManager.h"
 #include "Animation.hpp"
+#include "SFML/Audio.hpp"
+#include "SoundManager.h"
 
 Player::Player()
 	: Actor("Player"),
@@ -33,7 +37,7 @@ void Player::manageInputs(sf::Time dt) {
 		if (velocity.x < -_maxMoveSpeed) velocity.x = -_maxMoveSpeed;
 		_anim.playAnimation(WalkLeft, dt);
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)|| sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 		if (onGround)
 			velocity.x += _groundAcceleration;
 		else
@@ -51,5 +55,7 @@ void Player::manageInputs(sf::Time dt) {
 
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) && onGround) {
 		velocity.y = -_jumpAcceleration;
+		std::thread thread_object(playSound(), "assets/sounds/jump.wav");
+		thread_object.detach();
 	}
 }

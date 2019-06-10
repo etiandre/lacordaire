@@ -178,6 +178,7 @@
     <ClInclude Include="PreGameState.h" />
     <ClInclude Include="Rule.h" />
     <ClInclude Include="SFMLOrthogonalLayer.hpp" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SplashscreenState.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateMachine.hpp" />

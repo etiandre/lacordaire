@@ -61,4 +61,7 @@ void VictoryState::onEnter() {
       buf, sf::Vector2f(VIEW_WIDTH / 2, VIEW_HEIGHT / 5 * 4), sf::Color(255, 0, 0), 25);
 
   _gameData.window.setView(view);
+
+  std::thread thread_object(playSound(), "assets/sounds/win.wav");
+  thread_object.detach();
 }
